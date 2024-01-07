@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "517859587458",
+    "project_id": "kinder-c0e08",
+    "storage_bucket": "kinder-c0e08.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:517859587458:android:d81b00ece086a6765acb9b",
+        "android_client_info": {
+          "package_name": "com.DatingApp.tinder101"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBJAAKSMXKvcT6sp7HXaM8yvNhFzEKoNQg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
