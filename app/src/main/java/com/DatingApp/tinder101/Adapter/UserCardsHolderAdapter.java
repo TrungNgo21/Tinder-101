@@ -1,18 +1,12 @@
 package com.DatingApp.tinder101.Adapter;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
-import android.util.Log;
-import android.view.GestureDetector;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.DatingApp.tinder101.Dto.UserDto;
@@ -21,15 +15,11 @@ import com.DatingApp.tinder101.R;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import me.relex.circleindicator.CircleIndicator3;
-
-public class UserCardsHolderAdapter extends BaseAdapter implements UserCardAdapter.OnImageTap {
+public class UserCardsHolderAdapter extends BaseAdapter implements UserCardAdapter.OnTapImage {
   private Context context;
   private List<UserDto> users;
   private ViewPager2 adapterViewFlipper;
-  private CircleIndicator3 circleIndicator3;
   private AtomicInteger currentPosition = new AtomicInteger();
-  private UserCardAdapter userCardAdapter;
   private UserDto user;
 
   public UserCardsHolderAdapter(Context context) {
@@ -63,35 +53,32 @@ public class UserCardsHolderAdapter extends BaseAdapter implements UserCardAdapt
     convertView =
         LayoutInflater.from(parent.getContext()).inflate(R.layout.user_cards_holder, parent, false);
     adapterViewFlipper = convertView.findViewById(R.id.userCardsHolder);
-    circleIndicator3 = convertView.findViewById(R.id.imageIndicators);
+
     user = users.get(position);
-    userCardAdapter = new UserCardAdapter(context, this);
+    UserCardAdapter userCardAdapter = new UserCardAdapter(context, this);
     userCardAdapter.setData(user);
     adapterViewFlipper.setAdapter(userCardAdapter);
-    circleIndicator3.setViewPager(adapterViewFlipper);
-
     adapterViewFlipper.setUserInputEnabled(false);
 
     return convertView;
   }
 
   @Override
-  public void tapRight() {
-    if (currentPosition.get() == user.getImageUrlsMap().size() - 1) {
+  public void tabLeft() {
+    if (currentPosition.get() == 0) {
       currentPosition.set(user.getImageUrlsMap().size() - 1);
-    } else {
-      adapterViewFlipper.setCurrentItem(currentPosition.get() + 1);
-      currentPosition.getAndIncrement();
     }
+    adapterViewFlipper.setCurrentItem(currentPosition.get() - 1);
+    currentPosition.getAndDecrement();
   }
 
   @Override
-  public void tapLeft() {
-    if (currentPosition.get() == 0) {
+  public void tabRight() {
+
+    if (currentPosition.get() == user.getImageUrlsMap().size() - 1) {
       currentPosition.set(0);
-    } else {
-      adapterViewFlipper.setCurrentItem(currentPosition.get() - 1);
-      currentPosition.getAndDecrement();
     }
+    adapterViewFlipper.setCurrentItem(currentPosition.get() + 1);
+    currentPosition.getAndIncrement();
   }
 }

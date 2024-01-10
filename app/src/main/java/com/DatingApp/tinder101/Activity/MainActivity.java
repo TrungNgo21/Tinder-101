@@ -12,11 +12,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.DatingApp.tinder101.Callback.CallbackRes;
 import com.DatingApp.tinder101.Callback.FirebaseCallback;
 import com.DatingApp.tinder101.Constant.Constant;
 import com.DatingApp.tinder101.Dto.UserDto;
+import com.DatingApp.tinder101.Fragments.SwipeFragment;
 import com.DatingApp.tinder101.R;
 import com.DatingApp.tinder101.Service.UserService;
 import com.google.firebase.FirebaseApp;
@@ -61,6 +64,8 @@ public class MainActivity extends AppCompatActivity {
             if (template instanceof CallbackRes.Success) {
               users = ((CallbackRes.Success<Stack<UserDto>>) template).getData();
               updateListUsers();
+              Fragment fragment = new SwipeFragment(users);
+              loadFragment(fragment);
             } else {
               Toast.makeText(getApplicationContext(), template.toString(), Toast.LENGTH_LONG)
                   .show();
@@ -164,5 +169,13 @@ public class MainActivity extends AppCompatActivity {
         .child(currentUser.getId())
         .child("likeList")
         .addChildEventListener(childEventListener);
+  }
+
+  private void loadFragment(Fragment fragment) {
+    // load fragment
+    FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+    transaction.replace(R.id.swipeScreen1, fragment);
+    transaction.addToBackStack(null);
+    transaction.commit();
   }
 }
