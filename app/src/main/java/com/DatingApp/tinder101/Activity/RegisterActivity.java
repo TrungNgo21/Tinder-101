@@ -34,6 +34,11 @@ public class RegisterActivity extends AppCompatActivity {
   }
 
   public void setUpButton() {
+    activityRegisterBinding.toLogin.setOnClickListener(
+        view -> {
+          finish();
+          startActivity(new Intent(this, SignInActivity.class));
+        });
     activityRegisterBinding.registerBtn.setOnClickListener(
         view -> {
           userService.register(
@@ -43,8 +48,9 @@ public class RegisterActivity extends AppCompatActivity {
                 @Override
                 public void callback(CallbackRes<UserDto> res) {
                   if (res instanceof CallbackRes.Success) {
-                    finish();
-                    startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                    //                    finish();
+                    //                    startActivity(new Intent(getApplicationContext(),
+                    // MainActivity.class));
                   } else {
                     Toast.makeText(getApplicationContext(), res.toString(), Toast.LENGTH_LONG)
                         .show();

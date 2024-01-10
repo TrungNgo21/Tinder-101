@@ -11,7 +11,7 @@ android {
 
     defaultConfig {
         applicationId = "com.DatingApp.tinder101"
-        minSdk = 24
+        minSdk = 26
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
@@ -76,6 +76,8 @@ dependencies {
     implementation("com.facebook.shimmer:shimmer:0.5.0")
 
     implementation("com.intuit.sdp:sdp-android:1.0.6")
+    implementation("com.intuit.ssp:ssp-android:1.0.6")
+
 
     implementation("com.makeramen:roundedimageview:2.3.0")
 
@@ -94,4 +96,10 @@ dependencies {
     implementation("com.google.maps.android:android-maps-utils:2.4.0")
     implementation("com.google.android.gms:play-services-maps:18.2.0")
     implementation("com.google.android.gms:play-services-location:21.0.1")
+    implementation("androidx.viewpager2:viewpager2:1.0.0-alpha0")
+    implementation("com.cloudinary:cloudinary-android:2.5.0")
+    implementation("com.lorentzos.swipecards:library:1.0.9")
+    implementation("com.google.android.flexbox:flexbox:3.0.0")
+
+
 }

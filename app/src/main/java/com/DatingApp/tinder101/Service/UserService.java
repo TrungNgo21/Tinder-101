@@ -10,8 +10,12 @@ import androidx.annotation.Nullable;
 import com.DatingApp.tinder101.Callback.CallbackRes;
 import com.DatingApp.tinder101.Callback.FirebaseCallback;
 import com.DatingApp.tinder101.Constant.Constant;
+import com.DatingApp.tinder101.Dto.ProfileSettingDto;
 import com.DatingApp.tinder101.Dto.UserDto;
+import com.DatingApp.tinder101.Enum.LookingForEnum;
+import com.DatingApp.tinder101.Model.ProfileSetting;
 import com.DatingApp.tinder101.Model.User;
+import com.DatingApp.tinder101.Utils.EnumConverter;
 import com.DatingApp.tinder101.Utils.PreferenceManager;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -31,6 +35,7 @@ import com.google.firebase.firestore.Transaction;
 import com.google.firebase.firestore.WriteBatch;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -153,6 +158,31 @@ public class UserService {
                     User.builder()
                         .name("Test")
                         .email(email)
+                        .profileSetting(
+                            ProfileSetting.builder()
+                                .basics(Arrays.asList("Smoke", "Moaa"))
+                                .interests(Arrays.asList("BaseBall", "LickBack"))
+                                .lifestyleList(Arrays.asList("hihihihh"))
+                                .lookingForEnum(LookingForEnum.SHORT_LONG_OK.toString())
+                                .quotes("Qua la tuyet voi")
+                                .build())
+                        .imageUrlsMap(
+                            new HashMap<String, String>() {
+                              {
+                                put(
+                                    "0",
+                                    "https://www.google.com/url?sa=i&url=https%3A%2F%2Funsplash.com%2Fimages%2Fanimals%2Fcat&psig=AOvVaw1Drslg04h5cWQauEC9tDNi&ust=1704874937406000&source=images&cd=vfe&ved=0CBEQjRxqFwoTCLjty5nwz4MDFQAAAAAdAAAAABAE");
+                                put(
+                                    "1",
+                                    "https://www.google.com/url?sa=i&url=https%3A%2F%2Funsplash.com%2Fimages%2Fanimals%2Fcat&psig=AOvVaw1Drslg04h5cWQauEC9tDNi&ust=1704874937406000&source=images&cd=vfe&ved=0CBEQjRxqFwoTCLjty5nwz4MDFQAAAAAdAAAAABAE");
+                                put(
+                                    "2",
+                                    "https://www.google.com/url?sa=i&url=https%3A%2F%2Funsplash.com%2Fimages%2Fanimals%2Fcat&psig=AOvVaw1Drslg04h5cWQauEC9tDNi&ust=1704874937406000&source=images&cd=vfe&ved=0CBEQjRxqFwoTCLjty5nwz4MDFQAAAAAdAAAAABAE");
+                                put(
+                                    "3",
+                                    "https://www.google.com/url?sa=i&url=https%3A%2F%2Funsplash.com%2Fimages%2Fanimals%2Fcat&psig=AOvVaw1Drslg04h5cWQauEC9tDNi&ust=1704874937406000&source=images&cd=vfe&ved=0CBEQjRxqFwoTCLjty5nwz4MDFQAAAAAdAAAAABAE");
+                              }
+                            })
                         .createdDate(new Date())
                         .updatedDate(new Date())
                         .build();
