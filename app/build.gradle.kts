@@ -33,6 +33,8 @@ android {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
+
+
 }
 
 dependencies {
@@ -94,4 +96,6 @@ dependencies {
     implementation("com.google.maps.android:android-maps-utils:2.4.0")
     implementation("com.google.android.gms:play-services-maps:18.2.0")
     implementation("com.google.android.gms:play-services-location:21.0.1")
+    implementation("com.github.denzcoskun:ImageSlideshow:0.1.2")
+    implementation("com.tbuonomo:dotsindicator:5.0")
 }
