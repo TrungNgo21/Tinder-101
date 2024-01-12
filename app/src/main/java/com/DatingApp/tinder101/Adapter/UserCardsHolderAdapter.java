@@ -1,12 +1,18 @@
 package com.DatingApp.tinder101.Adapter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
+import android.util.Log;
+import android.view.GestureDetector;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.DatingApp.tinder101.Dto.UserDto;
@@ -15,12 +21,15 @@ import com.DatingApp.tinder101.R;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class UserCardsHolderAdapter extends BaseAdapter implements UserCardAdapter.OnTapImage {
+public class UserCardsHolderAdapter extends BaseAdapter implements UserCardAdapter.OnImageTap {
   private Context context;
   private List<UserDto> users;
   private ViewPager2 adapterViewFlipper;
   private AtomicInteger currentPosition = new AtomicInteger();
+  private UserCardAdapter userCardAdapter;
   private UserDto user;
+
+  private boolean isLike;
 
   public UserCardsHolderAdapter(Context context) {
     this.context = context;
@@ -55,30 +64,43 @@ public class UserCardsHolderAdapter extends BaseAdapter implements UserCardAdapt
     adapterViewFlipper = convertView.findViewById(R.id.userCardsHolder);
 
     user = users.get(position);
-    UserCardAdapter userCardAdapter = new UserCardAdapter(context, this);
+    userCardAdapter = new UserCardAdapter(context, this);
     userCardAdapter.setData(user);
+    userCardAdapter.setIsDislikeDisplay(!isLike);
+    userCardAdapter.setIsLikeDisplay(isLike);
     adapterViewFlipper.setAdapter(userCardAdapter);
     adapterViewFlipper.setUserInputEnabled(false);
 
     return convertView;
   }
 
-  @Override
-  public void tabLeft() {
-    if (currentPosition.get() == 0) {
-      currentPosition.set(user.getImageUrlsMap().size() - 1);
-    }
-    adapterViewFlipper.setCurrentItem(currentPosition.get() - 1);
-    currentPosition.getAndDecrement();
+  public void updateLike(boolean isDisplay) {
+    this.isLike = isDisplay;
+    userCardAdapter.setIsLikeDisplay(isLike);
+  }
+
+  public void updateDislike(boolean isDisplay) {
+    this.isLike = isDisplay;
+    userCardAdapter.setIsDislikeDisplay(isLike);
   }
 
   @Override
-  public void tabRight() {
-
+  public void tapRight() {
     if (currentPosition.get() == user.getImageUrlsMap().size() - 1) {
-      currentPosition.set(0);
+      currentPosition.set(user.getImageUrlsMap().size() - 1);
+    } else {
+      adapterViewFlipper.setCurrentItem(currentPosition.get() + 1);
+      currentPosition.getAndIncrement();
     }
-    adapterViewFlipper.setCurrentItem(currentPosition.get() + 1);
-    currentPosition.getAndIncrement();
+  }
+
+  @Override
+  public void tapLeft() {
+    if (currentPosition.get() == 0) {
+      currentPosition.set(0);
+    } else {
+      adapterViewFlipper.setCurrentItem(currentPosition.get() - 1);
+      currentPosition.getAndDecrement();
+    }
   }
 }

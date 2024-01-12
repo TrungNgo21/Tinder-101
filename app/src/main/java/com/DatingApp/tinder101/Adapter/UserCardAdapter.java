@@ -2,6 +2,7 @@ package com.DatingApp.tinder101.Adapter;
 
 import android.content.Context;
 import android.util.Log;
+import android.view.GestureDetector;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -23,6 +24,7 @@ import com.google.android.flexbox.AlignItems;
 import com.google.android.flexbox.FlexDirection;
 import com.google.android.flexbox.FlexWrap;
 import com.google.android.flexbox.FlexboxLayoutManager;
+import com.google.android.gms.common.api.BatchResultToken;
 import com.squareup.picasso.Picasso;
 
 import java.lang.reflect.Array;
@@ -36,57 +38,63 @@ public class UserCardAdapter extends RecyclerView.Adapter<UserCardAdapter.UserCa
   private UserDto userDto;
   private Context context;
 
-  private OnTapImage onTapImage;
+  private boolean isLikeDisplay;
+  private boolean isDislikeDisplay;
+
+  private OnImageTap onImageTap;
+
   private final String DEBUG_TAG = "Action down";
 
   private final List<String> displayFields =
       Arrays.asList("QUOTES", "INTEREST", "BASIS", "LOOKING_FOR");
 
-  public UserCardAdapter(Context context, OnTapImage onTapImage) {
+  public UserCardAdapter(Context context, OnImageTap onImageTap) {
     this.context = context;
-    this.onTapImage = onTapImage;
+    this.onImageTap = onImageTap;
   }
 
   public void setData(UserDto userDto) {
     this.userDto = userDto;
+    notifyDataSetChanged();
+  }
+
+  public void setIsLikeDisplay(boolean isDisplay) {
+    this.isLikeDisplay = isDisplay;
+    notifyDataSetChanged();
+  }
+
+  public void setIsDislikeDisplay(boolean isDisplay) {
+    this.isDislikeDisplay = isDisplay;
+    notifyDataSetChanged();
   }
 
   @NonNull
   @Override
   public UserCardHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
     View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.user_card, parent, false);
-    return new UserCardHolder(view, onTapImage);
+    return new UserCardHolder(view);
   }
 
   @Override
   public void onBindViewHolder(@NonNull UserCardHolder holder, int position) {
 
-    holder.prevButton.setOnClickListener(
+    holder.infoDisplay.setOnClickListener(
         view -> {
-          onTapImage.tabLeft();
-        });
-    holder.nextButton.setOnClickListener(
-        v -> {
-          onTapImage.tabRight();
+          Log.d(DEBUG_TAG, " dasdasdasdsad");
         });
 
-    holder.imageField.setOnTouchListener(
-        (v, event) -> {
-          int action = event.getActionMasked();
-          Log.d(DEBUG_TAG, String.valueOf(action));
-          switch (action) {
-            case (MotionEvent.ACTION_DOWN):
-              v.performClick();
-              Log.d(DEBUG_TAG, String.valueOf(v.getWidth()));
-              Log.d(DEBUG_TAG, String.valueOf(event.getRawX()));
-              return true;
-            case (MotionEvent.ACTION_POINTER_DOWN):
-              Log.d(DEBUG_TAG, String.valueOf(v.getWidth()));
-              Log.d(DEBUG_TAG, String.valueOf(event.getRawX()));
-              return true;
-          }
-          return false;
+    //    holder.dislikeMask.setVisibility(isDislikeDisplay ? View.VISIBLE : View.GONE);
+    //    holder.likeMask.setVisibility(isLikeDisplay ? View.VISIBLE : View.GONE);
+
+    holder.nextBtn.setOnClickListener(
+        view -> {
+          onImageTap.tapRight();
         });
+    holder.prevBtn.setOnClickListener(
+        view -> {
+          onImageTap.tapLeft();
+        });
+
     String currentFieldDisplay;
     if (position > userDto.getImageUrlsMap().size() - 1) {
       currentFieldDisplay = displayFields.get(3);
@@ -131,6 +139,7 @@ public class UserCardAdapter extends RecyclerView.Adapter<UserCardAdapter.UserCa
       holder.profileChipsIcon.setImageResource(R.drawable.label_icon);
       holder.profileChipsType.setText("Basics & Lifestyle");
       List<String> total = new ArrayList<>();
+
       // set up lifestyle & basics adapters
       if (!userDto.getProfileSetting().getLifestyleList().isEmpty()
           && !userDto.getProfileSetting().getBasics().isEmpty()) {
@@ -207,21 +216,21 @@ public class UserCardAdapter extends RecyclerView.Adapter<UserCardAdapter.UserCa
     private ImageView profileSingleIcon;
     private TextView profileSingleContent;
     private ImageView profileChipsIcon;
-    private ImageView profileLookingForIcon;
     private TextView profileLookingForContent;
 
     private TextView profileChipsType;
-    private Button nextButton;
 
-    private Button prevButton;
+    private View infoDisplay;
 
-    private View imageField;
+    private View likeMask;
 
-    private OnTapImage onTapImage;
+    private View dislikeMask;
+    private Button prevBtn;
+    private Button nextBtn;
 
-    private UserCardHolder(@NonNull View itemView, OnTapImage onTapImage) {
+    private UserCardHolder(@NonNull View itemView) {
       super(itemView);
-      this.onTapImage = onTapImage;
+
       profileImage = itemView.findViewById(R.id.profileImage);
       profileName = itemView.findViewById(R.id.profileName);
       profileAge = itemView.findViewById(R.id.profileAge);
@@ -234,15 +243,17 @@ public class UserCardAdapter extends RecyclerView.Adapter<UserCardAdapter.UserCa
       profileSingleIcon = itemView.findViewById(R.id.profileSingleInfoIcon);
       profileSingleContent = itemView.findViewById(R.id.profileSingleInfoContent);
       profileLookingForContent = itemView.findViewById(R.id.profileLookingFor);
-      imageField = itemView.findViewById(R.id.imageField);
-      nextButton = itemView.findViewById(R.id.nextBtn);
-      prevButton = itemView.findViewById(R.id.prevBtn);
+      likeMask = itemView.findViewById(R.id.likeMask);
+      dislikeMask = itemView.findViewById(R.id.dislikeMask);
+      infoDisplay = itemView.findViewById(R.id.info);
+      prevBtn = itemView.findViewById(R.id.prevBtn);
+      nextBtn = itemView.findViewById(R.id.nextBtn);
     }
   }
 
-  public interface OnTapImage {
-    void tabLeft();
+  public interface OnImageTap {
+    void tapRight();
 
-    void tabRight();
+    void tapLeft();
   }
 }
