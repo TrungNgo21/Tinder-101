@@ -17,8 +17,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.DatingApp.tinder101.Constant.Constant;
 import com.DatingApp.tinder101.Dto.UserDto;
+<<<<<<< HEAD
 import com.DatingApp.tinder101.Enum.BasicEnum;
 import com.DatingApp.tinder101.Enum.LifestyleEnum;
+=======
+>>>>>>> aba3763 (feat: add 2 buttons to navigate)
 import com.DatingApp.tinder101.Model.User;
 import com.DatingApp.tinder101.R;
 import com.DatingApp.tinder101.Utils.EnumConverter;
@@ -32,9 +35,13 @@ import com.squareup.picasso.Picasso;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
+<<<<<<< HEAD
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+=======
+import java.util.List;
+>>>>>>> aba3763 (feat: add 2 buttons to navigate)
 
 import javax.crypto.ShortBufferException;
 
@@ -42,6 +49,12 @@ public class UserCardAdapter extends RecyclerView.Adapter<UserCardAdapter.UserCa
   private UserDto userDto;
   private Context context;
 
+<<<<<<< HEAD
+=======
+  private boolean isLikeDisplay;
+  private boolean isDislikeDisplay;
+
+>>>>>>> aba3763 (feat: add 2 buttons to navigate)
   private OnImageTap onImageTap;
 
   private final String DEBUG_TAG = "Action down";
@@ -59,6 +72,7 @@ public class UserCardAdapter extends RecyclerView.Adapter<UserCardAdapter.UserCa
     notifyDataSetChanged();
   }
 
+<<<<<<< HEAD
   private List<LifestyleEnum> extractLifestyles(HashMap<LifestyleEnum, String> LifeStyleList) {
     List<LifestyleEnum> listTypes = new ArrayList<>();
     for (Map.Entry<LifestyleEnum, String> entry : LifeStyleList.entrySet()) {
@@ -89,6 +103,16 @@ public class UserCardAdapter extends RecyclerView.Adapter<UserCardAdapter.UserCa
       listContents.add(entry.getValue());
     }
     return listContents;
+=======
+  public void setIsLikeDisplay(boolean isDisplay) {
+    this.isLikeDisplay = isDisplay;
+    notifyDataSetChanged();
+  }
+
+  public void setIsDislikeDisplay(boolean isDisplay) {
+    this.isDislikeDisplay = isDisplay;
+    notifyDataSetChanged();
+>>>>>>> aba3763 (feat: add 2 buttons to navigate)
   }
 
   @NonNull
@@ -103,7 +127,23 @@ public class UserCardAdapter extends RecyclerView.Adapter<UserCardAdapter.UserCa
 
     holder.infoDisplay.setOnClickListener(
         view -> {
+<<<<<<< HEAD
           onImageTap.tapDown(userDto);
+=======
+          Log.d(DEBUG_TAG, " dasdasdasdsad");
+        });
+
+    //    holder.dislikeMask.setVisibility(isDislikeDisplay ? View.VISIBLE : View.GONE);
+    //    holder.likeMask.setVisibility(isLikeDisplay ? View.VISIBLE : View.GONE);
+
+    holder.nextBtn.setOnClickListener(
+        view -> {
+          onImageTap.tapRight();
+        });
+    holder.prevBtn.setOnClickListener(
+        view -> {
+          onImageTap.tapLeft();
+>>>>>>> aba3763 (feat: add 2 buttons to navigate)
         });
 
     String currentFieldDisplay;
@@ -142,13 +182,18 @@ public class UserCardAdapter extends RecyclerView.Adapter<UserCardAdapter.UserCa
         holder.profileChipsIcon.setImageResource(R.drawable.interest_icon);
 
         // set up interest chips adapter
+<<<<<<< HEAD
         chipsAdapter.setData(userDto.getProfileSetting().getInterests(), null, null);
+=======
+        chipsAdapter.setData(userDto.getProfileSetting().getInterests());
+>>>>>>> aba3763 (feat: add 2 buttons to navigate)
         holder.profileChips.setAdapter(chipsAdapter);
       }
     } else {
       setDisplayVisible(holder, currentFieldDisplay);
       holder.profileChipsIcon.setImageResource(R.drawable.label_icon);
       holder.profileChipsType.setText("Basics & Lifestyle");
+<<<<<<< HEAD
 
       HashMap<LifestyleEnum, String> lifeStyleChips =
           userDto.getProfileSetting().getLifestyleList();
@@ -172,15 +217,46 @@ public class UserCardAdapter extends RecyclerView.Adapter<UserCardAdapter.UserCa
           contents.addAll(basicContents);
           chipsAdapter.setData(
               contents, extractLifestyles(lifeStyleChips), extractBasics(basicChips));
+=======
+      List<String> total = new ArrayList<>();
+
+      // set up lifestyle & basics adapters
+      if (!userDto.getProfileSetting().getLifestyleList().isEmpty()
+          && !userDto.getProfileSetting().getBasics().isEmpty()) {
+        total.addAll(userDto.getProfileSetting().getBasics());
+        total.addAll(userDto.getProfileSetting().getLifestyleList());
+        if (total.size() > 5) {
+          chipsAdapter.setData(total.subList(0, 5));
+        } else {
+          chipsAdapter.setData(total);
+>>>>>>> aba3763 (feat: add 2 buttons to navigate)
         }
         holder.profileChips.setAdapter(chipsAdapter);
         holder.profileChips.setLayoutManager(constructLayoutManager());
       } else if (!userDto.getProfileSetting().getLifestyleList().isEmpty()) {
+<<<<<<< HEAD
         chipsAdapter.setData(lifeStyleContents, extractLifestyles(lifeStyleChips), null);
         holder.profileChips.setAdapter(chipsAdapter);
         holder.profileChips.setLayoutManager(constructLayoutManager());
       } else if (!userDto.getProfileSetting().getBasics().isEmpty()) {
         chipsAdapter.setData(basicContents, null, extractBasics(basicChips));
+=======
+        total.addAll(userDto.getProfileSetting().getLifestyleList());
+        if (total.size() > 5) {
+          chipsAdapter.setData(total.subList(0, 5));
+        } else {
+          chipsAdapter.setData(total);
+        }
+        holder.profileChips.setAdapter(chipsAdapter);
+        holder.profileChips.setLayoutManager(constructLayoutManager());
+      } else if (!userDto.getProfileSetting().getBasics().isEmpty()) {
+        total.addAll(userDto.getProfileSetting().getBasics());
+        if (total.size() > 5) {
+          chipsAdapter.setData(total.subList(0, 5));
+        } else {
+          chipsAdapter.setData(total);
+        }
+>>>>>>> aba3763 (feat: add 2 buttons to navigate)
         holder.profileChips.setAdapter(chipsAdapter);
         holder.profileChips.setLayoutManager(constructLayoutManager());
       }
@@ -216,7 +292,11 @@ public class UserCardAdapter extends RecyclerView.Adapter<UserCardAdapter.UserCa
     }
   }
 
+<<<<<<< HEAD
   public class UserCardHolder extends RecyclerView.ViewHolder {
+=======
+  public static class UserCardHolder extends RecyclerView.ViewHolder {
+>>>>>>> aba3763 (feat: add 2 buttons to navigate)
     private ImageView profileImage;
     private TextView profileName;
     private TextView profileAge;
@@ -235,6 +315,15 @@ public class UserCardAdapter extends RecyclerView.Adapter<UserCardAdapter.UserCa
 
     private View infoDisplay;
 
+<<<<<<< HEAD
+=======
+    private View likeMask;
+
+    private View dislikeMask;
+    private Button prevBtn;
+    private Button nextBtn;
+
+>>>>>>> aba3763 (feat: add 2 buttons to navigate)
     private UserCardHolder(@NonNull View itemView) {
       super(itemView);
 
@@ -250,11 +339,25 @@ public class UserCardAdapter extends RecyclerView.Adapter<UserCardAdapter.UserCa
       profileSingleIcon = itemView.findViewById(R.id.profileSingleInfoIcon);
       profileSingleContent = itemView.findViewById(R.id.profileSingleInfoContent);
       profileLookingForContent = itemView.findViewById(R.id.profileLookingFor);
+<<<<<<< HEAD
       infoDisplay = itemView.findViewById(R.id.info);
+=======
+      likeMask = itemView.findViewById(R.id.likeMask);
+      dislikeMask = itemView.findViewById(R.id.dislikeMask);
+      infoDisplay = itemView.findViewById(R.id.info);
+      prevBtn = itemView.findViewById(R.id.prevBtn);
+      nextBtn = itemView.findViewById(R.id.nextBtn);
+>>>>>>> aba3763 (feat: add 2 buttons to navigate)
     }
   }
 
   public interface OnImageTap {
+<<<<<<< HEAD
     void tapDown(UserDto userDto);
+=======
+    void tapRight();
+
+    void tapLeft();
+>>>>>>> aba3763 (feat: add 2 buttons to navigate)
   }
 }

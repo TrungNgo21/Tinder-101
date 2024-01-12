@@ -7,6 +7,7 @@
     tools:context=".Fragments.SwipeFragment">
 
 
+<<<<<<< HEAD
     <!--    <com.lorentzos.flingswipe.SwipeFlingAdapterView-->
     <!--        android:id="@+id/swipeScreen"-->
     <!--        app:rotation_degrees="15.5"-->
@@ -16,6 +17,11 @@
     <com.yuyakaido.android.cardstackview.CardStackView
         android:id="@+id/swipeScreen"
         tools:listitem="@layout/user_cards_holder"
+=======
+    <com.lorentzos.flingswipe.SwipeFlingAdapterView
+        android:id="@+id/swipeScreen"
+        app:rotation_degrees="15.5"
+>>>>>>> aba3763 (feat: add 2 buttons to navigate)
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 </RelativeLayout>
