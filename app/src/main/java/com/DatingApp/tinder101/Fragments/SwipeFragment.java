@@ -39,8 +39,9 @@ public class SwipeFragment extends Fragment {
 
   private UserCardsHolderAdapter userCardsHolderAdapter;
 
-  private float draggingValue = 0f;
   private boolean isLike;
+
+  private boolean isDislike;
 
   public SwipeFragment() {}
 
@@ -76,9 +77,19 @@ public class SwipeFragment extends Fragment {
           public void onScroll(float v) {
             View view = swipeFlingAdapterView.getSelectedView();
             Log.d("latitude", String.valueOf(v));
-            draggingValue = v;
-            view.findViewById(R.id.likeMask).setAlpha(isLike ? draggingValue : 0);
-            view.findViewById(R.id.dislikeMask).setAlpha(!isLike ? -draggingValue : 0);
+            if (v > 0) {
+              isLike = true;
+              isDislike = false;
+            } else if (v < 0) {
+              isLike = false;
+              isDislike = true;
+            } else {
+              isDislike = false;
+              isLike = false;
+            }
+            view.findViewById(R.id.likeMask).setVisibility(isLike ? View.VISIBLE : View.INVISIBLE);
+            view.findViewById(R.id.dislikeMask)
+                .setVisibility(isDislike ? View.VISIBLE : View.INVISIBLE);
           }
         });
   }
