@@ -38,9 +38,6 @@ public class UserCardAdapter extends RecyclerView.Adapter<UserCardAdapter.UserCa
   private UserDto userDto;
   private Context context;
 
-  private boolean isLikeDisplay;
-  private boolean isDislikeDisplay;
-
   private OnImageTap onImageTap;
 
   private final String DEBUG_TAG = "Action down";
@@ -55,16 +52,6 @@ public class UserCardAdapter extends RecyclerView.Adapter<UserCardAdapter.UserCa
 
   public void setData(UserDto userDto) {
     this.userDto = userDto;
-    notifyDataSetChanged();
-  }
-
-  public void setIsLikeDisplay(boolean isDisplay) {
-    this.isLikeDisplay = isDisplay;
-    notifyDataSetChanged();
-  }
-
-  public void setIsDislikeDisplay(boolean isDisplay) {
-    this.isDislikeDisplay = isDisplay;
     notifyDataSetChanged();
   }
 
@@ -83,16 +70,13 @@ public class UserCardAdapter extends RecyclerView.Adapter<UserCardAdapter.UserCa
           Log.d(DEBUG_TAG, " dasdasdasdsad");
         });
 
-    //    holder.dislikeMask.setVisibility(isDislikeDisplay ? View.VISIBLE : View.GONE);
-    //    holder.likeMask.setVisibility(isLikeDisplay ? View.VISIBLE : View.GONE);
-
-    holder.nextBtn.setOnClickListener(
-        view -> {
-          onImageTap.tapRight();
-        });
     holder.prevBtn.setOnClickListener(
         view -> {
           onImageTap.tapLeft();
+        });
+    holder.nextBtn.setOnClickListener(
+        view -> {
+          onImageTap.tapRight();
         });
 
     String currentFieldDisplay;
@@ -221,10 +205,6 @@ public class UserCardAdapter extends RecyclerView.Adapter<UserCardAdapter.UserCa
     private TextView profileChipsType;
 
     private View infoDisplay;
-
-    private View likeMask;
-
-    private View dislikeMask;
     private Button prevBtn;
     private Button nextBtn;
 
@@ -243,8 +223,6 @@ public class UserCardAdapter extends RecyclerView.Adapter<UserCardAdapter.UserCa
       profileSingleIcon = itemView.findViewById(R.id.profileSingleInfoIcon);
       profileSingleContent = itemView.findViewById(R.id.profileSingleInfoContent);
       profileLookingForContent = itemView.findViewById(R.id.profileLookingFor);
-      likeMask = itemView.findViewById(R.id.likeMask);
-      dislikeMask = itemView.findViewById(R.id.dislikeMask);
       infoDisplay = itemView.findViewById(R.id.info);
       prevBtn = itemView.findViewById(R.id.prevBtn);
       nextBtn = itemView.findViewById(R.id.nextBtn);

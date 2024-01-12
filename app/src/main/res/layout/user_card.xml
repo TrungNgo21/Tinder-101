@@ -20,9 +20,8 @@
         android:layout_height="wrap_content">
 
         <LinearLayout
-            android:visibility="visible"
+            android:visibility="invisible"
             android:id="@+id/likeMask"
-            android:alpha="0"
             android:layout_width="match_parent"
             android:background="@drawable/bg_like_linear"
             android:gravity="center_vertical"
@@ -40,8 +39,7 @@
         </LinearLayout>
 
         <LinearLayout
-            android:visibility="visible"
-            android:alpha="0"
+            android:visibility="invisible"
             android:id="@+id/dislikeMask"
             android:layout_width="match_parent"
             android:background="@drawable/bg_dislike_linear"

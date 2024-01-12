@@ -21,15 +21,16 @@ import com.DatingApp.tinder101.R;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import me.relex.circleindicator.CircleIndicator3;
+
 public class UserCardsHolderAdapter extends BaseAdapter implements UserCardAdapter.OnImageTap {
   private Context context;
   private List<UserDto> users;
   private ViewPager2 adapterViewFlipper;
+  private CircleIndicator3 circleIndicator3;
   private AtomicInteger currentPosition = new AtomicInteger();
   private UserCardAdapter userCardAdapter;
   private UserDto user;
-
-  private boolean isLike;
 
   public UserCardsHolderAdapter(Context context) {
     this.context = context;
@@ -62,26 +63,16 @@ public class UserCardsHolderAdapter extends BaseAdapter implements UserCardAdapt
     convertView =
         LayoutInflater.from(parent.getContext()).inflate(R.layout.user_cards_holder, parent, false);
     adapterViewFlipper = convertView.findViewById(R.id.userCardsHolder);
-
+    circleIndicator3 = convertView.findViewById(R.id.imageIndicators);
     user = users.get(position);
     userCardAdapter = new UserCardAdapter(context, this);
     userCardAdapter.setData(user);
-    userCardAdapter.setIsDislikeDisplay(!isLike);
-    userCardAdapter.setIsLikeDisplay(isLike);
     adapterViewFlipper.setAdapter(userCardAdapter);
+    circleIndicator3.setViewPager(adapterViewFlipper);
+
     adapterViewFlipper.setUserInputEnabled(false);
 
     return convertView;
-  }
-
-  public void updateLike(boolean isDisplay) {
-    this.isLike = isDisplay;
-    userCardAdapter.setIsLikeDisplay(isLike);
-  }
-
-  public void updateDislike(boolean isDisplay) {
-    this.isLike = isDisplay;
-    userCardAdapter.setIsDislikeDisplay(isLike);
   }
 
   @Override
