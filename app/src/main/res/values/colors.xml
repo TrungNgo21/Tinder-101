@@ -7,6 +7,23 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+<<<<<<< HEAD
+
+    <color name="gray">#E5E1DA</color>
+
+    <color name="white_a5">#0DFFFFFF</color>
+    <color name="black_a70">#99000000</color>
+    <color name="transparent">#00000000</color>
+
+    <color name="like_color">#25A55F</color>
+    <color name="like_middle_color">#9BDF46</color>
+    <color name="dislike_color">#F05941</color>
+    <color name="dislike_middle_color">#f9bfbf</color>
+
+
+    <color name="start_black">#4D000000</color>
+    <color name="middle_black">#191919</color>
+=======
     <color name="primary_purple_700">#8023EB</color>
     <color name="purple_mystic_lavender_500">#8023EB</color>
     <color name="purple_velvet_opacity_40">#450DCB66</color>
@@ -19,4 +36,5 @@
     <color name="pink_200">#FEEFEF</color>
     <color name="bluish_gray_200">#EBEEF2</color>
     <color name="slate_blue_500">#2C3A4B</color>
+>>>>>>> f064f0f (Commit something)
 </resources>
