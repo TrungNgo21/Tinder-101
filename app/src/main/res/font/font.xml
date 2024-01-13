@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<font-family
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <!-- regular default -->
+    <font
+        android:font="@font/source_sans_pro_regular"
+        app:font="@font/source_sans_pro_regular" />
+
+    <!-- regular italic -->
+    <font
+        android:font="@font/source_sans_pro_lt"
+        app:font="@font/source_sans_pro_lt" />
+
+    <!-- light default -->
+    <font
+        android:font="@font/source_sans_pro_light"
+        app:font="@font/source_sans_pro_light" />
+
+    <!-- light italic -->
+    <font
+        android:font="@font/source_sans_pro_lightlt"
+        app:font="@font/source_sans_pro_lightlt" />
+
+    <!-- semibold default -->
+    <font
+        android:font="@font/source_sans_pro_semibold"
+        app:font="@font/source_sans_pro_semibold" />
+
+    <!-- semibold italic -->
+    <font
+        android:font="@font/source_sans_pro_semiboldlt"
+        app:font="@font/source_sans_pro_semiboldlt" /> \
+
+    <!-- bold default -->
+    <font
+        android:font="@font/source_sans_pro_bold"
+        app:font="@font/source_sans_pro_bold" />
+
+    <!-- bold italic -->
+    <font
+        android:font="@font/source_sans_pro_boldlt"
+        app:font="@font/source_sans_pro_boldlt" />
+
+    <!-- black default -->
+    <font
+        android:font="@font/source_sans_pro_black"
+        app:font="@font/source_sans_pro_black" />
+
+    <!-- black italic -->
+    <font
+        android:font="@font/source_sans_pro_blacklt"
+        app:font="@font/source_sans_pro_blacklt" />
+
+</font-family>
