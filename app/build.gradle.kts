@@ -97,15 +97,11 @@ dependencies {
     implementation("com.google.maps.android:android-maps-utils:3.8.2")
     implementation("com.google.android.gms:play-services-maps:18.2.0")
     implementation("com.google.android.gms:play-services-location:21.0.1")
-<<<<<<< HEAD
     implementation("androidx.viewpager2:viewpager2:1.1.0-beta02")
     implementation("com.cloudinary:cloudinary-android:2.6.1")
     implementation("com.lorentzos.swipecards:library:1.0.9")
     implementation("com.google.android.flexbox:flexbox:3.0.0")
-
-
-=======
     implementation("com.github.denzcoskun:ImageSlideshow:0.1.2")
     implementation("com.tbuonomo:dotsindicator:5.0")
->>>>>>> f064f0f (Commit something)
+
 }
