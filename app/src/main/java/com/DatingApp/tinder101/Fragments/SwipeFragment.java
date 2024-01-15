@@ -35,6 +35,7 @@ import com.yuyakaido.android.cardstackview.CardStackListener;
 import com.yuyakaido.android.cardstackview.CardStackView;
 import com.yuyakaido.android.cardstackview.Direction;
 import com.yuyakaido.android.cardstackview.StackFrom;
+import com.yuyakaido.android.cardstackview.internal.CardStackState;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -74,14 +75,18 @@ public class SwipeFragment extends Fragment implements UserCardsHolderAdapter.On
     userCardsHolderAdapter = new UserCardsHolderAdapter(requireContext(), this);
     userCardsHolderAdapter.setData(users);
     CardStackView swipeFlingAdapterView = fragmentSwipeBinding.swipeScreen;
+    CardStackState cardStackState = new CardStackState();
 
     cardStackLayoutManager =
         new CardStackLayoutManager(
             requireContext(),
             new CardStackListener() {
+
               @Override
               public void onCardDragging(Direction direction, float ratio) {
-                Log.d("ratio", String.valueOf(ratio));
+                Log.d(
+                    "ratio",
+                    direction + String.valueOf(ratio) + "  " + String.valueOf(cardStackState.dx));
 
                 if (direction == Direction.Right) {
                   isLike = true;
@@ -89,12 +94,10 @@ public class SwipeFragment extends Fragment implements UserCardsHolderAdapter.On
                 } else if (direction == Direction.Left) {
                   isLike = false;
                   isDislike = true;
-                } else {
-                  isLike = false;
-                  isDislike = false;
                 }
 
                 likeView.setVisibility(isLike ? View.VISIBLE : View.INVISIBLE);
+
                 dislikeView.setVisibility(isDislike ? View.VISIBLE : View.INVISIBLE);
               }
 
@@ -109,14 +112,15 @@ public class SwipeFragment extends Fragment implements UserCardsHolderAdapter.On
               }
 
               @Override
-              public void onCardCanceled() {}
+              public void onCardCanceled() {
+                likeView.setVisibility(View.INVISIBLE);
+                dislikeView.setVisibility(View.INVISIBLE);
+              }
 
               @Override
               public void onCardAppeared(View view, int position) {
                 likeView = view.findViewById(R.id.likeMask);
                 dislikeView = view.findViewById(R.id.dislikeMask);
-                //                likeView.setVisibility(View.INVISIBLE);
-                //                dislikeView.setVisibility(View.INVISIBLE);
               }
 
               @Override
@@ -124,7 +128,7 @@ public class SwipeFragment extends Fragment implements UserCardsHolderAdapter.On
             });
 
     cardStackLayoutManager.setCanScrollHorizontal(true);
-    cardStackLayoutManager.setCanScrollVertical(true);
+    cardStackLayoutManager.setCanScrollVertical(false);
     cardStackLayoutManager.setDirections(
         new ArrayList<>(Arrays.asList(Direction.Left, Direction.Right)));
     cardStackLayoutManager.setMaxDegree(40.0f);
