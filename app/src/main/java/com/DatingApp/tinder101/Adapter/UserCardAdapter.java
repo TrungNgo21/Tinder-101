@@ -17,6 +17,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.DatingApp.tinder101.Constant.Constant;
 import com.DatingApp.tinder101.Dto.UserDto;
+import com.DatingApp.tinder101.Enum.BasicEnum;
+import com.DatingApp.tinder101.Enum.LifestyleEnum;
 import com.DatingApp.tinder101.Model.User;
 import com.DatingApp.tinder101.R;
 import com.DatingApp.tinder101.Utils.EnumConverter;
@@ -30,7 +32,9 @@ import com.squareup.picasso.Picasso;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.crypto.ShortBufferException;
 
@@ -55,6 +59,38 @@ public class UserCardAdapter extends RecyclerView.Adapter<UserCardAdapter.UserCa
     notifyDataSetChanged();
   }
 
+  private List<LifestyleEnum> extractLifestyles(HashMap<LifestyleEnum, String> LifeStyleList) {
+    List<LifestyleEnum> listTypes = new ArrayList<>();
+    for (Map.Entry<LifestyleEnum, String> entry : LifeStyleList.entrySet()) {
+      listTypes.add(entry.getKey());
+    }
+    return listTypes;
+  }
+
+  private List<BasicEnum> extractBasics(HashMap<BasicEnum, String> LifeStyleList) {
+    List<BasicEnum> listTypes = new ArrayList<>();
+    for (Map.Entry<BasicEnum, String> entry : LifeStyleList.entrySet()) {
+      listTypes.add(entry.getKey());
+    }
+    return listTypes;
+  }
+
+  private List<String> extractBasicContents(HashMap<BasicEnum, String> basics) {
+    List<String> listContents = new ArrayList<>();
+    for (Map.Entry<BasicEnum, String> entry : basics.entrySet()) {
+      listContents.add(entry.getValue());
+    }
+    return listContents;
+  }
+
+  private List<String> extractLifestyleContents(HashMap<LifestyleEnum, String> lifeStyles) {
+    List<String> listContents = new ArrayList<>();
+    for (Map.Entry<LifestyleEnum, String> entry : lifeStyles.entrySet()) {
+      listContents.add(entry.getValue());
+    }
+    return listContents;
+  }
+
   @NonNull
   @Override
   public UserCardHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -67,7 +103,7 @@ public class UserCardAdapter extends RecyclerView.Adapter<UserCardAdapter.UserCa
 
     holder.infoDisplay.setOnClickListener(
         view -> {
-          Log.d(DEBUG_TAG, " dasdasdasdsad");
+          onImageTap.tapDown();
         });
 
     holder.prevBtn.setOnClickListener(
@@ -115,43 +151,45 @@ public class UserCardAdapter extends RecyclerView.Adapter<UserCardAdapter.UserCa
         holder.profileChipsIcon.setImageResource(R.drawable.interest_icon);
 
         // set up interest chips adapter
-        chipsAdapter.setData(userDto.getProfileSetting().getInterests());
+        chipsAdapter.setData(userDto.getProfileSetting().getInterests(), null, null);
         holder.profileChips.setAdapter(chipsAdapter);
       }
     } else {
       setDisplayVisible(holder, currentFieldDisplay);
       holder.profileChipsIcon.setImageResource(R.drawable.label_icon);
       holder.profileChipsType.setText("Basics & Lifestyle");
-      List<String> total = new ArrayList<>();
 
+      HashMap<LifestyleEnum, String> lifeStyleChips =
+          userDto.getProfileSetting().getLifestyleList();
+      HashMap<BasicEnum, String> basicChips = userDto.getProfileSetting().getBasics();
+      List<String> lifeStyleContents = extractLifestyleContents(lifeStyleChips);
+      List<String> basicContents = extractBasicContents(basicChips);
+      List<String> contents = new ArrayList<>();
       // set up lifestyle & basics adapters
       if (!userDto.getProfileSetting().getLifestyleList().isEmpty()
           && !userDto.getProfileSetting().getBasics().isEmpty()) {
-        total.addAll(userDto.getProfileSetting().getBasics());
-        total.addAll(userDto.getProfileSetting().getLifestyleList());
-        if (total.size() > 5) {
-          chipsAdapter.setData(total.subList(0, 5));
+
+        if (lifeStyleChips.size() + basicChips.size() > 5) {
+          contents.addAll(lifeStyleContents.subList(0, lifeStyleContents.size()));
+          contents.addAll(basicContents.subList(0, 5 - lifeStyleContents.size()));
+          chipsAdapter.setData(
+              contents,
+              extractLifestyles(lifeStyleChips).subList(0, lifeStyleContents.size()),
+              extractBasics(basicChips).subList(0, 5 - lifeStyleContents.size()));
         } else {
-          chipsAdapter.setData(total);
+          contents.addAll(lifeStyleContents);
+          contents.addAll(basicContents);
+          chipsAdapter.setData(
+              contents, extractLifestyles(lifeStyleChips), extractBasics(basicChips));
         }
         holder.profileChips.setAdapter(chipsAdapter);
         holder.profileChips.setLayoutManager(constructLayoutManager());
       } else if (!userDto.getProfileSetting().getLifestyleList().isEmpty()) {
-        total.addAll(userDto.getProfileSetting().getLifestyleList());
-        if (total.size() > 5) {
-          chipsAdapter.setData(total.subList(0, 5));
-        } else {
-          chipsAdapter.setData(total);
-        }
+        chipsAdapter.setData(lifeStyleContents, extractLifestyles(lifeStyleChips), null);
         holder.profileChips.setAdapter(chipsAdapter);
         holder.profileChips.setLayoutManager(constructLayoutManager());
       } else if (!userDto.getProfileSetting().getBasics().isEmpty()) {
-        total.addAll(userDto.getProfileSetting().getBasics());
-        if (total.size() > 5) {
-          chipsAdapter.setData(total.subList(0, 5));
-        } else {
-          chipsAdapter.setData(total);
-        }
+        chipsAdapter.setData(basicContents, null, extractBasics(basicChips));
         holder.profileChips.setAdapter(chipsAdapter);
         holder.profileChips.setLayoutManager(constructLayoutManager());
       }
@@ -233,5 +271,7 @@ public class UserCardAdapter extends RecyclerView.Adapter<UserCardAdapter.UserCa
     void tapRight();
 
     void tapLeft();
+
+    void tapDown();
   }
 }

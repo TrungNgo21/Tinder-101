@@ -160,9 +160,25 @@ public class UserService {
                         .email(email)
                         .profileSetting(
                             ProfileSetting.builder()
-                                .basics(Arrays.asList("Smoke", "Moaa"))
+                                .basics(
+                                    new HashMap<String, String>() {
+                                      {
+                                        put("ZODIAC", "Cancer");
+                                        put("EDUCATION", "At uni");
+                                        put("COMMUNICATION", "Better in person");
+                                        put("LOVE", "Touch");
+                                      }
+                                    })
                                 .interests(Arrays.asList("BaseBall", "LickBack"))
-                                .lifestyleList(Arrays.asList("hihihihh"))
+                                .lifestyleList(
+                                    new HashMap<String, String>() {
+                                      {
+                                        put("PET", "No pet");
+                                        put("SMOKE", "Social smoker");
+                                        put("DRINKING", "Occasion");
+                                        put("WORKOUT", "Everyday");
+                                      }
+                                    })
                                 .lookingForEnum(LookingForEnum.SHORT_LONG_OK.toString())
                                 .quotes("Qua la tuyet voi")
                                 .build())
@@ -171,16 +187,16 @@ public class UserService {
                               {
                                 put(
                                     "0",
-                                    "https://www.google.com/url?sa=i&url=https%3A%2F%2Funsplash.com%2Fimages%2Fanimals%2Fcat&psig=AOvVaw1Drslg04h5cWQauEC9tDNi&ust=1704874937406000&source=images&cd=vfe&ved=0CBEQjRxqFwoTCLjty5nwz4MDFQAAAAAdAAAAABAE");
+                                    "https://cdn.freecodecamp.org/curriculum/cat-photo-app/relaxing-cat.jpg");
                                 put(
                                     "1",
-                                    "https://www.google.com/url?sa=i&url=https%3A%2F%2Funsplash.com%2Fimages%2Fanimals%2Fcat&psig=AOvVaw1Drslg04h5cWQauEC9tDNi&ust=1704874937406000&source=images&cd=vfe&ved=0CBEQjRxqFwoTCLjty5nwz4MDFQAAAAAdAAAAABAE");
+                                    "https://cdn.freecodecamp.org/curriculum/cat-photo-app/relaxing-cat.jpg");
                                 put(
                                     "2",
-                                    "https://www.google.com/url?sa=i&url=https%3A%2F%2Funsplash.com%2Fimages%2Fanimals%2Fcat&psig=AOvVaw1Drslg04h5cWQauEC9tDNi&ust=1704874937406000&source=images&cd=vfe&ved=0CBEQjRxqFwoTCLjty5nwz4MDFQAAAAAdAAAAABAE");
+                                    "https://cdn.freecodecamp.org/curriculum/cat-photo-app/relaxing-cat.jpg");
                                 put(
                                     "3",
-                                    "https://www.google.com/url?sa=i&url=https%3A%2F%2Funsplash.com%2Fimages%2Fanimals%2Fcat&psig=AOvVaw1Drslg04h5cWQauEC9tDNi&ust=1704874937406000&source=images&cd=vfe&ved=0CBEQjRxqFwoTCLjty5nwz4MDFQAAAAAdAAAAABAE");
+                                    "https://cdn.freecodecamp.org/curriculum/cat-photo-app/relaxing-cat.jpg");
                               }
                             })
                         .createdDate(new Date())
@@ -234,7 +250,8 @@ public class UserService {
                         getUserTask -> {
                           if (getUserTask.isSuccessful()) {
                             DocumentSnapshot documentSnapshot = getUserTask.getResult();
-                            UserDto currentUser = documentSnapshot.toObject(UserDto.class);
+                            User getUser = documentSnapshot.toObject(User.class);
+                            UserDto currentUser = getUser.toDto();
                             currentUser.setOnline(true);
                             currentUser.setId(firebaseUser.getUid());
                             preferenceManager.putCurrentUser(currentUser);
@@ -265,9 +282,10 @@ public class UserService {
                   if (!documentSnapshot
                       .getId()
                       .equals(preferenceManager.getCurrentUser().getId())) {
-                    UserDto user = documentSnapshot.toObject(UserDto.class);
-                    user.setId(documentSnapshot.getId());
-                    users.add(user);
+                    User user = documentSnapshot.toObject(User.class);
+                    UserDto getUser = user.toDto();
+                    getUser.setId(documentSnapshot.getId());
+                    users.add(getUser);
                   }
                 }
                 callback.callback(new CallbackRes.Success<>(users));

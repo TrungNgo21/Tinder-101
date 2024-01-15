@@ -29,4 +29,16 @@ public class Constant {
   public static final String SHORT_OK = "Short-term fun";
   public static final String FRIEND_OK = "New friends";
   public static final String THINKING = "Still figuring it out";
+
+  // Type lifestyle
+  public static final String PET = "Pets";
+  public static final String DRINKING = "Drinking";
+  public static final String SMOKE = "HOW OFTEN DO YOU SMOKE";
+  public static final String WORKOUT = "Workout";
+
+  // Type Basics
+  public static final String ZODIAC = "Zodiac";
+  public static final String EDUCATION = "Education";
+  public static final String COMMUNICATION = "Communication style";
+  public static final String LOVE = "Love style";
 }

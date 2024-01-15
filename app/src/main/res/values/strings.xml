@@ -9,8 +9,22 @@
     <string name="mockUpAge">19</string>
     <string name="interest">Interests</string>
     <string name="lookingFor">Looking for</string>
+    <string name="aboutMe">About me</string>
+    <string name="essential">Essentials</string>
+    <string name="basic">Basics</string>
+    <string name="block">Block</string>
+    <string name="report">Report</string>
+    <string name="home">Home</string>
+    <string name="message">Message</string>
+    <string name="features">Features</string>
+    <string name="profile">Profile</string>
+    <string name="lifeStyle">Lifestyle</string>
     <string name="mockUpLookingFor">Short-time, but long-term OK</string>
+    <string name="mockUpEssential">1 kilometer away</string>
+
+
     <string name="mockUpChipContent">Harry Potter</string>
+    <string name="mockUpType">Education</string>
     <string name='mockUpQuotes'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam in scelerisque sem. Mauris
         volutpat, dolor id interdum ullamcorper, risus dolor egestas lectus, sit amet mattis purus
         dui nec risus. Maecenas non sodales nisi, vel dictum dolor. Class aptent taciti sociosqu ad

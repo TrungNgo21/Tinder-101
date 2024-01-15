@@ -33,14 +33,7 @@ public class User {
         .name(name)
         .email(email)
         .imageUrlsMap(imageUrlsMap)
-        .profileSetting(
-            ProfileSettingDto.builder()
-                .quotes(profileSetting.getQuotes())
-                .basics(profileSetting.getBasics())
-                .interests(profileSetting.getInterests())
-                .lifestyleList(profileSetting.getLifestyleList())
-                .lookingForEnum(LookingForEnum.valueOf(profileSetting.getLookingForEnum()))
-                .build())
+        .profileSetting(profileSetting.toDto())
         .createdDate(createdDate)
         .updatedDate(updatedDate)
         .build();

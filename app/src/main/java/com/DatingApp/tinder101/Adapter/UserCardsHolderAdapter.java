@@ -30,10 +30,12 @@ public class UserCardsHolderAdapter extends BaseAdapter implements UserCardAdapt
   private CircleIndicator3 circleIndicator3;
   private AtomicInteger currentPosition = new AtomicInteger();
   private UserCardAdapter userCardAdapter;
+  private OnTapDetail onTapDetail;
   private UserDto user;
 
-  public UserCardsHolderAdapter(Context context) {
+  public UserCardsHolderAdapter(Context context, OnTapDetail onTapDetail) {
     this.context = context;
+    this.onTapDetail = onTapDetail;
   }
 
   public void setData(List<UserDto> users) {
@@ -69,10 +71,12 @@ public class UserCardsHolderAdapter extends BaseAdapter implements UserCardAdapt
     userCardAdapter.setData(user);
     adapterViewFlipper.setAdapter(userCardAdapter);
     circleIndicator3.setViewPager(adapterViewFlipper);
-
     adapterViewFlipper.setUserInputEnabled(false);
-
     return convertView;
+  }
+
+  public interface OnTapDetail {
+    void showDetail(UserDto userDto);
   }
 
   @Override
@@ -93,5 +97,10 @@ public class UserCardsHolderAdapter extends BaseAdapter implements UserCardAdapt
       adapterViewFlipper.setCurrentItem(currentPosition.get() - 1);
       currentPosition.getAndDecrement();
     }
+  }
+
+  @Override
+  public void tapDown() {
+    onTapDetail.showDetail(user);
   }
 }

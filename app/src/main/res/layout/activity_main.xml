@@ -11,50 +11,49 @@
 
     <FrameLayout
         android:id="@+id/swipeScreen1"
+        android:layout_weight="1"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
+    <!--    <LinearLayout-->
+    <!--        android:visibility="gone"-->
+    <!--        android:orientation="vertical"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="wrap_content">-->
 
-    <LinearLayout
-        android:visibility="gone"
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+    <!--        <TextView-->
+    <!--            android:id="@+id/userEmail"-->
+    <!--            android:layout_width="match_parent"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:textAlignment="center" />-->
 
-        <TextView
-            android:id="@+id/userEmail"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textAlignment="center" />
+    <!--        <TextView-->
+    <!--            android:id="@+id/users"-->
+    <!--            android:layout_width="match_parent"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:textAlignment="center" />-->
+    <!--    </LinearLayout>-->
 
-        <TextView
-            android:id="@+id/users"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textAlignment="center" />
-    </LinearLayout>
+    <!--    <LinearLayout-->
+    <!--        android:orientation="horizontal"-->
+    <!--        android:gravity="center"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="wrap_content">-->
 
-    <LinearLayout
+    <!--        <Button-->
+    <!--            android:id="@+id/leftSwipeBtn"-->
+    <!--            android:layout_width="wrap_content"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:layout_marginHorizontal="@dimen/_12sdp"-->
+    <!--            android:text="left" />-->
 
-        android:orientation="horizontal"
-        android:gravity="center"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <Button
-            android:id="@+id/leftSwipeBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/_12sdp"
-            android:text="left" />
-
-        <Button
-            android:id="@+id/rightSwipeBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/_12sdp"
-            android:text="right" />
-    </LinearLayout>
+    <!--        <Button-->
+    <!--            android:id="@+id/rightSwipeBtn"-->
+    <!--            android:layout_width="wrap_content"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:layout_marginHorizontal="@dimen/_12sdp"-->
+    <!--            android:text="right" />-->
+    <!--    </LinearLayout>-->
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -67,5 +66,16 @@
             android:text="logout" />
     </LinearLayout>
 
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/menu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?android:attr/windowBackground"
+        app:itemBackground="@color/white"
+        android:foreground="?attr/selectableItemBackground"
+        app:itemIconTint="@color/icon_color"
+        app:labelVisibilityMode="unlabeled"
+        app:itemTextColor="@color/icon_color"
+        app:menu="@menu/navigation" />
 
 </LinearLayout>

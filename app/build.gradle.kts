@@ -100,5 +100,7 @@ dependencies {
     implementation("com.lorentzos.swipecards:library:1.0.9")
     implementation("com.google.android.flexbox:flexbox:3.0.0")
 
+    implementation("com.yuyakaido.android:card-stack-view:2.3.4")
+
 
 }

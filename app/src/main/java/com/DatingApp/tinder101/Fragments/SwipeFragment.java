@@ -32,12 +32,14 @@ import com.lorentzos.flingswipe.SwipeFlingAdapterView;
 import java.util.Collections;
 import java.util.List;
 
-public class SwipeFragment extends Fragment {
+public class SwipeFragment extends Fragment implements UserCardsHolderAdapter.OnTapDetail {
 
   private FragmentSwipeBinding fragmentSwipeBinding;
   private List<UserDto> users;
 
   private UserCardsHolderAdapter userCardsHolderAdapter;
+
+  private OnMainTapDetail onMainTapDetail;
 
   private boolean isLike;
 
@@ -45,16 +47,17 @@ public class SwipeFragment extends Fragment {
 
   public SwipeFragment() {}
 
-  public SwipeFragment(List<UserDto> users) {
+  public SwipeFragment(List<UserDto> users, OnMainTapDetail onMainTapDetail) {
     // Required empty public constructor
     this.users = users;
+    this.onMainTapDetail = onMainTapDetail;
   }
 
   @Override
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     fragmentSwipeBinding = FragmentSwipeBinding.inflate(getLayoutInflater());
-    userCardsHolderAdapter = new UserCardsHolderAdapter(requireContext());
+    userCardsHolderAdapter = new UserCardsHolderAdapter(requireContext(), this);
     userCardsHolderAdapter.setData(users);
     SwipeFlingAdapterView swipeFlingAdapterView = fragmentSwipeBinding.swipeScreen;
     swipeFlingAdapterView.setAdapter(userCardsHolderAdapter);
@@ -76,7 +79,6 @@ public class SwipeFragment extends Fragment {
           @Override
           public void onScroll(float v) {
             View view = swipeFlingAdapterView.getSelectedView();
-            Log.d("latitude", String.valueOf(v));
             if (v > 0) {
               isLike = true;
               isDislike = false;
@@ -94,10 +96,19 @@ public class SwipeFragment extends Fragment {
         });
   }
 
+  public interface OnMainTapDetail {
+    void showDetail(UserDto userDto);
+  }
+
   @Override
   public View onCreateView(
       LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
     // Inflate the layout for this fragment
     return fragmentSwipeBinding.getRoot();
+  }
+
+  @Override
+  public void showDetail(UserDto userDto) {
+    onMainTapDetail.showDetail(userDto);
   }
 }
