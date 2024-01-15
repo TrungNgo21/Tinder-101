@@ -40,26 +40,7 @@ public class RegisterActivity extends AppCompatActivity {
     activityRegisterBinding = ActivityRegisterBinding.inflate(getLayoutInflater());
     setContentView(activityRegisterBinding.getRoot());
     userService = new UserService(getApplicationContext());
-    LoginButton fbLogin = (LoginButton) findViewById(R.id.login_button);
-    CallbackManager callbackManager = CallbackManager.Factory.create();
-      fbLogin.setReadPermissions(Arrays.asList(EMAIL));
-      fbLogin.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
-          @Override
-          public void onSuccess(LoginResult loginResult) {
-              // App code
-              Log.d("success", loginResult.toString());
-          }
 
-          @Override
-          public void onCancel() {
-              // App code
-          }
-
-          @Override
-          public void onError(FacebookException exception) {
-              // App code
-          }
-      });
     setUpButton();
   }
 
