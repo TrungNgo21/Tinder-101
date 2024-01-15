@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:gravity="center"
+    android:layout_height="match_parent">
+
+
+    <com.makeramen.roundedimageview.RoundedImageView
+        android:id="@+id/profileImage"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/ic_launcher_background"
+        android:scaleType="fitXY"
+        app:riv_corner_radius="@dimen/_8sdp" />
+
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:visibility="invisible"
+            android:id="@+id/likeMask"
+            android:layout_width="match_parent"
+            android:background="@drawable/bg_like_linear"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:layout_height="@dimen/_100sdp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/_30ssp"
+                android:textStyle="bold"
+                android:layout_marginStart="@dimen/_30sdp"
+                android:textColor="@color/white"
+                android:text="LIKE!" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:visibility="invisible"
+            android:id="@+id/dislikeMask"
+            android:layout_width="match_parent"
+            android:background="@drawable/bg_dislike_linear"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:layout_height="@dimen/_100sdp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/_30ssp"
+                android:textStyle="bold"
+                android:textAlignment="textEnd"
+                android:layout_marginEnd="@dimen/_30sdp"
+                android:textColor="@color/white"
+                android:text="NOPE!" />
+        </LinearLayout>
+    </FrameLayout>
+
+
+    <LinearLayout
+        android:id="@+id/imageMask"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/info"
+        android:layout_marginBottom="0dp"
+        android:background="@color/transparent"
+        android:orientation="horizontal">
+
+        <Button
+            android:background="@color/transparent"
+            android:id="@+id/prevBtn"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/_100sdp" />
+
+        <Button
+            android:background="@color/transparent"
+            android:id="@+id/nextBtn"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/_100sdp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/info"
+        android:paddingBottom="@dimen/_20sdp"
+        android:paddingTop="@dimen/_14sdp"
+        android:orientation="vertical"
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:background="@drawable/bg_linear_gradient"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:gravity="center_vertical"
+            android:layout_marginHorizontal="@dimen/_8sdp"
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_marginBottom="@dimen/_1sdp"
+                android:layout_weight="1"
+                android:orientation="horizontal"
+                android:layout_width="0dp"
+                android:gravity="center_vertical"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/profileName"
+                    android:textStyle="bold"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_16ssp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/mockUpName" />
+
+                <TextView
+                    android:id="@+id/profileAge"
+                    android:layout_marginStart="@dimen/_4sdp"
+                    android:textSize="@dimen/_16ssp"
+                    android:textColor="@color/white"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/mockUpAge" />
+            </LinearLayout>
+
+            <RelativeLayout
+                android:gravity="center"
+                android:background="@drawable/bg_round"
+                android:layout_width="@dimen/_24sdp"
+                android:layout_height="@dimen/_24sdp">
+
+                <ImageView
+                    android:id="@+id/viewProfileBtn"
+                    app:riv_corner_radius="@dimen/_99sdp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:tint="@color/white"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/view_more_icon" />
+            </RelativeLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/profileSingleInfoDisplay"
+            android:visibility="gone"
+            android:layout_marginHorizontal="@dimen/_8sdp"
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/profileSingleInfoIcon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/quote_icon"
+                app:tint="@color/white" />
+
+            <TextView
+                android:id="@+id/profileSingleInfoContent"
+                android:layout_marginEnd="@dimen/_14sdp"
+                android:justificationMode="inter_word"
+                android:paddingTop="@dimen/_1sdp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:text="@string/mockUpQuotes" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:visibility="gone"
+            android:id="@+id/profileChipsDisplay"
+            android:layout_marginHorizontal="@dimen/_8sdp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:gravity="center_vertical"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/profileChipsTypeIcon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/interest_icon"
+                    app:tint="@color/white" />
+
+                <TextView
+                    android:id="@+id/profileChipsType"
+                    android:textSize="@dimen/_12ssp"
+                    android:textColor="@color/white"
+                    android:textStyle="bold"
+                    android:layout_marginStart="@dimen/_2sdp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/interest" />
+            </LinearLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/profileChips"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:visibility="gone"
+            android:orientation="vertical"
+            android:layout_marginHorizontal="@dimen/_8sdp"
+            android:id="@+id/profileLookingForDisplay"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:gravity="center_vertical"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/profileLookingForIcon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/looking_for_icon"
+                    app:tint="@color/white" />
+
+                <TextView
+                    android:id="@+id/profileLookingForType"
+                    android:textSize="@dimen/_12ssp"
+                    android:textColor="@color/white"
+                    android:textStyle="bold"
+                    android:layout_marginStart="@dimen/_2sdp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/lookingFor" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_marginTop="@dimen/_6sdp"
+                android:gravity="center_vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/LookingForTypeIcon"
+                    android:layout_width="@dimen/_24sdp"
+                    android:layout_height="@dimen/_24sdp"
+
+                    android:src="@drawable/looking_for_icon" />
+
+                <TextView
+                    android:id="@+id/profileLookingFor"
+                    android:textSize="@dimen/_14ssp"
+                    android:textColor="@color/white"
+                    android:textStyle="bold"
+                    android:layout_marginStart="@dimen/_2sdp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/mockUpLookingFor" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+
+</RelativeLayout>

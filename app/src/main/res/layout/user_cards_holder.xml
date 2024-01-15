@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/userCardsHolder"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <me.relex.circleindicator.CircleIndicator3
+        android:id="@+id/imageIndicators"
+        android:layout_width="match_parent"
+        app:ci_drawable="@drawable/bg_dots_selected"
+        app:ci_width="@dimen/_40sdp"
+        app:ci_height="@dimen/_4sdp"
+        app:ci_animator="@animator/dots_indicators_anim"
+        android:layout_height="@dimen/_40sdp" />
+
+</RelativeLayout>

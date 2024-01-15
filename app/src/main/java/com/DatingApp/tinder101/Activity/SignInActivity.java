@@ -78,6 +78,11 @@ public class SignInActivity extends AppCompatActivity {
   }
 
   public void setUpButton() {
+    activitySignInBinding.toRegister.setOnClickListener(
+        view -> {
+          finish();
+          startActivity(new Intent(this, RegisterActivity.class));
+        });
     activitySignInBinding.loginBtn.setOnClickListener(
         view -> {
           userService.login(
