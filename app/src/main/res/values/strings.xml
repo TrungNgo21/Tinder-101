@@ -19,8 +19,11 @@
     <string name="features">Features</string>
     <string name="profile">Profile</string>
     <string name="lifeStyle">Lifestyle</string>
+    <string name="newMatches">New Matches</string>
+    <string name="messages">Messages</string>
     <string name="mockUpLookingFor">Short-time, but long-term OK</string>
     <string name="mockUpEssential">1 kilometer away</string>
+    <string name="lastOnline">7 m</string>
 
 
     <string name="mockUpChipContent">Harry Potter</string>

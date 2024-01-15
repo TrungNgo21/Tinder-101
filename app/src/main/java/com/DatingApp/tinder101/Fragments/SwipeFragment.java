@@ -22,6 +22,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import com.DatingApp.tinder101.Adapter.RoundChatItemAdapter;
 import com.DatingApp.tinder101.Adapter.UserCardAdapter;
 import com.DatingApp.tinder101.Adapter.UserCardsHolderAdapter;
 import com.DatingApp.tinder101.Dto.UserDto;
