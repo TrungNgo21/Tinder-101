@@ -61,6 +61,7 @@ public class ViewProfileFragment extends Fragment {
     setUpProfileHeader();
     setUpProfileImages();
     setUpProfileInfo();
+    setUpButton();
     return fragmentViewProfileBinding.getRoot();
   }
 
@@ -224,6 +225,11 @@ public class ViewProfileFragment extends Fragment {
     } else {
       fragmentViewProfileBinding.lifeStyleDisplay.setVisibility(View.GONE);
     }
+  }
+
+  private void setUpButton() {
+    fragmentViewProfileBinding.nameReport.setText(userDto.getName());
+    fragmentViewProfileBinding.nameBlock.setText(userDto.getName());
   }
 
   public interface OnBackSwipePress {

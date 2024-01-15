@@ -272,7 +272,7 @@ public class UserService {
   }
 
   public void getAllUsers(final FirebaseCallback<CallbackRes<List<UserDto>>> callback) {
-    List<UserDto> users = new Stack<>();
+    List<UserDto> users = new ArrayList<>();
     userReference
         .get()
         .addOnCompleteListener(

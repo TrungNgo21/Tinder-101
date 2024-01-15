@@ -33,7 +33,7 @@ public class Constant {
   // Type lifestyle
   public static final String PET = "Pets";
   public static final String DRINKING = "Drinking";
-  public static final String SMOKE = "HOW OFTEN DO YOU SMOKE";
+  public static final String SMOKE = "How often do you smoke?";
   public static final String WORKOUT = "Workout";
 
   // Type Basics

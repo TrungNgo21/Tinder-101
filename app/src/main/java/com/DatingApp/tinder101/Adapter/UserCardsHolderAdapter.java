@@ -125,7 +125,7 @@ public class UserCardsHolderAdapter
   }
 
   @Override
-  public void tapDown() {
-    onTapDetail.showDetail(user);
+  public void tapDown(UserDto userDto) {
+    onTapDetail.showDetail(userDto);
   }
 }

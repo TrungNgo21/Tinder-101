@@ -103,7 +103,7 @@ public class UserCardAdapter extends RecyclerView.Adapter<UserCardAdapter.UserCa
 
     holder.infoDisplay.setOnClickListener(
         view -> {
-          onImageTap.tapDown();
+          onImageTap.tapDown(userDto);
         });
 
     String currentFieldDisplay;
@@ -255,6 +255,6 @@ public class UserCardAdapter extends RecyclerView.Adapter<UserCardAdapter.UserCa
   }
 
   public interface OnImageTap {
-    void tapDown();
+    void tapDown(UserDto userDto);
   }
 }

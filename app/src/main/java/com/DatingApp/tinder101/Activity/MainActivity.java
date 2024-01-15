@@ -24,6 +24,7 @@ import com.DatingApp.tinder101.Callback.CallbackRes;
 import com.DatingApp.tinder101.Callback.FirebaseCallback;
 import com.DatingApp.tinder101.Constant.Constant;
 import com.DatingApp.tinder101.Dto.UserDto;
+import com.DatingApp.tinder101.Fragments.ChatFragment;
 import com.DatingApp.tinder101.Fragments.SwipeFragment;
 import com.DatingApp.tinder101.Fragments.ViewProfileFragment;
 import com.DatingApp.tinder101.R;
@@ -42,12 +43,12 @@ import java.util.List;
 import java.util.Stack;
 
 public class MainActivity extends AppCompatActivity
-    implements SwipeFragment.OnMainTapDetail, ViewProfileFragment.OnBackSwipePress {
+    implements SwipeFragment.OnMainEventHandle, ViewProfileFragment.OnBackSwipePress {
 
   private ActivityMainBinding activityMainBinding;
   private UserDto currentUser;
   private UserService userService;
-  private Stack<UserDto> users;
+  private List<UserDto> users;
 
   private final FirebaseDatabase firebaseDatabase =
       FirebaseDatabase.getInstance(Constant.KEY_DATABASE_URL);
@@ -73,7 +74,8 @@ public class MainActivity extends AppCompatActivity
           @Override
           public void callback(CallbackRes<List<UserDto>> template) {
             if (template instanceof CallbackRes.Success) {
-              users = ((CallbackRes.Success<Stack<UserDto>>) template).getData();
+              users = ((CallbackRes.Success<List<UserDto>>) template).getData();
+
               //              updateListUsers();
               Fragment fragment = new SwipeFragment(users, MainActivity.this);
               loadFragment(fragment);
@@ -198,6 +200,11 @@ public class MainActivity extends AppCompatActivity
   }
 
   @Override
+  public void popCard() {
+    users.remove(0);
+  }
+
+  @Override
   public void backToSwipe() {
     Fragment fragment = new SwipeFragment(users, this);
     loadFragment(fragment);
@@ -208,13 +215,15 @@ public class MainActivity extends AppCompatActivity
         item -> {
           Fragment fragment;
           if (item.getItemId() == R.id.home) {
-            fragment = new SwipeFragment();
+            fragment = new SwipeFragment(users, this);
+
             loadFragment(fragment);
 
           } else if (item.getItemId() == R.id.profile) {
 
           } else if (item.getItemId() == R.id.message) {
-
+            fragment = new ChatFragment(users);
+            loadFragment(fragment);
           } else {
 
           }

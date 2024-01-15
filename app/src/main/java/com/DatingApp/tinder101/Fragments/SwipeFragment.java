@@ -41,6 +41,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Stack;
 
 public class SwipeFragment extends Fragment implements UserCardsHolderAdapter.OnTapDetail {
 
@@ -51,7 +52,7 @@ public class SwipeFragment extends Fragment implements UserCardsHolderAdapter.On
 
   private CardStackLayoutManager cardStackLayoutManager;
 
-  private OnMainTapDetail onMainTapDetail;
+  private OnMainEventHandle onMainTapDetail;
 
   private View dislikeView;
   private View likeView;
@@ -62,7 +63,7 @@ public class SwipeFragment extends Fragment implements UserCardsHolderAdapter.On
 
   public SwipeFragment() {}
 
-  public SwipeFragment(List<UserDto> users, OnMainTapDetail onMainTapDetail) {
+  public SwipeFragment(List<UserDto> users, OnMainEventHandle onMainTapDetail) {
     // Required empty public constructor
     this.users = users;
     this.onMainTapDetail = onMainTapDetail;
@@ -102,7 +103,9 @@ public class SwipeFragment extends Fragment implements UserCardsHolderAdapter.On
               }
 
               @Override
-              public void onCardSwiped(Direction direction) {}
+              public void onCardSwiped(Direction direction) {
+                onMainTapDetail.popCard();
+              }
 
               @Override
               public void onCardRewound() {
@@ -140,8 +143,10 @@ public class SwipeFragment extends Fragment implements UserCardsHolderAdapter.On
     swipeFlingAdapterView.setLayoutManager(cardStackLayoutManager);
   }
 
-  public interface OnMainTapDetail {
+  public interface OnMainEventHandle {
     void showDetail(UserDto userDto);
+
+    void popCard();
   }
 
   @Override
