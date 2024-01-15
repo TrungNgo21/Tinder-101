@@ -3,6 +3,7 @@ package com.DatingApp.tinder101.Constant;
 import static java.util.Arrays.asList;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -21,4 +22,6 @@ public class Constant {
   public static final String KEY_CACHE_REGISTER = "cacheUser";
 
   public static final String KEY_SIGN_IN = "isSignIn";
+  public static final List<String> interests = asList(new String[]{"Gaming", "Dancing", "Music", "Movie", "Photography", "Architecture", "Fashion", "Book", "Writing", "Painting",
+          "Football", "People", "Animals", "Gym", "Food & Drink", "Travel & Places"});
 }

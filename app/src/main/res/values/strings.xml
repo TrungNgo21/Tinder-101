@@ -5,7 +5,43 @@
     <string name="second_fragment_label">Second Fragment</string>
     <string name="next">Next</string>
     <string name="previous">Previous</string>
-
+    <string name="login_text">Login</string>
+    <string name="email_text">Email</string>
+    <string name="password_text">Password</string>
+    <string name="authentication_default_error">
+        Authentication failed! Try again.
+    </string>
+    <string name="register_default_error">
+        Something wrong! Try again.
+    </string>
+    <string name="email_prompt">Enter your email</string>
+    <string name="password_prompt">Enter your password please…</string>
+    <string name="sign_up_text">Sign up</string>
+    <string name="sign_in_text">Sign in</string>
+    <string name="no_account">Don\'t have an account?</string>
+    <string name="have_account">Already have an account?</string>
+    <string name="sign_up_title">Create an Account</string>
+    <string name="sign_in_title">Let\'s sign you in</string>
+    <string name="email_error">Your email is not valid</string>
+    <string name="password_error">Your password is not valid</string>
+    <string name="method_text">Or continue with</string>
+    <string name="Facebook">Facebook</string>
+    <string name="Gmail">Google</string>
+    <string name="create_profile_title">Create your profile</string>
+    <string name="full_name_prompt">Enter your full name</string>
+    <string name="num_prompt">Enter your phone number</string>
+    <string name="full_name">Full Name</string>
+    <string name="num_text">Phone Number</string>
+    <string name="name_error">Your name is not valid</string>
+    <string name="num_error">Your phone number is not valid</string>
+    <string name="gender_text">Gender</string>
+    <string name="continue_button">Continue</string>
+    <string name="location_text">Location</string>
+    <string name="location_error">Location is required</string>
+    <string name="add_photo_title">Add your best photos</string>
+    <string name="add_photo_ins">Choose your best photos to increase the rate of matching</string>
+    <string name="add_interest_title">Select your interest</string>
+    <string name="add_interest_ins">Select your interests to display on your profile and match with users who have similar interest.</string>
     <string name="lorem_ipsum">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam in scelerisque sem. Mauris
         volutpat, dolor id interdum ullamcorper, risus dolor egestas lectus, sit amet mattis purus
