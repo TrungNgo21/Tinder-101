@@ -14,6 +14,8 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Adapter;
 import android.widget.AdapterViewFlipper;
 import android.widget.LinearLayout;
@@ -28,7 +30,14 @@ import com.DatingApp.tinder101.R;
 import com.DatingApp.tinder101.databinding.FragmentSwipeBinding;
 
 import com.lorentzos.flingswipe.SwipeFlingAdapterView;
+import com.yuyakaido.android.cardstackview.CardStackLayoutManager;
+import com.yuyakaido.android.cardstackview.CardStackListener;
+import com.yuyakaido.android.cardstackview.CardStackView;
+import com.yuyakaido.android.cardstackview.Direction;
+import com.yuyakaido.android.cardstackview.StackFrom;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -39,7 +48,12 @@ public class SwipeFragment extends Fragment implements UserCardsHolderAdapter.On
 
   private UserCardsHolderAdapter userCardsHolderAdapter;
 
+  private CardStackLayoutManager cardStackLayoutManager;
+
   private OnMainTapDetail onMainTapDetail;
+
+  private View dislikeView;
+  private View likeView;
 
   private boolean isLike;
 
@@ -59,41 +73,67 @@ public class SwipeFragment extends Fragment implements UserCardsHolderAdapter.On
     fragmentSwipeBinding = FragmentSwipeBinding.inflate(getLayoutInflater());
     userCardsHolderAdapter = new UserCardsHolderAdapter(requireContext(), this);
     userCardsHolderAdapter.setData(users);
-    SwipeFlingAdapterView swipeFlingAdapterView = fragmentSwipeBinding.swipeScreen;
+    CardStackView swipeFlingAdapterView = fragmentSwipeBinding.swipeScreen;
+
+    cardStackLayoutManager =
+        new CardStackLayoutManager(
+            requireContext(),
+            new CardStackListener() {
+              @Override
+              public void onCardDragging(Direction direction, float ratio) {
+                Log.d("ratio", String.valueOf(ratio));
+
+                if (direction == Direction.Right) {
+                  isLike = true;
+                  isDislike = false;
+                } else if (direction == Direction.Left) {
+                  isLike = false;
+                  isDislike = true;
+                } else {
+                  isLike = false;
+                  isDislike = false;
+                }
+
+                likeView.setVisibility(isLike ? View.VISIBLE : View.INVISIBLE);
+                dislikeView.setVisibility(isDislike ? View.VISIBLE : View.INVISIBLE);
+              }
+
+              @Override
+              public void onCardSwiped(Direction direction) {}
+
+              @Override
+              public void onCardRewound() {
+                Log.d("rewound r ne", "heehee");
+                likeView.setVisibility(View.INVISIBLE);
+                dislikeView.setVisibility(View.INVISIBLE);
+              }
+
+              @Override
+              public void onCardCanceled() {}
+
+              @Override
+              public void onCardAppeared(View view, int position) {
+                likeView = view.findViewById(R.id.likeMask);
+                dislikeView = view.findViewById(R.id.dislikeMask);
+                //                likeView.setVisibility(View.INVISIBLE);
+                //                dislikeView.setVisibility(View.INVISIBLE);
+              }
+
+              @Override
+              public void onCardDisappeared(View view, int position) {}
+            });
+
+    cardStackLayoutManager.setCanScrollHorizontal(true);
+    cardStackLayoutManager.setCanScrollVertical(true);
+    cardStackLayoutManager.setDirections(
+        new ArrayList<>(Arrays.asList(Direction.Left, Direction.Right)));
+    cardStackLayoutManager.setMaxDegree(40.0f);
+    cardStackLayoutManager.setStackFrom(StackFrom.Bottom);
+    cardStackLayoutManager.setVisibleCount(3);
+    cardStackLayoutManager.setTranslationInterval(4.0f);
+
     swipeFlingAdapterView.setAdapter(userCardsHolderAdapter);
-
-    swipeFlingAdapterView.setFlingListener(
-        new SwipeFlingAdapterView.onFlingListener() {
-          @Override
-          public void removeFirstObjectInAdapter() {}
-
-          @Override
-          public void onLeftCardExit(Object o) {}
-
-          @Override
-          public void onRightCardExit(Object o) {}
-
-          @Override
-          public void onAdapterAboutToEmpty(int i) {}
-
-          @Override
-          public void onScroll(float v) {
-            View view = swipeFlingAdapterView.getSelectedView();
-            if (v > 0) {
-              isLike = true;
-              isDislike = false;
-            } else if (v < 0) {
-              isLike = false;
-              isDislike = true;
-            } else {
-              isDislike = false;
-              isLike = false;
-            }
-            view.findViewById(R.id.likeMask).setVisibility(isLike ? View.VISIBLE : View.INVISIBLE);
-            view.findViewById(R.id.dislikeMask)
-                .setVisibility(isDislike ? View.VISIBLE : View.INVISIBLE);
-          }
-        });
+    swipeFlingAdapterView.setLayoutManager(cardStackLayoutManager);
   }
 
   public interface OnMainTapDetail {

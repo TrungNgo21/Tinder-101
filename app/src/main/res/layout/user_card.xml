@@ -59,31 +59,7 @@
         </LinearLayout>
     </FrameLayout>
 
-
-    <LinearLayout
-        android:id="@+id/imageMask"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/info"
-        android:layout_marginBottom="0dp"
-        android:background="@color/transparent"
-        android:orientation="horizontal">
-
-        <Button
-            android:background="@color/transparent"
-            android:id="@+id/prevBtn"
-            android:layout_weight="1"
-            android:layout_width="0dp"
-            android:layout_height="@dimen/_100sdp" />
-
-        <Button
-            android:background="@color/transparent"
-            android:id="@+id/nextBtn"
-            android:layout_weight="1"
-            android:layout_width="0dp"
-            android:layout_height="@dimen/_100sdp" />
-    </LinearLayout>
-
+    
     <LinearLayout
         android:id="@+id/info"
         android:paddingBottom="@dimen/_20sdp"
