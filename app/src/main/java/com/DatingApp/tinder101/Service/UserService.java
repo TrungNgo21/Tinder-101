@@ -13,6 +13,9 @@ import com.DatingApp.tinder101.Constant.Constant;
 import com.DatingApp.tinder101.Dto.UserDto;
 import com.DatingApp.tinder101.Model.User;
 import com.DatingApp.tinder101.Utils.PreferenceManager;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
@@ -52,6 +55,7 @@ public class UserService {
 
   public UserService(Context context) {
     this.preferenceManager = new PreferenceManager(context.getApplicationContext());
+
   }
 
   public void rightSwipe(String userId) {
@@ -149,6 +153,7 @@ public class UserService {
             registerTask -> {
               if (registerTask.isSuccessful()) {
                 FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+                sendVerificationEmail();
                 User createdUser =
                     User.builder()
                         .name("Test")
@@ -186,6 +191,23 @@ public class UserService {
                         });
               }
             });
+  }
+
+  private void sendVerificationEmail() {
+      FirebaseUser currentUser = firebaseAuth.getCurrentUser();
+      currentUser.sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
+          @Override
+          public void onComplete(@NonNull Task<Void> task) {
+              if (task.isSuccessful()) {
+                  firebaseAuth.signOut();
+              }
+          }
+      }).addOnFailureListener(new OnFailureListener() {
+          @Override
+          public void onFailure(@NonNull Exception e) {
+              Log.d("Failed", e.getMessage().toString());
+          }
+      });
   }
 
   public void login(
