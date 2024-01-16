@@ -1,30 +1,16 @@
 package com.DatingApp.tinder101.Activity;
 
 import android.os.Bundle;
-import android.os.Handler;
-import android.widget.LinearLayout;
-
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
-import androidx.viewpager.widget.ViewPager;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.DatingApp.tinder101.R;
 import com.DatingApp.tinder101.Adapter.CarouselAdapter;
-import com.denzcoskun.imageslider.ImageSlider;
-import com.denzcoskun.imageslider.constants.ScaleTypes;
-import com.denzcoskun.imageslider.models.SlideModel;
-import com.google.android.material.tabs.TabLayout;
 import com.tbuonomo.viewpagerdotsindicator.SpringDotsIndicator;
 
-import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Timer;
-import java.util.TimerTask;
 
 public class TestActivity extends AppCompatActivity {
     List<String> carouselImageLists;
