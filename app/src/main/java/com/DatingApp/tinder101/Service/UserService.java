@@ -315,5 +315,17 @@ public class UserService {
                 callback.callback(new CallbackRes.Error(getUsersTask.getException()));
               }
             });
+
+  }
+  public void updateProfile(final FirebaseCallback<CallbackRes<UserDto>> callback, ProfileSetting profileSetting){
+      userReference.document(getCurrentUser().getId()).update("profileSetting", profileSetting).addOnCompleteListener(
+              updateUserTask -> {
+                  if (updateUserTask.isSuccessful()) {
+                      callback.callback(new CallbackRes.Success<>(getCurrentUser()));
+                  } else {
+                      callback.callback(new CallbackRes.Error(updateUserTask.getException()));
+                  }
+              }
+      );
   }
 }
