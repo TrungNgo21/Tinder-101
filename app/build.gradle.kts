@@ -99,6 +99,7 @@ dependencies {
     implementation("com.cloudinary:cloudinary-android:2.6.1")
     implementation("com.lorentzos.swipecards:library:1.0.9")
     implementation("com.google.android.flexbox:flexbox:3.0.0")
-
+    implementation("com.github.denzcoskun:ImageSlideshow:0.1.2")
+    implementation("com.tbuonomo:dotsindicator:5.0")
 
 }

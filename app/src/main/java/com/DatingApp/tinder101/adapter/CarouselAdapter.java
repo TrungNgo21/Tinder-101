@@ -1,4 +1,4 @@
-package com.DatingApp.tinder101.adapter;
+package com.DatingApp.tinder101.Adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.PagerAdapter;
 
 import com.DatingApp.tinder101.R;
@@ -19,38 +20,33 @@ import lombok.NoArgsConstructor;
 
 @AllArgsConstructor
 @NoArgsConstructor
-public class CarouselAdapter extends PagerAdapter {
-    Context context;
-    List<String> imageList;
+public class CarouselAdapter extends RecyclerView.Adapter<CarouselAdapter.ViewHolder> {
+    private List<String> mData;
 
     @NonNull
     @Override
-    public Object instantiateItem(@NonNull ViewGroup container, int position) {
-        LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View view = layoutInflater.inflate(R.layout.carousel_image_list, container, false);
-        final ImageView imageView = view.findViewById(R.id.image_view);
-
-        Picasso.get()
-                .load(imageList.get(position))
-                .into(imageView);
-
-        container.addView(view);
-
-        return view;
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.image_carousel_item_layout, parent, false);
+        return new ViewHolder(view);
     }
 
     @Override
-    public int getCount() {
-        return imageList.size();
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        // Set image or other data for the page
+        String imageUrl = mData.get(position);
+        Picasso.get().load(imageUrl).into(holder.imageView);
     }
 
     @Override
-    public boolean isViewFromObject(@NonNull View view, @NonNull Object object) {
-        return view == object;
+    public int getItemCount() {
+        return mData.size();
     }
 
-    @Override
-    public void destroyItem(@NonNull ViewGroup container, int position, @NonNull Object object) {
-        container.removeView((View) object);
+    public static class ViewHolder extends RecyclerView.ViewHolder {
+        ImageView imageView;
+        public ViewHolder(@NonNull View itemView) {
+            super(itemView);
+            imageView = itemView.findViewById(R.id.imageView);
+        }
     }
 }
