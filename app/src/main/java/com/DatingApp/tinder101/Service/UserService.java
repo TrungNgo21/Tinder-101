@@ -271,6 +271,23 @@ public class UserService {
     preferenceManager.clear();
   }
 
+  public void getOneUser(String id, final FirebaseCallback<CallbackRes<UserDto>> callback) {
+    userReference
+        .document(id)
+        .get()
+        .addOnCompleteListener(
+            task -> {
+              if (task.isSuccessful()) {
+                User user = task.getResult().toObject(User.class);
+                UserDto userDto = user.toDto();
+                userDto.setId(task.getResult().getId());
+                callback.callback(new CallbackRes.Success<UserDto>(userDto));
+              } else {
+                callback.callback(new CallbackRes.Error(task.getException()));
+              }
+            });
+  }
+
   public void getAllUsers(final FirebaseCallback<CallbackRes<List<UserDto>>> callback) {
     List<UserDto> users = new ArrayList<>();
     userReference

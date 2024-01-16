@@ -20,8 +20,11 @@ public class RoundChatItemAdapter
 
   private List<UserDto> users;
 
-  public RoundChatItemAdapter(List<UserDto> users) {
+  private OnChatItemTap onChatItemTap;
+
+  public RoundChatItemAdapter(List<UserDto> users, OnChatItemTap onChatItemTap) {
     this.users = users;
+    this.onChatItemTap = onChatItemTap;
     notifyDataSetChanged();
   }
 
@@ -31,7 +34,7 @@ public class RoundChatItemAdapter
     View view =
         LayoutInflater.from(parent.getContext()).inflate(R.layout.chat_round_item, parent, false);
 
-    return new RoundChatItemViewHolder(view);
+    return new RoundChatItemViewHolder(view, onChatItemTap);
   }
 
   @Override
@@ -50,16 +53,26 @@ public class RoundChatItemAdapter
     return 0;
   }
 
-  public static class RoundChatItemViewHolder extends RecyclerView.ViewHolder {
+  public static class RoundChatItemViewHolder extends RecyclerView.ViewHolder
+      implements View.OnClickListener {
     private ImageView profileImage;
     private TextView profileName;
     private TextView lastOnline;
 
-    public RoundChatItemViewHolder(@NonNull View itemView) {
+    private OnChatItemTap onChatItemTap;
+
+    public RoundChatItemViewHolder(@NonNull View itemView, OnChatItemTap onChatItemTap) {
       super(itemView);
       profileImage = itemView.findViewById(R.id.profileImage);
       profileName = itemView.findViewById(R.id.profileName);
       lastOnline = itemView.findViewById(R.id.lastOnline);
+      this.onChatItemTap = onChatItemTap;
+      itemView.setOnClickListener(this);
+    }
+
+    @Override
+    public void onClick(View v) {
+      onChatItemTap.openChat(getAdapterPosition());
     }
   }
 }

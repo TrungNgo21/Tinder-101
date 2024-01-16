@@ -18,9 +18,11 @@ import java.util.List;
 public class MessageItemAdapter
     extends RecyclerView.Adapter<MessageItemAdapter.MessageItemViewHolder> {
   private List<UserDto> users;
+  private OnChatItemTap onChatItemTap;
 
-  public MessageItemAdapter(List<UserDto> users) {
+  public MessageItemAdapter(List<UserDto> users, OnChatItemTap onChatItemTap) {
     this.users = users;
+    this.onChatItemTap = onChatItemTap;
     notifyDataSetChanged();
   }
 
@@ -30,7 +32,7 @@ public class MessageItemAdapter
     View view =
         LayoutInflater.from(parent.getContext()).inflate(R.layout.message_item, parent, false);
 
-    return new MessageItemViewHolder(view);
+    return new MessageItemViewHolder(view, onChatItemTap);
   }
 
   @Override
@@ -50,18 +52,27 @@ public class MessageItemAdapter
     return 0;
   }
 
-  public static class MessageItemViewHolder extends RecyclerView.ViewHolder {
+  public static class MessageItemViewHolder extends RecyclerView.ViewHolder
+      implements View.OnClickListener {
     private ImageView profileImage;
     private TextView profileName;
     private TextView lastOnline;
     private TextView lastMessage;
+    private OnChatItemTap onChatItemTap;
 
-    public MessageItemViewHolder(@NonNull View itemView) {
+    public MessageItemViewHolder(@NonNull View itemView, OnChatItemTap onChatItemTap) {
       super(itemView);
       profileImage = itemView.findViewById(R.id.profileImage);
       profileName = itemView.findViewById(R.id.profileName);
       lastOnline = itemView.findViewById(R.id.lastOnline);
       lastMessage = itemView.findViewById(R.id.lastMessage);
+      this.onChatItemTap = onChatItemTap;
+      itemView.setOnClickListener(this);
+    }
+
+    @Override
+    public void onClick(View v) {
+      onChatItemTap.openChat(getAdapterPosition());
     }
   }
 }
