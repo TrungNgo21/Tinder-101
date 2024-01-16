@@ -11,7 +11,10 @@
     </style>
 
     <style name="PrimaryPurpleButton">
+        <item name="android:padding">@dimen/_12sdp</item>
+        <item name="android:textColor">@color/white</item>
         <item name="android:backgroundTint">@color/primary_purple_700</item>
+        <item name="fontFamily">@font/source_sans_pro_semibold</item>
     </style>
 
     <style name="PrimaryEditTextLayout">
