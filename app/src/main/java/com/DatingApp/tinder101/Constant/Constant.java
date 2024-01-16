@@ -11,6 +11,8 @@ public class Constant {
   public static final String KEY_COLLECTION_USERS = "users";
   public static final String KEY_COLLECTION_MESSAGES = "messages";
 
+  public static final String KEY_COLLECTION_CONVERSATIONS = "conversations";
+
   public static final String KEY_GOOGLE_MAP_API = "AIzaSyBiKCD0sJBfjF8OHDT6j-8iTHh3PAdB268";
 
   public static final String KEY_DATABASE_URL =
@@ -25,6 +27,16 @@ public class Constant {
 
   public static final String KEY_SENT_USER_ID = "sentUserId";
   public static final String KEY_RECEIVED_USED_ID = "receivedUserId";
+  public static final String KEY_CONVERSION_NAME = "conversionName";
+  public static final String KEY_CONVERSION_URL = "conversionUrl";
+
+  public static final String KEY_RECEIVER_NAME = "receiverName";
+  public static final String KEY_RECEIVER_URL = "receiverUrl";
+
+  public static final String KEY_SENDER_NAME = "senderName";
+  public static final String KEY_SENDER_URL = "senderUrl";
+  public static final String KEY_CONVERSION_ID = "conversionId";
+
   public static final String KEY_MESSAGE_CONTENT_ID = "messageContent";
 
   public static final String KEY_CREATED_DATE_ID = "createDate";

@@ -103,6 +103,8 @@ public class ConversationActivity extends AppCompatActivity {
                     .sentUserId(userService.getCurrentUser().getId())
                     .messageContent(activityConversationBinding.messageChatBox.getText().toString())
                     .build(),
+                receivedUser,
+                userService.getCurrentUser(),
                 new FirebaseCallback<CallbackRes<MessageDto>>() {
                   @Override
                   public void callback(CallbackRes<MessageDto> template) {
