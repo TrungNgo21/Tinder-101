@@ -42,6 +42,12 @@
     <string name="add_photo_ins">Choose your best photos to increase the rate of matching</string>
     <string name="add_interest_title">Select your interest</string>
     <string name="add_interest_ins">Select your interests to display on your profile and match with users who have similar interest.</string>
+    <string name="next_text">Next</string>
+    <string name="password_register_error">Your password must be between 7 to 10 characters</string>
+    <string-array name="gender">
+        <item>Male</item>
+        <item>Female</item>
+    </string-array>
     <string name="lorem_ipsum">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam in scelerisque sem. Mauris
         volutpat, dolor id interdum ullamcorper, risus dolor egestas lectus, sit amet mattis purus

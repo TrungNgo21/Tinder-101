@@ -89,65 +89,13 @@
                     android:text="@string/name_error"
                     android:textColor="@color/error" />
             </LinearLayout>
-            <LinearLayout
-                android:id="@+id/emailContainer"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:layout_below="@+id/fullNameContainer"
-                android:layout_alignParentEnd="true"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:layout_marginStart="@dimen/_38sdp"
-                android:layout_marginEnd="@dimen/_38sdp"
-                android:orientation="vertical">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/email_text"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/_14sdp"
-                    android:textStyle="bold" />
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:hintTextColor="@color/purple_200"
-                    app:boxStrokeWidth="0dp"
-                    app:boxStrokeWidthFocused="0dp">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/emailId"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/input_field"
-                        android:hint="@string/email_prompt"
-                        android:inputType="text"
-                        android:paddingHorizontal="@dimen/_12sdp"
-                        android:padding="@dimen/_10sdp"
-                        android:drawableEnd="@drawable/ic_mail"
-                        android:textColor="@color/purple_200"
-                        android:textSize="@dimen/_12sdp" />
-                </com.google.android.material.textfield.TextInputLayout>
-                <TextView
-                    android:background="@color/white"
-                    android:paddingHorizontal="4dp"
-                    android:textAlignment="center"
-                    android:id="@+id/errorEmail"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/_35sdp"
-                    android:layout_marginEnd="@dimen/_35sdp"
-                    android:layout_marginTop="@dimen/_5sdp"
-                    android:text="@string/email_error"
-                    android:textColor="@color/error" />
-            </LinearLayout>
             <LinearLayout
                 android:id="@+id/numContainer"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
-                android:layout_below="@+id/emailContainer"
+                android:layout_below="@+id/fullNameContainer"
                 android:layout_alignParentEnd="true"
                 android:layout_marginTop="@dimen/_10sdp"
                 android:layout_marginStart="@dimen/_38sdp"
