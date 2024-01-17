@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <stroke
+        android:color="@color/purple_700"
+        android:dashWidth="@dimen/_5sdp"
+        android:dashGap="@dimen/_5sdp"
+        android:width="@dimen/_3sdp"/>
+    <gradient
+        android:type="linear"
+        android:angle="0"
+        android:endColor="#d7c2f0"
+        android:startColor="#d7c2f0"
+        />
+    <corners android:radius="@dimen/_10sdp"/>
+</shape>

@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/_5sdp"
+    tools:context=".Activity.AddPhotoActivity">
+    <ScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:id="@+id/titleCtn"
+                android:layout_marginTop="@dimen/_20sdp">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/add_photo_title"
+                    android:textColor="@color/purple_500"
+                    android:id="@+id/addPhotoTitle"
+                    android:textSize="@dimen/_20sdp"
+                    android:textStyle="bold"
+                    android:textAlignment="center"
+                    />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/add_photo_ins"
+                    android:textColor="@color/purple_200"
+                    android:textSize="@dimen/_12sdp"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:textStyle="normal"
+                    android:textAlignment="center" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="@dimen/_5sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_below="@+id/titleCtn"
+                android:id="@+id/imageCtn1">
+                <ImageView
+                    android:id="@+id/uploadImage1"
+                    android:layout_width="@dimen/_200sdp"
+                    android:layout_height="@dimen/_200sdp"
+                    android:layout_weight="1"
+                    android:scaleType="fitXY"
+                    android:background="@drawable/add_photo_stroke"
+                    android:layout_marginEnd="@dimen/_5sdp"
+                    android:src="@drawable/add_photo" />
+                <ImageView
+                    android:id="@+id/uploadImage2"
+                    android:layout_width="@dimen/_200sdp"
+                    android:layout_height="@dimen/_200sdp"
+                    android:layout_weight="1"
+                    android:scaleType="fitXY"
+                    android:layout_marginStart="@dimen/_5sdp"
+                    android:background="@drawable/add_photo_stroke"
+                    android:src="@drawable/add_photo" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="@dimen/_5sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_below="@+id/imageCtn1"
+                android:id="@+id/imageCtn2">
+
+                <ImageView
+                    android:id="@+id/uploadImage3"
+                    android:layout_width="@dimen/_200sdp"
+                    android:layout_height="@dimen/_200sdp"
+                    android:layout_marginEnd="@dimen/_5sdp"
+                    android:layout_weight="1"
+                    android:scaleType="fitXY"
+                    android:background="@drawable/add_photo_stroke"
+                    android:src="@drawable/add_photo" />
+
+                <ImageView
+                    android:id="@+id/uploadImage4"
+                    android:layout_width="@dimen/_200sdp"
+                    android:layout_height="@dimen/_200sdp"
+                    android:background="@drawable/add_photo_stroke"
+                    android:layout_weight="1"
+                    android:scaleType="fitXY"
+                    android:layout_marginStart="@dimen/_5sdp"
+                    android:src="@drawable/add_photo" />
+            </LinearLayout>
+            <TextView
+                android:background="@color/white"
+                android:paddingHorizontal="4dp"
+                android:textAlignment="center"
+                android:id="@+id/photoError"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/imageCtn2"
+                android:layout_marginStart="@dimen/_35sdp"
+                android:layout_marginEnd="@dimen/_35sdp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:text="@string/photo_error"
+                android:textSize="@dimen/_14sdp"
+                android:textColor="@color/error" />
+
+            <Button
+                android:id="@+id/continueButtonId"
+                android:layout_width="200dp"
+                android:layout_height="50dp"
+                android:textColor="@color/white"
+                android:layout_below="@+id/photoError"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="@dimen/_38sdp"
+                android:layout_marginEnd="@dimen/_38sdp"
+                android:layout_marginTop="@dimen/_12sdp"
+                android:background="@drawable/primary_button"
+                android:text="@string/continue_button" />
+        </RelativeLayout>
+    </ScrollView>
+
+
+
+</RelativeLayout>

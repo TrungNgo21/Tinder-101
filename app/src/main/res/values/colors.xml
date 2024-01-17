@@ -7,6 +7,7 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="error">#ED0707</color>
 
     <color name="gray">#E5E1DA</color>
 
@@ -25,6 +26,9 @@
 
     <color name="start_black">#4D000000</color>
     <color name="middle_black">#191919</color>
+    <color name="color_gradient_1">#8023EB</color>
+    <color name="color_gradient_2">#FD788C</color>
+    <color name="error_background">#FEEFEF</color>
 
     <color name="colorGradientStart">#D9FF43</color>
     <color name="colorGradientCenter">#F67831</color>
