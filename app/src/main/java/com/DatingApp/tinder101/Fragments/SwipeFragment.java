@@ -28,6 +28,7 @@ import com.DatingApp.tinder101.Adapter.UserCardsHolderAdapter;
 import com.DatingApp.tinder101.Dto.UserDto;
 
 import com.DatingApp.tinder101.R;
+import com.DatingApp.tinder101.Service.UserService;
 import com.DatingApp.tinder101.databinding.FragmentSwipeBinding;
 
 import com.lorentzos.flingswipe.SwipeFlingAdapterView;
@@ -53,7 +54,9 @@ public class SwipeFragment extends Fragment implements UserCardsHolderAdapter.On
 
   private CardStackLayoutManager cardStackLayoutManager;
 
-  private OnMainEventHandle onMainTapDetail;
+  private OnMainEventHandle onMainEventHandle;
+
+  private UserService userService;
 
   private View dislikeView;
   private View likeView;
@@ -67,18 +70,17 @@ public class SwipeFragment extends Fragment implements UserCardsHolderAdapter.On
   public SwipeFragment(List<UserDto> users, OnMainEventHandle onMainTapDetail) {
     // Required empty public constructor
     this.users = users;
-    this.onMainTapDetail = onMainTapDetail;
+    this.onMainEventHandle = onMainTapDetail;
   }
 
   @Override
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
+    userService = new UserService(requireContext());
     fragmentSwipeBinding = FragmentSwipeBinding.inflate(getLayoutInflater());
     userCardsHolderAdapter = new UserCardsHolderAdapter(requireContext(), this);
     userCardsHolderAdapter.setData(users);
     CardStackView swipeFlingAdapterView = fragmentSwipeBinding.swipeScreen;
-    CardStackState cardStackState = new CardStackState();
-
     cardStackLayoutManager =
         new CardStackLayoutManager(
             requireContext(),
@@ -86,10 +88,6 @@ public class SwipeFragment extends Fragment implements UserCardsHolderAdapter.On
 
               @Override
               public void onCardDragging(Direction direction, float ratio) {
-                Log.d(
-                    "ratio",
-                    direction + String.valueOf(ratio) + "  " + String.valueOf(cardStackState.dx));
-
                 if (direction == Direction.Right) {
                   isLike = true;
                   isDislike = false;
@@ -105,14 +103,17 @@ public class SwipeFragment extends Fragment implements UserCardsHolderAdapter.On
 
               @Override
               public void onCardSwiped(Direction direction) {
-                onMainTapDetail.popCard();
+                int position = cardStackLayoutManager.getTopPosition();
+                if (direction == Direction.Right) {
+                  userService.rightSwipe(users.get(position - 1).getId());
+                } else {
+                  Log.d("delete ne", "hehee");
+                }
               }
 
               @Override
               public void onCardRewound() {
                 Log.d("rewound r ne", "heehee");
-                likeView.setVisibility(View.INVISIBLE);
-                dislikeView.setVisibility(View.INVISIBLE);
               }
 
               @Override
@@ -128,16 +129,15 @@ public class SwipeFragment extends Fragment implements UserCardsHolderAdapter.On
               }
 
               @Override
-              public void onCardDisappeared(View view, int position) {}
+              public void onCardDisappeared(View view, int position) {
+                Log.d("position", String.valueOf(position));
+              }
             });
 
     cardStackLayoutManager.setCanScrollHorizontal(true);
     cardStackLayoutManager.setCanScrollVertical(false);
-    cardStackLayoutManager.setDirections(
-        new ArrayList<>(Arrays.asList(Direction.Left, Direction.Right)));
     cardStackLayoutManager.setMaxDegree(40.0f);
     cardStackLayoutManager.setStackFrom(StackFrom.Bottom);
-    cardStackLayoutManager.setVisibleCount(3);
     cardStackLayoutManager.setTranslationInterval(4.0f);
 
     swipeFlingAdapterView.setAdapter(userCardsHolderAdapter);
@@ -148,6 +148,10 @@ public class SwipeFragment extends Fragment implements UserCardsHolderAdapter.On
     void showDetail(UserDto userDto);
 
     void popCard();
+
+    void rightSwipe();
+
+    void checkMatch();
   }
 
   @Override
@@ -159,6 +163,6 @@ public class SwipeFragment extends Fragment implements UserCardsHolderAdapter.On
 
   @Override
   public void showDetail(UserDto userDto) {
-    onMainTapDetail.showDetail(userDto);
+    onMainEventHandle.showDetail(userDto);
   }
 }

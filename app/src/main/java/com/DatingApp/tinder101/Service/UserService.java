@@ -67,35 +67,18 @@ public class UserService {
   }
 
   public void handleMatch(String userId) {
-    Map<String, Object> updates = new HashMap<>();
-    WriteBatch batch = fireStore.batch();
-    updates.put(preferenceManager.getCurrentUser().getId() + "/" + "likeList/" + userId, null);
-    updates.put(preferenceManager.getCurrentUser().getId() + "/" + "likedList/" + userId, null);
-    updates.put(userId + "/" + "likedList/" + preferenceManager.getCurrentUser().getId(), null);
-    updates.put(userId + "/" + "likeList/" + preferenceManager.getCurrentUser().getId(), null);
-    batch.update(
-        userReference.document(preferenceManager.getCurrentUser().getId()),
-        "matchedUsers",
-        FieldValue.arrayUnion(userId));
-    batch.update(
-        userReference.document(userId),
-        "matchedUsers",
-        FieldValue.arrayUnion(preferenceManager.getCurrentUser().getId()));
-    batch
-        .commit()
-        .addOnCompleteListener(
-            task -> {
-              if (task.isSuccessful()) {
-                Log.d("update successful", "Success");
 
-              } else {
-                Log.d("update failed", "Faillllll");
-              }
-            });
-
-    //    updates.put(preferenceManager.getCurrentUser().getId() + "/" + "matched/" + userId, true);
-    //    updates.put(userId + "/" + "matched/" + preferenceManager.getCurrentUser().getId(), true);
-    realTimeUserRef.updateChildren(updates);
+    realTimeUserRef.child(getCurrentUser().getId()).child("likeList").child(userId).removeValue();
+    realTimeUserRef.child(getCurrentUser().getId()).child("likedList").child(userId).removeValue();
+    realTimeUserRef.child(userId).child("likeList").child(getCurrentUser().getId()).removeValue();
+    realTimeUserRef.child(userId).child("likedList").child(getCurrentUser().getId()).removeValue();
+    userReference
+        .document(preferenceManager.getCurrentUser().getId())
+        .update("matchedUsers", FieldValue.arrayUnion(userId));
+    userReference
+        .document(userId)
+        .update("matchedUsers", FieldValue.arrayUnion(preferenceManager.getCurrentUser().getId()));
+    preferenceManager.getCurrentUser().getMatchedUsers().add(userId);
   }
 
   public void getMatchedUsers(final FirebaseCallback<CallbackRes<List<UserDto>>> callback) {
@@ -110,14 +93,18 @@ public class UserService {
                 List<DocumentSnapshot> userSnapshots = new ArrayList<>();
 
                 for (String userId : preferenceManager.getCurrentUser().getMatchedUsers()) {
+                  if (userId.equals(preferenceManager.getCurrentUser().getId())) {
+                    continue;
+                  }
                   DocumentSnapshot userSnapshot = transaction.get(userReference.document(userId));
                   userSnapshots.add(userSnapshot);
                 }
                 for (DocumentSnapshot snapshot : userSnapshots) {
                   if (snapshot.exists()) {
-                    UserDto user = snapshot.toObject(UserDto.class);
-                    user.setId(snapshot.getId());
-                    matchedUsers.add(user);
+                    User user = snapshot.toObject(User.class);
+                    UserDto userDto = user.toDto();
+                    userDto.setId(snapshot.getId());
+                    matchedUsers.add(userDto);
                   }
                 }
                 return null;

@@ -46,6 +46,14 @@ public class ViewProfileFragment extends Fragment {
     this.onBackSwipePress = onBackSwipePress;
   }
 
+  public ViewProfileFragment() {
+    // doesn't do anything special
+  }
+
+  public ViewProfileFragment(UserDto userDto) {
+    this.userDto = userDto;
+  }
+
   @Override
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -105,6 +113,10 @@ public class ViewProfileFragment extends Fragment {
       contents.add(entry.getValue());
     }
     return contents;
+  }
+
+  public void hideBackToSwipe() {
+    fragmentViewProfileBinding.viewProfileBtn.setVisibility(View.GONE);
   }
 
   private FlexboxLayoutManager constructLayoutManager() {

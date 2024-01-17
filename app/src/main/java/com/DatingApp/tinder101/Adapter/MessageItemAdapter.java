@@ -49,9 +49,7 @@ public class MessageItemAdapter
     Picasso.get().load(conversation.getConversionUrl()).into(holder.profileImage);
     holder.profileName.setText(conversation.getConversionName());
     holder.lastOnline.setText("9 m");
-
     holder.lastMessage.setText(conversation.getMessageContent());
-
     holder.container.setOnClickListener(
         view -> {
           onChatItemTap.openChatId(conversation.getConversionId());

@@ -3,6 +3,7 @@ package com.DatingApp.tinder101.Activity;
 import android.os.Bundle;
 import android.text.TextPaint;
 import android.util.Log;
+import android.view.View;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -10,6 +11,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.DatingApp.tinder101.Adapter.ConversationAdapter;
@@ -18,6 +21,7 @@ import com.DatingApp.tinder101.Callback.FirebaseCallback;
 import com.DatingApp.tinder101.Constant.Constant;
 import com.DatingApp.tinder101.Dto.MessageDto;
 import com.DatingApp.tinder101.Dto.UserDto;
+import com.DatingApp.tinder101.Fragments.ViewProfileFragment;
 import com.DatingApp.tinder101.Model.Message;
 import com.DatingApp.tinder101.R;
 import com.DatingApp.tinder101.Service.MessageService;
@@ -90,6 +94,19 @@ public class ConversationActivity extends AppCompatActivity {
   }
 
   private void setUpButton() {
+    activityConversationBinding.viewMoreIcon.setOnClickListener(
+        view -> {
+          ViewProfileFragment viewProfileFragment = new ViewProfileFragment(receivedUser);
+          viewProfileFragment.hideBackToSwipe();
+          activityConversationBinding.profileDisplay.setVisibility(View.VISIBLE);
+          activityConversationBinding.mainDisplay.setVisibility(View.GONE);
+          loadFragment(viewProfileFragment);
+        });
+
+    activityConversationBinding.backBtn.setOnClickListener(
+        view -> {
+          finish();
+        });
     activityConversationBinding.sendBtn.setOnClickListener(
         view -> {
           if (activityConversationBinding.messageChatBox.getText().toString().trim().isEmpty()) {
@@ -119,5 +136,12 @@ public class ConversationActivity extends AppCompatActivity {
                 });
           }
         });
+  }
+
+  private void loadFragment(Fragment fragment) {
+    FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+    transaction.replace(R.id.profileDisplay, fragment);
+    transaction.addToBackStack(null);
+    transaction.commit();
   }
 }
