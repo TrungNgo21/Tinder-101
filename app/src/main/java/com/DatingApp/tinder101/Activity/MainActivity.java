@@ -178,24 +178,24 @@ public class MainActivity extends AppCompatActivity
     loadFragment(fragment);
   }
 
-  private void setUpNavigation() {
-    activityMainBinding.menu.setOnItemSelectedListener(
-        item -> {
-          Fragment fragment;
-          if (item.getItemId() == R.id.home) {
-            fragment = new SwipeFragment(users, this);
+    private void setUpNavigation() {
+        activityMainBinding.menu.setOnItemSelectedListener(
+                item -> {
+                    Fragment fragment;
+                    if (item.getItemId() == R.id.home) {
+                        fragment = new SwipeFragment(users, this);
+                        loadFragment(fragment);
+                        return true;
+                    } else if (item.getItemId() == R.id.profile) {
 
-            loadFragment(fragment);
-
-          } else if (item.getItemId() == R.id.profile) {
-
-          } else if (item.getItemId() == R.id.message) {
-            fragment = new ChatFragment(matchedUsers);
-            loadFragment(fragment);
-          } else {
-
-          }
-          return false;
-        });
-  }
+                    } else if (item.getItemId() == R.id.message) {
+                        fragment = new ChatFragment(users);
+                        loadFragment(fragment);
+                        return true;
+                    } else {
+                        return false;
+                    }
+                    return false;
+                });
+    }
 }
