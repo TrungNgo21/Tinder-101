@@ -8,16 +8,56 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Activity.RegisterActivity">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Let's sign you in"
+        android:layout_gravity="center"
+        android:textSize="@dimen/_32sdp"
 
-    <EditText
-        android:id="@+id/username"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        style="@style/PrimaryPurpleText"/>
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_marginTop="24dp"
+        android:layout_height="wrap_content">
+        <TextView
+            style="@style/PrimaryLabelText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_gravity="left"
+            android:text="Email" />
+        <EditText
+            android:id="@+id/username"
+            android:hint="Email"
+            style="@style/PrimaryEditTextLayout"
+            android:background="@drawable/light_border"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
 
-    <EditText
-        android:id="@+id/password"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_marginTop="24dp"
+        android:layout_height="wrap_content">
+        <TextView
+            style="@style/PrimaryLabelText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_gravity="left"
+            android:text="Password" />
+        <EditText
+            android:id="@+id/password"
+            style="@style/PrimaryEditTextLayout"
+            android:background="@drawable/light_border"
+            android:hint="Password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
 
     <Button
         android:id="@+id/loginBtn"

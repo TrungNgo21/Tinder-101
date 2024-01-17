@@ -2,6 +2,7 @@
 <resources>
     <style name="PrimaryPurpleText" parent="TextAppearance.AppCompat">
         <item name="android:textColor">@color/primary_purple_700</item>
+        <item name="android:fontFamily">@font/source_sans_pro_semibold</item>
     </style>
 
     <style name="PrimaryLabelText" parent="TextAppearance.AppCompat">

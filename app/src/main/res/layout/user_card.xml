@@ -15,8 +15,6 @@
         app:riv_corner_radius="@dimen/_8sdp" />
 
 
-<<<<<<< HEAD
-=======
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -88,7 +86,6 @@
             android:layout_height="@dimen/_100sdp" />
     </LinearLayout>
 
->>>>>>> aba3763 (feat: add 2 buttons to navigate)
     <LinearLayout
         android:id="@+id/info"
         android:paddingBottom="@dimen/_20sdp"

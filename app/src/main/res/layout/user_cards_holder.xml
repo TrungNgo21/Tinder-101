@@ -1,21 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-<<<<<<< HEAD
     android:layout_height="match_parent"
     android:gravity="center_horizontal"
     android:orientation="vertical"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-=======
-    android:layout_height="match_parent">
->>>>>>> aba3763 (feat: add 2 buttons to navigate)
 
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/userCardsHolder"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
-<<<<<<< HEAD
-
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -71,9 +65,4 @@
         app:ci_height="@dimen/_4sdp"
         app:ci_animator="@animator/dots_indicators_anim"
         android:layout_height="@dimen/_40sdp" />
-
 </RelativeLayout>
-=======
-    
-</RelativeLayout>
->>>>>>> aba3763 (feat: add 2 buttons to navigate)

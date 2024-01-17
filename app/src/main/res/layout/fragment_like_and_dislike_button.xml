@@ -1,0 +1,39 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal">
+
+    <com.google.android.flexbox.FlexboxLayout
+        android:id="@+id/likeAndDislikeButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:alignItems="center"
+        app:justifyContent="center"
+        tools:ignore="MissingConstraints">
+
+        <ImageView
+            android:id="@+id/likeButton"
+            android:layout_width="@dimen/_50sdp"
+            android:layout_height="@dimen/_50sdp"
+            android:background="@drawable/full_border_transparent"
+            android:contentDescription="Reload Button"
+            android:src="@drawable/like_icon"
+            />
+
+        <ImageView
+            android:id="@+id/dislikeButton"
+            android:layout_width="@dimen/_48sdp"
+            android:layout_height="@dimen/_48sdp"
+            android:layout_marginLeft="@dimen/_8sdp"
+            android:background="@drawable/full_border_transparent"
+            android:contentDescription="Reload Button"
+            android:src="@drawable/dislike_icon"
+            tools:ignore="MissingConstraints" />
+    </com.google.android.flexbox.FlexboxLayout>
+</RelativeLayout>
+
+
+

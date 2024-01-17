@@ -29,8 +29,9 @@
 
             <EditText
                 style="@style/PrimaryEditTextLayout"
-                android:hint="Username"
                 android:background="@drawable/light_border"
+                android:hint="Username"
+
                 android:layout_marginTop="8dp"
                 />
 

@@ -101,5 +101,6 @@ dependencies {
     implementation("com.google.android.flexbox:flexbox:3.0.0")
     implementation("com.github.denzcoskun:ImageSlideshow:0.1.2")
     implementation("com.tbuonomo:dotsindicator:5.0")
+    implementation("com.yuyakaido.android:card-stack-view:2.3.4")
 
 }
