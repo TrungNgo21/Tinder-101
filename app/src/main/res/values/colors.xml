@@ -24,4 +24,8 @@
 
     <color name="start_black">#4D000000</color>
     <color name="middle_black">#191919</color>
+
+    <color name="colorGradientStart">#D9FF43</color>
+    <color name="colorGradientCenter">#F67831</color>
+    <color name="colorGradientEnd">#FF1493</color>
 </resources>

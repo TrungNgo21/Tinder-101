@@ -19,11 +19,7 @@ import com.DatingApp.tinder101.R;
 import com.DatingApp.tinder101.Service.UserService;
 import com.DatingApp.tinder101.databinding.ActivityRegisterBinding;
 import com.DatingApp.tinder101.databinding.ActivitySignInBinding;
-import com.facebook.CallbackManager;
-import com.facebook.FacebookCallback;
-import com.facebook.FacebookException;
-import com.facebook.login.LoginResult;
-import com.facebook.login.widget.LoginButton;
+
 import com.google.firebase.FirebaseApp;
 
 import java.util.Arrays;

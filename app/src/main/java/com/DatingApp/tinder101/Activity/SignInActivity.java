@@ -3,9 +3,12 @@ package com.DatingApp.tinder101.Activity;
 import static com.DatingApp.tinder101.Activity.RegisterActivity.EMAIL;
 
 import android.content.Intent;
+import android.graphics.drawable.AnimationDrawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -20,19 +23,11 @@ import androidx.core.view.WindowInsetsCompat;
 import com.DatingApp.tinder101.Callback.CallbackRes;
 import com.DatingApp.tinder101.Callback.FirebaseCallback;
 import com.DatingApp.tinder101.Dto.UserDto;
+import com.DatingApp.tinder101.Fragments.LoadingComponent;
 import com.DatingApp.tinder101.Model.User;
 import com.DatingApp.tinder101.R;
 import com.DatingApp.tinder101.Service.UserService;
 import com.DatingApp.tinder101.databinding.ActivitySignInBinding;
-import com.facebook.AccessToken;
-import com.facebook.CallbackManager;
-import com.facebook.FacebookCallback;
-import com.facebook.FacebookException;
-import com.facebook.FacebookSdk;
-import com.facebook.appevents.AppEventsLogger;
-import com.facebook.login.LoginManager;
-import com.facebook.login.LoginResult;
-import com.facebook.login.widget.LoginButton;
 import com.google.firebase.FirebaseApp;
 
 import org.w3c.dom.Text;
@@ -45,8 +40,6 @@ public class SignInActivity extends AppCompatActivity {
   private UserService userService;
   private ActivitySignInBinding activitySignInBinding;
 
-  private  CallbackManager callbackManager;
-
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -58,24 +51,15 @@ public class SignInActivity extends AppCompatActivity {
       finish();
       startActivity(new Intent(this, MainActivity.class));
     }
-    LoginButton fbLogin = (LoginButton) findViewById(R.id.login_button);
-    TextView toSignupPage = findViewById(R.id.toSignupButton);
-    toSignupPage.setOnClickListener(new View.OnClickListener() {
-      @Override
-      public void onClick(View v) {
-        Intent intent = new Intent(SignInActivity.this, RegisterActivity.class);
-        startActivity(intent);
-      }
-    });
+
+
+      LoadingComponent loadingComponent = findViewById(R.id.loadingView);
+    loadingComponent.hideLoading();
 
     setUpButton();
   }
 
-  @Override
-  protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-    callbackManager.onActivityResult(requestCode, resultCode, data);
-    super.onActivityResult(requestCode, resultCode, data);
-  }
+
 
   public void setUpButton() {
     activitySignInBinding.toRegister.setOnClickListener(
