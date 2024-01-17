@@ -3,5 +3,5 @@
     <solid android:color="@color/white" /><!-- background color for imagebutton-->
 
     <corners
-        android:radius="@dimen/_9sdp" />
+        android:radius="@dimen/_30sdp" />
 </shape>

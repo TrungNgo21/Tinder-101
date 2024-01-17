@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_marginBottom="8dp"
+    android:layout_marginHorizontal="@dimen/_32sdp"
+    android:background="@drawable/light_border"
+    android:layout_marginTop="@dimen/_16sdp"
+    android:elevation="4dp">
+
+    <com.google.android.flexbox.FlexboxLayout
+        android:id="@+id/info1"
+        android:orientation="horizontal"
+        android:padding="16dp"
+        android:layout_width="match_parent"
+
+        app:justifyContent="flex_start"
+        app:alignItems="center"
+        android:layout_height="wrap_content">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/member_image"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/girl_1"
+            app:civ_border_width="2dp"
+            app:civ_border_color="@color/transparent"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_marginLeft="@dimen/_16sdp"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/member_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                style="@style/PrimaryPurpleText"
+                android:textAppearance="?attr/textAppearanceSubtitle1"
+                 />
+
+            <TextView
+                android:id="@+id/member_role"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:textAppearance="?attr/textAppearanceCaption"
+                 />
+        </LinearLayout>
+    </com.google.android.flexbox.FlexboxLayout>
+    <TextView
+        android:id="@+id/member_description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/source_sans_pro_regular"
+        android:layout_marginTop="@dimen/_70sdp"
+        android:padding="@dimen/_16sdp"
+        android:textAppearance="?attr/textAppearanceBody2"
+         />
+</androidx.cardview.widget.CardView>

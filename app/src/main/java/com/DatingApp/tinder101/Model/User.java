@@ -30,14 +30,14 @@ public class User {
 
   public UserDto toDto() {
     return UserDto.builder()
-        .name(name)
-        .email(email)
-        .imageUrlsMap(imageUrlsMap)
-        .profileSetting(profileSetting.toDto())
-        .matchedUsers(matchedUsers)
-        .createdDate(createdDate)
-        .updatedDate(updatedDate)
-        .build();
+            .name(name)
+            .email(email)
+            .imageUrlsMap(imageUrlsMap)
+            .profileSetting(profileSetting.toDto())
+            .matchedUsers(matchedUsers)
+            .createdDate(createdDate)
+            .updatedDate(updatedDate)
+            .build();
   }
 
   public HashMap<String, Object> toMap() {

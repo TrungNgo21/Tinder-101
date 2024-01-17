@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+    <!-- Title -->
+    <TextView
+        android:id="@+id/heading_about_us"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:fontFamily="@font/source_sans_pro_semibold"
+        android:textAppearance="?attr/textAppearanceHeadline5"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"/>
+
+    <!-- Team Member List -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/team_members_recyclerview"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+      />
+
+</LinearLayout>
