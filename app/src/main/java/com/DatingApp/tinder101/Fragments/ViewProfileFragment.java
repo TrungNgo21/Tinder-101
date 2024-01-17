@@ -46,6 +46,14 @@ public class ViewProfileFragment extends Fragment {
     this.onBackSwipePress = onBackSwipePress;
   }
 
+  public ViewProfileFragment() {
+    // doesn't do anything special
+  }
+
+  public ViewProfileFragment(UserDto userDto) {
+    this.userDto = userDto;
+  }
+
   @Override
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -61,6 +69,7 @@ public class ViewProfileFragment extends Fragment {
     setUpProfileHeader();
     setUpProfileImages();
     setUpProfileInfo();
+    setUpButton();
     return fragmentViewProfileBinding.getRoot();
   }
 
@@ -104,6 +113,10 @@ public class ViewProfileFragment extends Fragment {
       contents.add(entry.getValue());
     }
     return contents;
+  }
+
+  public void hideBackToSwipe() {
+    fragmentViewProfileBinding.viewProfileBtn.setVisibility(View.GONE);
   }
 
   private FlexboxLayoutManager constructLayoutManager() {
@@ -224,6 +237,11 @@ public class ViewProfileFragment extends Fragment {
     } else {
       fragmentViewProfileBinding.lifeStyleDisplay.setVisibility(View.GONE);
     }
+  }
+
+  private void setUpButton() {
+    fragmentViewProfileBinding.nameReport.setText(userDto.getName());
+    fragmentViewProfileBinding.nameBlock.setText(userDto.getName());
   }
 
   public interface OnBackSwipePress {

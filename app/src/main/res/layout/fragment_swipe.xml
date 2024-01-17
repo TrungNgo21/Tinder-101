@@ -7,9 +7,15 @@
     tools:context=".Fragments.SwipeFragment">
 
 
-    <com.lorentzos.flingswipe.SwipeFlingAdapterView
+    <!--    <com.lorentzos.flingswipe.SwipeFlingAdapterView-->
+    <!--        android:id="@+id/swipeScreen"-->
+    <!--        app:rotation_degrees="15.5"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="match_parent" />-->
+
+    <com.yuyakaido.android.cardstackview.CardStackView
         android:id="@+id/swipeScreen"
-        app:rotation_degrees="15.5"
+        tools:listitem="@layout/user_cards_holder"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 </RelativeLayout>

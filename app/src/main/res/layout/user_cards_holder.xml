@@ -11,6 +11,53 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:visibility="invisible"
+            android:id="@+id/likeMask"
+            android:layout_width="match_parent"
+            android:background="@drawable/bg_like_linear"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:layout_height="@dimen/_100sdp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/_30ssp"
+                android:textStyle="bold"
+                android:layout_marginStart="@dimen/_30sdp"
+                android:textColor="@color/white"
+                android:text="LIKE!" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:visibility="invisible"
+            android:id="@+id/dislikeMask"
+            android:layout_width="match_parent"
+            android:background="@drawable/bg_dislike_linear"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:layout_height="@dimen/_100sdp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/_30ssp"
+                android:textStyle="bold"
+                android:textAlignment="textEnd"
+                android:layout_marginEnd="@dimen/_30sdp"
+                android:textColor="@color/white"
+                android:text="NOPE!" />
+        </LinearLayout>
+
+
+    </FrameLayout>
+
     <me.relex.circleindicator.CircleIndicator3
         android:id="@+id/imageIndicators"
         android:layout_width="match_parent"

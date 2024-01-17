@@ -103,16 +103,7 @@ public class UserCardAdapter extends RecyclerView.Adapter<UserCardAdapter.UserCa
 
     holder.infoDisplay.setOnClickListener(
         view -> {
-          onImageTap.tapDown();
-        });
-
-    holder.prevBtn.setOnClickListener(
-        view -> {
-          onImageTap.tapLeft();
-        });
-    holder.nextBtn.setOnClickListener(
-        view -> {
-          onImageTap.tapRight();
+          onImageTap.tapDown(userDto);
         });
 
     String currentFieldDisplay;
@@ -225,7 +216,7 @@ public class UserCardAdapter extends RecyclerView.Adapter<UserCardAdapter.UserCa
     }
   }
 
-  public static class UserCardHolder extends RecyclerView.ViewHolder {
+  public class UserCardHolder extends RecyclerView.ViewHolder {
     private ImageView profileImage;
     private TextView profileName;
     private TextView profileAge;
@@ -243,8 +234,6 @@ public class UserCardAdapter extends RecyclerView.Adapter<UserCardAdapter.UserCa
     private TextView profileChipsType;
 
     private View infoDisplay;
-    private Button prevBtn;
-    private Button nextBtn;
 
     private UserCardHolder(@NonNull View itemView) {
       super(itemView);
@@ -262,16 +251,10 @@ public class UserCardAdapter extends RecyclerView.Adapter<UserCardAdapter.UserCa
       profileSingleContent = itemView.findViewById(R.id.profileSingleInfoContent);
       profileLookingForContent = itemView.findViewById(R.id.profileLookingFor);
       infoDisplay = itemView.findViewById(R.id.info);
-      prevBtn = itemView.findViewById(R.id.prevBtn);
-      nextBtn = itemView.findViewById(R.id.nextBtn);
     }
   }
 
   public interface OnImageTap {
-    void tapRight();
-
-    void tapLeft();
-
-    void tapDown();
+    void tapDown(UserDto userDto);
   }
 }
