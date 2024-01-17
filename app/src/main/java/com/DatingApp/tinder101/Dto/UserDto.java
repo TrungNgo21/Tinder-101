@@ -1,9 +1,8 @@
 package com.DatingApp.tinder101.Dto;
 
-import org.checkerframework.checker.units.qual.A;
-
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 import lombok.AllArgsConstructor;
@@ -21,6 +20,8 @@ public class UserDto {
   private String email;
   private Date createdDate;
   private Date updatedDate;
+  private ProfileSettingDto profileSetting;
+  private HashMap<String, String> imageUrlsMap;
   @Builder.Default private boolean isOnline = true;
   @Builder.Default private List<String> matchedUsers = new ArrayList<>();
 }

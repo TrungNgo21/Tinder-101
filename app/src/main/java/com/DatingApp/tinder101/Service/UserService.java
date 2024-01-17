@@ -10,8 +10,12 @@ import androidx.annotation.Nullable;
 import com.DatingApp.tinder101.Callback.CallbackRes;
 import com.DatingApp.tinder101.Callback.FirebaseCallback;
 import com.DatingApp.tinder101.Constant.Constant;
+import com.DatingApp.tinder101.Dto.ProfileSettingDto;
 import com.DatingApp.tinder101.Dto.UserDto;
+import com.DatingApp.tinder101.Enum.LookingForEnum;
+import com.DatingApp.tinder101.Model.ProfileSetting;
 import com.DatingApp.tinder101.Model.User;
+import com.DatingApp.tinder101.Utils.EnumConverter;
 import com.DatingApp.tinder101.Utils.PreferenceManager;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -31,6 +35,7 @@ import com.google.firebase.firestore.Transaction;
 import com.google.firebase.firestore.WriteBatch;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -62,35 +67,18 @@ public class UserService {
   }
 
   public void handleMatch(String userId) {
-    Map<String, Object> updates = new HashMap<>();
-    WriteBatch batch = fireStore.batch();
-    updates.put(preferenceManager.getCurrentUser().getId() + "/" + "likeList/" + userId, null);
-    updates.put(preferenceManager.getCurrentUser().getId() + "/" + "likedList/" + userId, null);
-    updates.put(userId + "/" + "likedList/" + preferenceManager.getCurrentUser().getId(), null);
-    updates.put(userId + "/" + "likeList/" + preferenceManager.getCurrentUser().getId(), null);
-    batch.update(
-        userReference.document(preferenceManager.getCurrentUser().getId()),
-        "matchedUsers",
-        FieldValue.arrayUnion(userId));
-    batch.update(
-        userReference.document(userId),
-        "matchedUsers",
-        FieldValue.arrayUnion(preferenceManager.getCurrentUser().getId()));
-    batch
-        .commit()
-        .addOnCompleteListener(
-            task -> {
-              if (task.isSuccessful()) {
-                Log.d("update successful", "Success");
 
-              } else {
-                Log.d("update failed", "Faillllll");
-              }
-            });
-
-    //    updates.put(preferenceManager.getCurrentUser().getId() + "/" + "matched/" + userId, true);
-    //    updates.put(userId + "/" + "matched/" + preferenceManager.getCurrentUser().getId(), true);
-    realTimeUserRef.updateChildren(updates);
+    realTimeUserRef.child(getCurrentUser().getId()).child("likeList").child(userId).removeValue();
+    realTimeUserRef.child(getCurrentUser().getId()).child("likedList").child(userId).removeValue();
+    realTimeUserRef.child(userId).child("likeList").child(getCurrentUser().getId()).removeValue();
+    realTimeUserRef.child(userId).child("likedList").child(getCurrentUser().getId()).removeValue();
+    userReference
+        .document(preferenceManager.getCurrentUser().getId())
+        .update("matchedUsers", FieldValue.arrayUnion(userId));
+    userReference
+        .document(userId)
+        .update("matchedUsers", FieldValue.arrayUnion(preferenceManager.getCurrentUser().getId()));
+    preferenceManager.getCurrentUser().getMatchedUsers().add(userId);
   }
 
   public void getMatchedUsers(final FirebaseCallback<CallbackRes<List<UserDto>>> callback) {
@@ -105,14 +93,18 @@ public class UserService {
                 List<DocumentSnapshot> userSnapshots = new ArrayList<>();
 
                 for (String userId : preferenceManager.getCurrentUser().getMatchedUsers()) {
+                  if (userId.equals(preferenceManager.getCurrentUser().getId())) {
+                    continue;
+                  }
                   DocumentSnapshot userSnapshot = transaction.get(userReference.document(userId));
                   userSnapshots.add(userSnapshot);
                 }
                 for (DocumentSnapshot snapshot : userSnapshots) {
                   if (snapshot.exists()) {
-                    UserDto user = snapshot.toObject(UserDto.class);
-                    user.setId(snapshot.getId());
-                    matchedUsers.add(user);
+                    User user = snapshot.toObject(User.class);
+                    UserDto userDto = user.toDto();
+                    userDto.setId(snapshot.getId());
+                    matchedUsers.add(userDto);
                   }
                 }
                 return null;
@@ -153,6 +145,47 @@ public class UserService {
                     User.builder()
                         .name("Test")
                         .email(email)
+                        .profileSetting(
+                            ProfileSetting.builder()
+                                .basics(
+                                    new HashMap<String, String>() {
+                                      {
+                                        put("ZODIAC", "Cancer");
+                                        put("EDUCATION", "At uni");
+                                        put("COMMUNICATION", "Better in person");
+                                        put("LOVE", "Touch");
+                                      }
+                                    })
+                                .interests(Arrays.asList("BaseBall", "LickBack"))
+                                .lifestyleList(
+                                    new HashMap<String, String>() {
+                                      {
+                                        put("PET", "No pet");
+                                        put("SMOKE", "Social smoker");
+                                        put("DRINKING", "Occasion");
+                                        put("WORKOUT", "Everyday");
+                                      }
+                                    })
+                                .lookingForEnum(LookingForEnum.SHORT_LONG_OK.toString())
+                                .quotes("Qua la tuyet voi")
+                                .build())
+                        .imageUrlsMap(
+                            new HashMap<String, String>() {
+                              {
+                                put(
+                                    "0",
+                                    "https://cdn.freecodecamp.org/curriculum/cat-photo-app/relaxing-cat.jpg");
+                                put(
+                                    "1",
+                                    "https://cdn.freecodecamp.org/curriculum/cat-photo-app/relaxing-cat.jpg");
+                                put(
+                                    "2",
+                                    "https://cdn.freecodecamp.org/curriculum/cat-photo-app/relaxing-cat.jpg");
+                                put(
+                                    "3",
+                                    "https://cdn.freecodecamp.org/curriculum/cat-photo-app/relaxing-cat.jpg");
+                              }
+                            })
                         .createdDate(new Date())
                         .updatedDate(new Date())
                         .build();
@@ -204,7 +237,8 @@ public class UserService {
                         getUserTask -> {
                           if (getUserTask.isSuccessful()) {
                             DocumentSnapshot documentSnapshot = getUserTask.getResult();
-                            UserDto currentUser = documentSnapshot.toObject(UserDto.class);
+                            User getUser = documentSnapshot.toObject(User.class);
+                            UserDto currentUser = getUser.toDto();
                             currentUser.setOnline(true);
                             currentUser.setId(firebaseUser.getUid());
                             preferenceManager.putCurrentUser(currentUser);
@@ -224,8 +258,25 @@ public class UserService {
     preferenceManager.clear();
   }
 
+  public void getOneUser(String id, final FirebaseCallback<CallbackRes<UserDto>> callback) {
+    userReference
+        .document(id)
+        .get()
+        .addOnCompleteListener(
+            task -> {
+              if (task.isSuccessful()) {
+                User user = task.getResult().toObject(User.class);
+                UserDto userDto = user.toDto();
+                userDto.setId(task.getResult().getId());
+                callback.callback(new CallbackRes.Success<UserDto>(userDto));
+              } else {
+                callback.callback(new CallbackRes.Error(task.getException()));
+              }
+            });
+  }
+
   public void getAllUsers(final FirebaseCallback<CallbackRes<List<UserDto>>> callback) {
-    List<UserDto> users = new Stack<>();
+    List<UserDto> users = new ArrayList<>();
     userReference
         .get()
         .addOnCompleteListener(
@@ -235,9 +286,10 @@ public class UserService {
                   if (!documentSnapshot
                       .getId()
                       .equals(preferenceManager.getCurrentUser().getId())) {
-                    UserDto user = documentSnapshot.toObject(UserDto.class);
-                    user.setId(documentSnapshot.getId());
-                    users.add(user);
+                    User user = documentSnapshot.toObject(User.class);
+                    UserDto getUser = user.toDto();
+                    getUser.setId(documentSnapshot.getId());
+                    users.add(getUser);
                   }
                 }
                 callback.callback(new CallbackRes.Success<>(users));

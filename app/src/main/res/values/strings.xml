@@ -48,6 +48,35 @@
         <item>Male</item>
         <item>Female</item>
     </string-array>
+    <string name="mockUpName">Minh Anh</string>
+    <string name="mockUpAge">19</string>
+    <string name="interest">Interests</string>
+    <string name="lookingFor">Looking for</string>
+    <string name="aboutMe">About me</string>
+    <string name="essential">Essentials</string>
+    <string name="basic">Basics</string>
+    <string name="block">Block</string>
+    <string name="report">Report</string>
+    <string name="home">Home</string>
+    <string name="message">Message</string>
+    <string name="features">Features</string>
+    <string name="profile">Profile</string>
+    <string name="lifeStyle">Lifestyle</string>
+    <string name="newMatches">New Matches</string>
+    <string name="messages">Messages</string>
+    <string name="mockUpLookingFor">Short-time, but long-term OK</string>
+    <string name="mockUpEssential">1 kilometer away</string>
+    <string name="mockUpDate">Jan 16, 2023 - 11:51 AM</string>
+    <string name="lastOnline">7 m</string>
+
+
+    <string name="mockUpChipContent">Harry Potter</string>
+    <string name="mockUpType">Education</string>
+    <string name='mockUpQuotes'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam in scelerisque sem. Mauris
+        volutpat, dolor id interdum ullamcorper, risus dolor egestas lectus, sit amet mattis purus
+        dui nec risus. Maecenas non sodales nisi, vel dictum dolor. Class aptent taciti sociosqu ad
+        litora torquent per conubia nostra, per inceptos himenaeos. Suspendisse blandit eleifend</string>
+
     <string name="lorem_ipsum">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam in scelerisque sem. Mauris
         volutpat, dolor id interdum ullamcorper, risus dolor egestas lectus, sit amet mattis purus
@@ -84,4 +113,6 @@
         libero vel nunc consequat, quis tincidunt nisl eleifend. Cras bibendum enim a justo luctus
         vestibulum. Fusce dictum libero quis erat maximus, vitae volutpat diam dignissim.
     </string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
