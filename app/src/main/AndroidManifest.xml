@@ -23,9 +23,9 @@
             android:exported="false" />
         <activity
             android:name=".Activity.AddInterestActivity"
-            android:exported="false">
+            android:exported="false" />
 
-        </activity>
+
 
         <activity
             android:name=".Activity.AddPhotoActivity"
@@ -33,7 +33,10 @@
 
         <activity
             android:name=".Activity.CreateProfileActivity"
-            android:exported="false" />
+            android:exported="false">
+
+        </activity>
+
 
         <activity
             android:name=".Activity.RegisterActivity"

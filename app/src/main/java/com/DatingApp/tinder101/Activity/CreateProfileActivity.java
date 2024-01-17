@@ -22,6 +22,7 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.DatingApp.tinder101.Constant.Constant;
 import com.DatingApp.tinder101.R;
+import com.DatingApp.tinder101.Utils.InputValidation;
 import com.DatingApp.tinder101.databinding.ActivityCreateProfileBinding;
 import com.google.android.gms.common.api.Status;
 import com.google.android.libraries.places.api.Places;
@@ -39,31 +40,11 @@ public class CreateProfileActivity extends AppCompatActivity {
         setContentView(activityCreateProfileBinding.getRoot());
         setInputText();
         setUpSpinner();
-        setUpAutoCompleteAddress();
+        setUpButton();
+        initialCheck();
 
     }
-    public void setUpAutoCompleteAddress() {
-        Places.initialize(this, Constant.KEY_GOOGLE_MAP_API);
-        Places.createClient(this);
-        AutocompleteSupportFragment autocompleteSupportFragment =
-                (AutocompleteSupportFragment)
-                        getSupportFragmentManager().findFragmentById(R.id.autoCompleteAddress);
-        //    AutocompleteSessionToken.newInstance();
-        autocompleteSupportFragment.setActivityMode(AutocompleteActivityMode.FULLSCREEN);
-        autocompleteSupportFragment.setPlaceFields(
-                asList(Place.Field.LAT_LNG, Place.Field.ADDRESS, Place.Field.NAME));
 
-        autocompleteSupportFragment.setOnPlaceSelectedListener(
-                new PlaceSelectionListener() {
-                    @Override
-                    public void onError(@NonNull Status status) {}
-
-                    @Override
-                    public void onPlaceSelected(@NonNull Place place) {
-                        activityCreateProfileBinding.addressDisplay.setText(place.getAddress());
-                    }
-                });
-    }
     public void setInputText(){
         TextWatcher textWatcher = new TextWatcher() {
             @Override
@@ -72,7 +53,7 @@ public class CreateProfileActivity extends AppCompatActivity {
                     activityCreateProfileBinding.errorName.setVisibility(View.VISIBLE);
                     activityCreateProfileBinding.continueButtonId.setEnabled(false);
                 }
-                if(TextUtils.isEmpty(activityCreateProfileBinding.phoneNumId.getText().toString())){
+                if(TextUtils.isEmpty(activityCreateProfileBinding.phoneNumId.getText().toString()) || !InputValidation.isValidPhoneNum(activityCreateProfileBinding.phoneNumId.getText().toString())){
                     activityCreateProfileBinding.errorNum.setVisibility(View.VISIBLE);
                     activityCreateProfileBinding.continueButtonId.setEnabled(false);
                 }
@@ -89,7 +70,7 @@ public class CreateProfileActivity extends AppCompatActivity {
                     activityCreateProfileBinding.errorName.setVisibility(View.INVISIBLE);
                     activityCreateProfileBinding.continueButtonId.setEnabled(true);
                 }
-                if(!TextUtils.isEmpty(activityCreateProfileBinding.phoneNumId.getText().toString())){
+                if(!TextUtils.isEmpty(activityCreateProfileBinding.phoneNumId.getText().toString()) && InputValidation.isValidPhoneNum(activityCreateProfileBinding.phoneNumId.getText().toString())){
                     activityCreateProfileBinding.errorNum.setVisibility(View.INVISIBLE);
                     activityCreateProfileBinding.continueButtonId.setEnabled(true);
                 }
@@ -113,6 +94,11 @@ public class CreateProfileActivity extends AppCompatActivity {
 
             }
         });
+    }
+    public void initialCheck(){
+        if(TextUtils.isEmpty(activityCreateProfileBinding.nameId.getText().toString()) || TextUtils.isEmpty(activityCreateProfileBinding.phoneNumId.getText().toString())){
+            activityCreateProfileBinding.continueButtonId.setEnabled(false);
+        }
     }
     public void setUpButton(){
         activityCreateProfileBinding.continueButtonId.setOnClickListener(new View.OnClickListener() {

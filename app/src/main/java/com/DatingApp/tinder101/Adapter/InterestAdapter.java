@@ -41,9 +41,8 @@ public class InterestAdapter extends RecyclerView.Adapter<InterestAdapter.Intere
         if(interest == null){
             return;
         }
-        int img = Constant.interestsIcon.get(position);
+
         holder.interest_text.setText(interest);
-        holder.interest_img.setImageResource(img);
     }
 
     @Override
@@ -56,12 +55,10 @@ public class InterestAdapter extends RecyclerView.Adapter<InterestAdapter.Intere
 
     public class InterestViewHolder extends RecyclerView.ViewHolder{
         private TextView interest_text;
-        private ImageView interest_img;
 
         public InterestViewHolder(@NonNull View itemView) {
             super(itemView);
             interest_text = itemView.findViewById(R.id.interest_text);
-            interest_img = itemView.findViewById(R.id.interestIcon);
         }
     }
 }

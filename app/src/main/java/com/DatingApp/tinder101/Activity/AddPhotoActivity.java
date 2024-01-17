@@ -32,6 +32,7 @@ public class AddPhotoActivity extends AppCompatActivity {
         activityAddPhotoBinding = ActivityAddPhotoBinding.inflate(getLayoutInflater());
         setContentView(activityAddPhotoBinding.getRoot());
         setUpImagePicker();
+        checkImage();
 
 
     }
@@ -45,6 +46,7 @@ public class AddPhotoActivity extends AppCompatActivity {
                             Intent data = result.getData();
                             imageUri1 = data.getData();
                             activityAddPhotoBinding.uploadImage1.setImageURI(imageUri1);
+                            checkImage();
                         } else {
                             Toast.makeText(getApplicationContext(), "No Image Selected", Toast.LENGTH_SHORT).show();
                         }
@@ -60,6 +62,7 @@ public class AddPhotoActivity extends AppCompatActivity {
                             Intent data = result.getData();
                             imageUri2 = data.getData();
                             activityAddPhotoBinding.uploadImage2.setImageURI(imageUri2);
+                            checkImage();
                         } else {
                             Toast.makeText(getApplicationContext(), "No Image Selected", Toast.LENGTH_SHORT).show();
                         }
@@ -74,6 +77,7 @@ public class AddPhotoActivity extends AppCompatActivity {
                         if (result.getResultCode() == Activity.RESULT_OK) {
                             Intent data = result.getData();
                             imageUri3 = data.getData();
+                            checkImage();
                             activityAddPhotoBinding.uploadImage3.setImageURI(imageUri3);
                         } else {
                             Toast.makeText(getApplicationContext(), "No Image Selected", Toast.LENGTH_SHORT).show();
@@ -90,6 +94,7 @@ public class AddPhotoActivity extends AppCompatActivity {
                             Intent data = result.getData();
                             imageUri4 = data.getData();
                             activityAddPhotoBinding.uploadImage4.setImageURI(imageUri4);
+                            checkImage();
                         } else {
                             Toast.makeText(getApplicationContext(), "No Image Selected", Toast.LENGTH_SHORT).show();
                         }
@@ -130,6 +135,25 @@ public class AddPhotoActivity extends AppCompatActivity {
                 photoPicker.setAction(Intent.ACTION_GET_CONTENT);
                 photoPicker.setType("image/*");
                 activityResultLauncher4.launch(photoPicker);
+            }
+        });
+    }
+    public void checkImage(){
+        if(imageUri1 == null && imageUri2 == null && imageUri3 == null && imageUri4 == null){
+            activityAddPhotoBinding.photoError.setVisibility(View.VISIBLE);
+            activityAddPhotoBinding.continueButtonId.setEnabled(false);
+        }
+        else {
+            activityAddPhotoBinding.photoError.setVisibility(View.INVISIBLE);
+            activityAddPhotoBinding.continueButtonId.setEnabled(true);
+        }
+    }
+    public void setButton(){
+        activityAddPhotoBinding.continueButtonId.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+//                startActivity(new Intent(getApplicationContext(), AddPhotoActivity.class));
             }
         });
     }

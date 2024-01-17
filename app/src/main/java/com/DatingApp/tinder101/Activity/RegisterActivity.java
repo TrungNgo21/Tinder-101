@@ -102,7 +102,7 @@ public class RegisterActivity extends AppCompatActivity {
                 public void callback(CallbackRes<UserDto> res) {
                   if (res instanceof CallbackRes.Success) {
                     finish();
-                    startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                    startActivity(new Intent(getApplicationContext(), CreateProfileActivity.class));
                   } else {
                     Toast.makeText(getApplicationContext(), res.toString(), Toast.LENGTH_LONG)
                         .show();

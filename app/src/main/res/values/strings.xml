@@ -33,7 +33,7 @@
     <string name="full_name">Full Name</string>
     <string name="num_text">Phone Number</string>
     <string name="name_error">Your name is not valid</string>
-    <string name="num_error">Your phone number is not valid</string>
+    <string name="num_error">Your phone number must contain 10 digits</string>
     <string name="gender_text">Gender</string>
     <string name="continue_button">Continue</string>
     <string name="location_text">Location</string>
@@ -77,6 +77,8 @@
         dui nec risus. Maecenas non sodales nisi, vel dictum dolor. Class aptent taciti sociosqu ad
         litora torquent per conubia nostra, per inceptos himenaeos. Suspendisse blandit eleifend</string>
 
+    <string name="choice_announce">You have choose 4 interests</string>
+    <string name="photo_error">You must choose photos to continue</string>
     <string name="lorem_ipsum">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam in scelerisque sem. Mauris
         volutpat, dolor id interdum ullamcorper, risus dolor egestas lectus, sit amet mattis purus

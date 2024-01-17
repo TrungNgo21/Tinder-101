@@ -26,4 +26,7 @@
 
     <color name="start_black">#4D000000</color>
     <color name="middle_black">#191919</color>
+    <color name="color_gradient_1">#8023EB</color>
+    <color name="color_gradient_2">#FD788C</color>
+    <color name="error_background">#FEEFEF</color>
 </resources>
