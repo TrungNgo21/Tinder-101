@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/border_of_dialog"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:layout_gravity="center"
+    android:layout_marginHorizontal="@dimen/_16sdp"
+    android:padding="@dimen/_36sdp">
+
+    <ImageView
+        android:id="@+id/successImageView"
+        android:layout_width="@dimen/_64sdp"
+        android:layout_height="@dimen/_64sdp"
+        android:layout_gravity="center"
+        android:layout_marginBottom="@dimen/_24sdp"
+        android:src="@drawable/successful_icon" />
+
+    <TextView
+        android:id="@+id/successTitleTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginBottom="@dimen/_8sdp"
+        style="@style/PrimaryPurpleText"
+        android:text="Great!"
+        android:textSize="@dimen/_20sdp"
+        android:textAppearance="?attr/textAppearanceHeadline6" />
+
+    <TextView
+        android:id="@+id/successDescriptionTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:layout_marginBottom="@dimen/_24sdp"
+        style="@style/PrimaryPurpleText"
+        android:text="Your account has been created successfully"
+        android:textSize="@dimen/_20sdp"
+        android:textAppearance="?attr/textAppearanceBody2" />
+
+    <Button
+        android:id="@+id/successHomeButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/PrimaryPurpleButton"
+        android:text="Home"
+        android:textSize="@dimen/_16sdp"
+    />
+</LinearLayout>
