@@ -79,6 +79,8 @@
 
     <string name="choice_announce">You have choose 4 interests</string>
     <string name="photo_error">You must choose photos to continue</string>
+    <string name="success">Success!</string>
+    <string name="toast_content">Your selection have been updated.</string>
     <string name="lorem_ipsum">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam in scelerisque sem. Mauris
         volutpat, dolor id interdum ullamcorper, risus dolor egestas lectus, sit amet mattis purus

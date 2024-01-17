@@ -96,16 +96,15 @@
                     android:src="@drawable/add_photo" />
             </LinearLayout>
             <TextView
-                android:background="@color/white"
+                android:background="@drawable/error_background"
                 android:paddingHorizontal="4dp"
-                android:textAlignment="center"
+                android:drawableStart="@drawable/ic_error"
+                android:drawablePadding="@dimen/_10sdp"
                 android:id="@+id/photoError"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/imageCtn2"
-                android:layout_marginStart="@dimen/_35sdp"
-                android:layout_marginEnd="@dimen/_35sdp"
-                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_marginTop="@dimen/_10sdp"
                 android:text="@string/photo_error"
                 android:textSize="@dimen/_14sdp"
                 android:textColor="@color/error" />
