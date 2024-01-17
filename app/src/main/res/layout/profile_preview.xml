@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:tools="http://schemas.android.com/tools"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <com.google.android.flexbox.FlexboxLayout
+            android:id="@+id/info1"
+            android:orientation="horizontal"
+            android:padding="16dp"
+            android:layout_width="match_parent"
+            app:justifyContent="flex_start"
+            app:alignItems="center"
+
+            android:layout_height="wrap_content"
+            tools:ignore="MissingConstraints">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/member_image"
+                android:layout_width="@dimen/_200sdp"
+                android:layout_height="@dimen/_200sdp"
+                android:scaleType="centerCrop"
+
+                android:background="@drawable/full_border_transparent"
+                android:src="@drawable/girl_4"
+                app:civ_border_width="6dp"
+                app:civ_border_color="@color/primary_purple_700"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:orientation="vertical">
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center"
+                    android:layout_marginLeft="@dimen/_16sdp"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:id="@+id/my_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="left"
+                        android:text="Trung Bu"
+                        android:fontFamily="@font/source_sans_pro_semibold"
+                        android:textSize="@dimen/_18sdp"
+                        android:textAppearance="?attr/textAppearanceSubtitle1"
+                        />
+
+                    <TextView
+                        android:id="@+id/my_age"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="left"
+                        android:layout_marginLeft="@dimen/_8sdp"
+                        android:text="21"
+                        android:fontFamily="@font/source_sans_pro_semibold"
+                        android:textSize="@dimen/_18sdp"
+                        android:textAppearance="?attr/textAppearanceCaption"
+                        />
+                </LinearLayout>
+                <Button
+                    style="@style/PrimaryLightPurpleButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Preview Your Profile"
+                    android:textSize="@dimen/_14sdp"
+                    android:layout_marginLeft="@dimen/_8sdp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="1.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </LinearLayout>
+
+        </com.google.android.flexbox.FlexboxLayout>
+
+
+        <TextView
+            android:id="@+id/heading_photo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/source_sans_pro_bold"
+            android:text="Photos"
+            android:textSize="@dimen/_20sdp"
+            app:layout_constraintTop_toBottomOf="@+id/info1"
+            tools:ignore="MissingConstraints" />
+
+        <com.google.android.flexbox.FlexboxLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/heading_photo"
+            app:justifyContent="space_between"
+            app:alignItems="center"
+            android:paddingLeft="@dimen/_16sdp"
+            android:paddingRight="@dimen/_16sdp"
+            app:flow_horizontalGap="@dimen/_32sdp"
+            app:alignContent="center"
+            tools:ignore="MissingConstraints">
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_330sdp"
+                android:scaleType="centerCrop"
+
+                android:src="@drawable/girl_1"
+                app:layout_flexShrink="50"
+                />
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginLeft="@dimen/_8sdp"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:layout_width="@dimen/_110sdp"
+                    android:layout_height="@dimen/_110sdp"
+                    android:src="@drawable/girl_2"
+                    android:scaleType="centerCrop"
+
+                    />
+                <ImageView
+                    android:layout_width="@dimen/_110sdp"
+                    android:layout_height="@dimen/_110sdp"
+                    android:src="@drawable/girl_3"
+                    android:scaleType="centerCrop"
+                    />
+                <ImageView
+                    android:layout_width="@dimen/_110sdp"
+                    android:layout_height="@dimen/_110sdp"
+                    android:src="@drawable/girl_4"
+                    android:scaleType="centerCrop"
+                    />
+            </LinearLayout>
+        </com.google.android.flexbox.FlexboxLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

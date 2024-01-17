@@ -26,6 +26,7 @@ import com.DatingApp.tinder101.Callback.FirebaseCallback;
 import com.DatingApp.tinder101.Constant.Constant;
 import com.DatingApp.tinder101.Dto.UserDto;
 import com.DatingApp.tinder101.Fragments.ChatFragment;
+import com.DatingApp.tinder101.Fragments.ProfilePreviewFragment;
 import com.DatingApp.tinder101.Fragments.SwipeFragment;
 import com.DatingApp.tinder101.Fragments.ViewProfileFragment;
 import com.DatingApp.tinder101.R;
@@ -187,7 +188,9 @@ public class MainActivity extends AppCompatActivity
                         loadFragment(fragment);
                         return true;
                     } else if (item.getItemId() == R.id.profile) {
-
+                        fragment = new ProfilePreviewFragment();
+                        loadFragment(fragment);
+                        return true;
                     } else if (item.getItemId() == R.id.message) {
                         fragment = new ChatFragment(users);
                         loadFragment(fragment);
@@ -195,7 +198,7 @@ public class MainActivity extends AppCompatActivity
                     } else {
                         return false;
                     }
-                    return false;
+
                 });
     }
 }

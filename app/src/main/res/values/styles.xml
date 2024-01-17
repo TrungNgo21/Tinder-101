@@ -5,6 +5,13 @@
         <item name="android:fontFamily">@font/source_sans_pro_semibold</item>
     </style>
 
+    <style name="PrimaryLightPurpleButton" parent="TextAppearance.AppCompat">
+        <item name="android:textColor">@color/primary_purple_700</item>
+        <item name="android:backgroundTint">@color/light_purple_200</item>
+        <item name="fontFamily">@font/source_sans_pro_semibold</item>
+    </style>
+
+
     <style name="PrimaryLabelText" parent="TextAppearance.AppCompat">
         <item name="android:textColor">@color/slate_blue_500</item>
         <item name="fontFamily">@font/source_sans_pro_semibold</item>
@@ -28,7 +35,12 @@
 
     <style name="RoundedImageViewRounded">
         <item name="cornerFamily">rounded</item>
-        <item name="cornerSize">100%</item>
+        <item name="cornerSize">@dimen/_25sdp</item>
+    </style>
+
+    <style name="RoundedImageViewSomeRounded">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">@dimen/_12sdp</item>
     </style>
 
     <style name="NoActionBar" parent="@android:style/Theme.Holo.Light">
