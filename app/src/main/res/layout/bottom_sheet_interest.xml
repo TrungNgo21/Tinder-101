@@ -16,11 +16,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/black"
+            android:id="@+id/cancel_button"
             android:textSize="@dimen/_14sdp"
             android:layout_columnWeight="1"
-            android:text="Done"
-            android:textStyle="bold"
-            />
+            android:text="Cancel"
+            android:textStyle="bold" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -28,9 +29,9 @@
             android:textSize="@dimen/_14sdp"
             android:layout_columnWeight="1"
             android:textAlignment="viewEnd"
+            android:id="@+id/done_button"
             android:text="Done"
-            android:textStyle="bold"
-            />
+            android:textStyle="bold" />
     </GridLayout>
     <TextView
         android:id="@+id/bottom_sheet_title"
@@ -38,7 +39,7 @@
         android:layout_height="wrap_content"
         android:textStyle="bold"
         android:textSize="30dp"
-        android:text="More about me"
+        android:text="My interests"
         />
     <GridLayout
         android:layout_width="match_parent"

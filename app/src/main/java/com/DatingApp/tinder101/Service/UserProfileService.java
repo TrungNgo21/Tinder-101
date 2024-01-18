@@ -39,6 +39,7 @@ public class UserProfileService {
     private List<String> interests;
     private HashMap<String,String> lifeStyleList;
     private HashMap<String, String> basics;
+    private HashMap<String, String> imgURLList;
     private String lookingForEnum;
 
     public UserProfileService(UserService userService) {
@@ -46,6 +47,10 @@ public class UserProfileService {
         this.firebaseAuth = FirebaseAuth.getInstance();
         this.userService = userService;
         this.currentUser = this.userService.getCurrentUser();
+        this.interests = new ArrayList<String>();
+        this.basics = new HashMap<>();
+        this.lifeStyleList = new HashMap<>();
+        this.imgURLList = new HashMap<>();
         if (this.currentUser != null) {
             this.interests = this.currentUser.getProfileSetting().getInterests();
             for (Map.Entry<BasicEnum, String> ele : this.currentUser.getProfileSetting().getBasics().entrySet()) {
@@ -59,10 +64,8 @@ public class UserProfileService {
                 String value = ele.getValue();
                 this.lifeStyleList.put(key, value);
             }
-        } else {
-            this.interests = new ArrayList<String>();
-            this.basics = new HashMap<>();
-            this.lifeStyleList = new HashMap<>();
+
+            this.imgURLList.putAll(this.currentUser.getImageUrlsMap());
         }
     }
 
@@ -101,6 +104,7 @@ public class UserProfileService {
         return this.lifeStyleList;
     }
 
+
     public void setBasics(HashMap<String, String> basics) {
         this.basics = basics;
     }
@@ -115,6 +119,22 @@ public class UserProfileService {
 
     public Map<String, String> getBasics() {
         return this.basics;
+    }
+
+    public void appendImgList(String key, String value) {
+        this.imgURLList.put(key, value);
+    }
+
+    public Map<String, String> getImgURL() {
+        return this.imgURLList;
+    }
+
+    public UserDto getCurrentUser() {
+        return currentUser;
+    }
+
+    public void setCurrentUser(UserDto currentUser) {
+        this.currentUser = currentUser;
     }
 
     public void setLookingForEnum(String lookingForEnum) {

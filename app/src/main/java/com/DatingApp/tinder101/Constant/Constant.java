@@ -51,19 +51,19 @@ public class Constant {
 
 //  public static final String PET = "Pets";
 public static final List<String> pets = asList(new String[]{
-        "Dog", "Cat", "Fish", "Bird", "Don't have, but love", "Pet-free", "All the pets", "Want a pet"
+        "Dog", "Cat", "Fish", "Bird", "Don't have, but love", "No pet", "All the pets", "Want a pet"
 });
 //  public static final String DRINKING = "Drinking";
 public static final List<String> drinks = asList(new String[]{
-        "Not for me", "Newly teetotal", "Sober curious", "On special occasions", "Socially, at the weekend", "Most nights"
+        "Occasion", "Not for me", "Newly teetotal", "Sober curious", "On special occasions", "Socially, at the weekend", "Most nights"
 });
 //  public static final String SMOKE = "How often do you smoke?";
 public static final List<String> smokes = asList(new String[]{
-        "Social smoker", "Smoker when drinking", "Non-smoker", "Smoker", "Trying to quit"
+        "Smoker when drinking", "Non-smoker", "Smoker", "Trying to quit", "Social smoker"
 });
 //  public static final String WORKOUT = "Workout";
 public static final List<String> workouts = asList(new String[]{
-        "Every day", "Often","Sometimes","Never"
+        "Often", "Sometimes", "Never", "Everyday"
 });
   public static List<Integer> interestsIcon = asList(new Integer[]{R.drawable.ic_game, R.drawable.ic_dancing, R.drawable.ic_music, R.drawable.ic_movie, R.drawable.ic_photo, R.drawable.ic_architecture, R.drawable.ic_fashion, R.drawable.ic_book, R.drawable.ic_writing,
           R.drawable.ic_painting, R.drawable.ic_football, R.drawable.ic_people, R.drawable.ic_animal, R.drawable.ic_gym, R.drawable.ic_food, R.drawable.ic_travel});
