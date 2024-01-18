@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager2.widget.ViewPager2;
@@ -45,16 +46,17 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Stack;
 
-public class SwipeFragment extends Fragment implements UserCardsHolderAdapter.OnTapDetail {
+public class SwipeFragment extends Fragment
+    implements UserCardsHolderAdapter.OnTapDetail, ViewProfileFragment.OnSwipeButton {
 
   private FragmentSwipeBinding fragmentSwipeBinding;
   private List<UserDto> users;
 
+  private CardStackView swipeFlingAdapterView;
+
   private UserCardsHolderAdapter userCardsHolderAdapter;
 
   private CardStackLayoutManager cardStackLayoutManager;
-
-  private OnMainEventHandle onMainEventHandle;
 
   private UserService userService;
 
@@ -67,10 +69,9 @@ public class SwipeFragment extends Fragment implements UserCardsHolderAdapter.On
 
   public SwipeFragment() {}
 
-  public SwipeFragment(List<UserDto> users, OnMainEventHandle onMainTapDetail) {
+  public SwipeFragment(List<UserDto> users) {
     // Required empty public constructor
     this.users = users;
-    this.onMainEventHandle = onMainTapDetail;
   }
 
   @Override
@@ -80,7 +81,7 @@ public class SwipeFragment extends Fragment implements UserCardsHolderAdapter.On
     fragmentSwipeBinding = FragmentSwipeBinding.inflate(getLayoutInflater());
     userCardsHolderAdapter = new UserCardsHolderAdapter(requireContext(), this);
     userCardsHolderAdapter.setData(users);
-    CardStackView swipeFlingAdapterView = fragmentSwipeBinding.swipeScreen;
+    swipeFlingAdapterView = fragmentSwipeBinding.swipeScreen;
     cardStackLayoutManager =
         new CardStackLayoutManager(
             requireContext(),
@@ -91,22 +92,44 @@ public class SwipeFragment extends Fragment implements UserCardsHolderAdapter.On
                 if (direction == Direction.Right) {
                   isLike = true;
                   isDislike = false;
+                  fragmentSwipeBinding.likeIcon.setImageResource(R.drawable.like_icon_on);
+                  fragmentSwipeBinding.likeBtn.setBackgroundResource(R.drawable.bg_like);
+                  fragmentSwipeBinding.dislikeIcon.setImageResource(R.drawable.dislike_icon_new);
+                  fragmentSwipeBinding.dislikeBtn.setBackgroundResource(R.drawable.bg_dislike_norm);
+
                 } else if (direction == Direction.Left) {
                   isLike = false;
                   isDislike = true;
+                  fragmentSwipeBinding.dislikeIcon.setImageResource(R.drawable.dislike_icon_on);
+                  fragmentSwipeBinding.dislikeBtn.setBackgroundResource(R.drawable.bg_dislike);
+                  fragmentSwipeBinding.likeIcon.setImageResource(R.drawable.like_icon_new);
+                  fragmentSwipeBinding.likeBtn.setBackgroundResource(R.drawable.bg_dislike_norm);
                 }
 
                 likeView.setVisibility(isLike ? View.VISIBLE : View.INVISIBLE);
-
                 dislikeView.setVisibility(isDislike ? View.VISIBLE : View.INVISIBLE);
               }
 
               @Override
               public void onCardSwiped(Direction direction) {
-                int position = cardStackLayoutManager.getTopPosition();
+                int currentPos = cardStackLayoutManager.getTopPosition();
                 if (direction == Direction.Right) {
-                  userService.rightSwipe(users.get(position - 1).getId());
+                  userService.rightSwipe(users.get(currentPos - 1).getId());
+                  users.remove(0);
+                  if (users.isEmpty()) {
+                    fragmentSwipeBinding.likeDislikeBtn.setVisibility(View.GONE);
+                  } else {
+                    fragmentSwipeBinding.likeDislikeBtn.setVisibility(View.VISIBLE);
+                  }
+                  userCardsHolderAdapter.notifyItemRemoved(0);
                 } else {
+                  users.remove(0);
+                  if (users.isEmpty()) {
+                    fragmentSwipeBinding.likeDislikeBtn.setVisibility(View.GONE);
+                  } else {
+                    fragmentSwipeBinding.likeDislikeBtn.setVisibility(View.VISIBLE);
+                  }
+                  userCardsHolderAdapter.notifyItemRemoved(0);
                   Log.d("delete ne", "hehee");
                 }
               }
@@ -120,6 +143,10 @@ public class SwipeFragment extends Fragment implements UserCardsHolderAdapter.On
               public void onCardCanceled() {
                 likeView.setVisibility(View.INVISIBLE);
                 dislikeView.setVisibility(View.INVISIBLE);
+                fragmentSwipeBinding.likeIcon.setImageResource(R.drawable.like_icon_new);
+                fragmentSwipeBinding.likeBtn.setBackgroundResource(R.drawable.bg_dislike_norm);
+                fragmentSwipeBinding.dislikeIcon.setImageResource(R.drawable.dislike_icon_new);
+                fragmentSwipeBinding.dislikeBtn.setBackgroundResource(R.drawable.bg_dislike_norm);
               }
 
               @Override
@@ -139,30 +166,67 @@ public class SwipeFragment extends Fragment implements UserCardsHolderAdapter.On
     cardStackLayoutManager.setMaxDegree(40.0f);
     cardStackLayoutManager.setStackFrom(StackFrom.Bottom);
     cardStackLayoutManager.setTranslationInterval(4.0f);
-
     swipeFlingAdapterView.setAdapter(userCardsHolderAdapter);
     swipeFlingAdapterView.setLayoutManager(cardStackLayoutManager);
   }
 
-  public interface OnMainEventHandle {
-    void showDetail(UserDto userDto);
+  private void setDesireButton() {
+    if (users.isEmpty()) {
+      fragmentSwipeBinding.likeDislikeBtn.setVisibility(View.GONE);
+    } else {
+      fragmentSwipeBinding.likeDislikeBtn.setVisibility(View.VISIBLE);
+    }
+    fragmentSwipeBinding.likeBtn.setOnClickListener(
+        view -> {
+          users.remove(0);
+          swipeFlingAdapterView.swipe();
+          Toast.makeText(requireContext(), "You swipe right!!!", Toast.LENGTH_SHORT).show();
+          userService.rightSwipe(users.get(cardStackLayoutManager.getTopPosition()).getId());
+        });
+    fragmentSwipeBinding.dislikeBtn.setOnClickListener(
+        view -> {
+          swipeFlingAdapterView.swipe();
+          users.remove(0);
+          userCardsHolderAdapter.notifyItemRemoved(0);
+          Toast.makeText(requireContext(), "You swipe left!!!", Toast.LENGTH_SHORT).show();
+        });
+  }
 
-    void popCard();
+  private void loadFragment(Fragment fragment) {
+    FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
+    transaction.replace(R.id.mainView, fragment);
+    transaction.addToBackStack(null);
+    transaction.commit();
+  }
 
-    void rightSwipe();
+  @Override
+  public void swipeLeft() {
+    swipeFlingAdapterView.swipe();
+    users.remove(0);
+    userCardsHolderAdapter.notifyItemRemoved(0);
+    Toast.makeText(requireContext(), "You swipe left!!!", Toast.LENGTH_SHORT).show();
+  }
 
-    void checkMatch();
+  @Override
+  public void swipeRight(String userId) {
+    users.remove(0);
+    swipeFlingAdapterView.swipe();
+    Toast.makeText(requireContext(), "You swipe right!!!", Toast.LENGTH_SHORT).show();
+    userService.rightSwipe(userId);
   }
 
   @Override
   public View onCreateView(
       LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    setDesireButton();
+
     // Inflate the layout for this fragment
     return fragmentSwipeBinding.getRoot();
   }
 
   @Override
   public void showDetail(UserDto userDto) {
-    onMainEventHandle.showDetail(userDto);
+    ViewProfileFragment viewProfileFragment = new ViewProfileFragment(userDto, users, true, this);
+    loadFragment(viewProfileFragment);
   }
 }

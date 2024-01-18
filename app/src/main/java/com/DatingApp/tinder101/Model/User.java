@@ -25,6 +25,7 @@ public class User {
   private int age;
   private HashMap<String, String> imageUrlsMap;
   private Date createdDate;
+  private String gender;
   private Date updatedDate;
   @Builder.Default private List<String> matchedUsers = new ArrayList<>();
   @Builder.Default private ProfileSetting profileSetting = ProfileSetting.builder().build();
@@ -33,6 +34,7 @@ public class User {
     return UserDto.builder()
         .name(name)
         .email(email)
+        .gender(gender)
         .age(age)
         .imageUrlsMap(imageUrlsMap)
         .profileSetting(profileSetting.toDto())

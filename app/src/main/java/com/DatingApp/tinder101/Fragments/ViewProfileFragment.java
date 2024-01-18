@@ -2,6 +2,7 @@ package com.DatingApp.tinder101.Fragments;
 
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.util.Log;
@@ -37,22 +38,34 @@ public class ViewProfileFragment extends Fragment {
 
   private UserDto userDto;
 
+  private List<UserDto> users;
+
   private ProfileImagesAdapter profileImagesAdapter;
 
-  private OnBackSwipePress onBackSwipePress;
+  private OnSwipeButton onSwipeButton;
 
-  public ViewProfileFragment(UserDto userDto, OnBackSwipePress onBackSwipePress) {
+  private boolean isSwiping;
+
+  public ViewProfileFragment(
+      UserDto userDto, List<UserDto> users, boolean isSwiping, OnSwipeButton onSwipeButton) {
     this.userDto = userDto;
-    this.onBackSwipePress = onBackSwipePress;
+    this.users = users;
+    this.isSwiping = isSwiping;
+    this.onSwipeButton = onSwipeButton;
   }
 
-  public ViewProfileFragment() {
-    // doesn't do anything special
-  }
-
-  public ViewProfileFragment(UserDto userDto) {
+  public ViewProfileFragment(UserDto userDto, boolean isSwiping) {
     this.userDto = userDto;
+    this.isSwiping = isSwiping;
   }
+
+  public ViewProfileFragment(UserDto userDto, List<UserDto> users, boolean isSwiping) {
+    this.userDto = userDto;
+    this.isSwiping = isSwiping;
+    this.users = users;
+  }
+
+  public ViewProfileFragment() {}
 
   @Override
   public void onCreate(Bundle savedInstanceState) {
@@ -70,6 +83,7 @@ public class ViewProfileFragment extends Fragment {
     setUpProfileImages();
     setUpProfileInfo();
     setUpButton();
+    setUpSwipeUI(isSwiping);
     return fragmentViewProfileBinding.getRoot();
   }
 
@@ -115,8 +129,24 @@ public class ViewProfileFragment extends Fragment {
     return contents;
   }
 
-  public void hideBackToSwipe() {
-    fragmentViewProfileBinding.viewProfileBtn.setVisibility(View.GONE);
+  private void setUpSwipeUI(boolean isSwiping) {
+    if (isSwiping) {
+      fragmentViewProfileBinding.likeDislikeBtn.setVisibility(View.VISIBLE);
+      fragmentViewProfileBinding.viewProfileBtn.setVisibility(View.VISIBLE);
+    } else {
+      fragmentViewProfileBinding.likeDislikeBtn.setVisibility(View.GONE);
+      fragmentViewProfileBinding.viewProfileBtn.setVisibility(View.GONE);
+    }
+    fragmentViewProfileBinding.likeBtn.setOnClickListener(
+        view -> {
+          onSwipeButton.swipeRight(userDto.getId());
+          backToSwipe();
+        });
+    fragmentViewProfileBinding.dislikeBtn.setOnClickListener(
+        view -> {
+          onSwipeButton.swipeLeft();
+          backToSwipe();
+        });
   }
 
   private FlexboxLayoutManager constructLayoutManager() {
@@ -153,11 +183,11 @@ public class ViewProfileFragment extends Fragment {
   }
 
   private void setUpProfileHeader() {
-    fragmentViewProfileBinding.profileAge.setText("19");
+    fragmentViewProfileBinding.profileAge.setText(String.valueOf(userDto.getAge()));
     fragmentViewProfileBinding.profileName.setText(userDto.getName());
     fragmentViewProfileBinding.viewProfileBtn.setOnClickListener(
         view -> {
-          onBackSwipePress.backToSwipe();
+          backToSwipe();
         });
   }
 
@@ -190,13 +220,6 @@ public class ViewProfileFragment extends Fragment {
   }
 
   private void setUpEssential() {
-    //    if (userDto.getProfileSetting().getQuotes() != null) {
-    //      fragmentViewProfileBinding.aboutMeDisplay.setVisibility(View.VISIBLE);
-    //
-    // fragmentViewProfileBinding.aboutMeContent.setText(userDto.getProfileSetting().getQuotes());
-    //    } else {
-    //      fragmentViewProfileBinding.aboutMeDisplay.setVisibility(View.GONE);
-    //    }
     fragmentViewProfileBinding.essentialDisplay.setVisibility(View.VISIBLE);
   }
 
@@ -244,7 +267,25 @@ public class ViewProfileFragment extends Fragment {
     fragmentViewProfileBinding.nameBlock.setText(userDto.getName());
   }
 
+  private void loadFragment(Fragment fragment) {
+    FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
+    transaction.replace(R.id.mainView, fragment);
+    transaction.addToBackStack(null);
+    transaction.commit();
+  }
+
+  private void backToSwipe() {
+    SwipeFragment swipeFragment = new SwipeFragment(users);
+    loadFragment(swipeFragment);
+  }
+
   public interface OnBackSwipePress {
     void backToSwipe();
+  }
+
+  public interface OnSwipeButton {
+    void swipeLeft();
+
+    void swipeRight(String userId);
   }
 }

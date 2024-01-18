@@ -3,6 +3,7 @@ package com.DatingApp.tinder101.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
@@ -44,8 +45,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.List;
 import java.util.Stack;
 
-public class MainActivity extends AppCompatActivity
-    implements SwipeFragment.OnMainEventHandle, ViewProfileFragment.OnBackSwipePress {
+public class MainActivity extends AppCompatActivity {
 
   private ActivityMainBinding activityMainBinding;
   private UserDto currentUser;
@@ -74,7 +74,7 @@ public class MainActivity extends AppCompatActivity
           public void callback(CallbackRes<List<UserDto>> template) {
             if (template instanceof CallbackRes.Success) {
               users = ((CallbackRes.Success<List<UserDto>>) template).getData();
-              Fragment fragment = new SwipeFragment(users, MainActivity.this);
+              Fragment fragment = new SwipeFragment(users);
               loadFragment(fragment);
             } else {
               Toast.makeText(getApplicationContext(), template.toString(), Toast.LENGTH_LONG)
@@ -156,49 +156,25 @@ public class MainActivity extends AppCompatActivity
     transaction.commit();
   }
 
-  @Override
-  public void showDetail(UserDto userDto) {
-    Fragment fragment = new ViewProfileFragment(userDto, this);
-    loadFragment(fragment);
+  private void setUpNavigation() {
+    activityMainBinding.menu.setOnItemSelectedListener(
+        item -> {
+          Fragment fragment;
+          if (item.getItemId() == R.id.home) {
+            fragment = new SwipeFragment(users);
+            loadFragment(fragment);
+            return true;
+          } else if (item.getItemId() == R.id.profile) {
+            fragment = new ProfilePreviewFragment();
+            loadFragment(fragment);
+            return true;
+          } else if (item.getItemId() == R.id.message) {
+            fragment = new ChatFragment(matchedUsers);
+            loadFragment(fragment);
+            return true;
+          } else {
+            return false;
+          }
+        });
   }
-
-  @Override
-  public void popCard() {
-    users.remove(0);
-  }
-
-  @Override
-  public void rightSwipe() {}
-
-  @Override
-  public void checkMatch() {}
-
-  @Override
-  public void backToSwipe() {
-    Fragment fragment = new SwipeFragment(users, this);
-    loadFragment(fragment);
-  }
-
-    private void setUpNavigation() {
-        activityMainBinding.menu.setOnItemSelectedListener(
-                item -> {
-                    Fragment fragment;
-                    if (item.getItemId() == R.id.home) {
-                        fragment = new SwipeFragment(users, this);
-                        loadFragment(fragment);
-                        return true;
-                    } else if (item.getItemId() == R.id.profile) {
-                        fragment = new ProfilePreviewFragment();
-                        loadFragment(fragment);
-                        return true;
-                    } else if (item.getItemId() == R.id.message) {
-                        fragment = new ChatFragment(users);
-                        loadFragment(fragment);
-                        return true;
-                    } else {
-                        return false;
-                    }
-
-                });
-    }
 }

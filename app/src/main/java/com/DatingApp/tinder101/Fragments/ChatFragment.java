@@ -50,7 +50,6 @@ public class ChatFragment extends Fragment implements OnChatItemTap {
   public View onCreateView(
       LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
     setUpNewMatches();
-
     // Inflate the layout for this fragment
     return fragmentChatBinding.getRoot();
   }

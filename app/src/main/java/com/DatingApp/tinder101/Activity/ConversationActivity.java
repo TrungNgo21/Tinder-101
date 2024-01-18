@@ -96,8 +96,8 @@ public class ConversationActivity extends AppCompatActivity {
   private void setUpButton() {
     activityConversationBinding.viewMoreIcon.setOnClickListener(
         view -> {
-          ViewProfileFragment viewProfileFragment = new ViewProfileFragment(receivedUser);
-          viewProfileFragment.hideBackToSwipe();
+          ViewProfileFragment viewProfileFragment = new ViewProfileFragment(receivedUser, false);
+          //          viewProfileFragment.hideBackToSwipe();
           activityConversationBinding.profileDisplay.setVisibility(View.VISIBLE);
           activityConversationBinding.mainDisplay.setVisibility(View.GONE);
           loadFragment(viewProfileFragment);
