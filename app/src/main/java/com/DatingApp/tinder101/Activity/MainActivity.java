@@ -45,8 +45,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.List;
 import java.util.Stack;
 
-public class MainActivity extends AppCompatActivity
-    implements SwipeFragment.OnMainEventHandle, ViewProfileFragment.OnBackSwipePress {
+public class MainActivity extends AppCompatActivity {
 
   private ActivityMainBinding activityMainBinding;
   private UserDto currentUser;
@@ -75,7 +74,7 @@ public class MainActivity extends AppCompatActivity
           public void callback(CallbackRes<List<UserDto>> template) {
             if (template instanceof CallbackRes.Success) {
               users = ((CallbackRes.Success<List<UserDto>>) template).getData();
-              Fragment fragment = new SwipeFragment(users, MainActivity.this);
+              Fragment fragment = new SwipeFragment(users);
               loadFragment(fragment);
             } else {
               Toast.makeText(getApplicationContext(), template.toString(), Toast.LENGTH_LONG)
@@ -157,30 +156,12 @@ public class MainActivity extends AppCompatActivity
     transaction.commit();
   }
 
-  @Override
-  public void showDetail(UserDto userDto) {
-    Fragment fragment = new ViewProfileFragment(userDto, true, this);
-    loadFragment(fragment);
-  }
-
-  @Override
-  public void dragRight(boolean isOn) {}
-
-  @Override
-  public void dragLeft(boolean isOn) {}
-
-  @Override
-  public void backToSwipe() {
-    Fragment fragment = new SwipeFragment(users, this);
-    loadFragment(fragment);
-  }
-
   private void setUpNavigation() {
     activityMainBinding.menu.setOnItemSelectedListener(
         item -> {
           Fragment fragment;
           if (item.getItemId() == R.id.home) {
-            fragment = new SwipeFragment(users, this);
+            fragment = new SwipeFragment(users);
             loadFragment(fragment);
             return true;
           } else if (item.getItemId() == R.id.profile) {

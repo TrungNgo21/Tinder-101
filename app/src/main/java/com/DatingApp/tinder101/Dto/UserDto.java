@@ -18,6 +18,7 @@ public class UserDto {
   private String id;
   private String name;
   private String email;
+  private String gender;
   private int age;
   private Date createdDate;
   private Date updatedDate;

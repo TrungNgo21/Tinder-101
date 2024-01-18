@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager2.widget.ViewPager2;
@@ -45,7 +46,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Stack;
 
-public class SwipeFragment extends Fragment implements UserCardsHolderAdapter.OnTapDetail {
+public class SwipeFragment extends Fragment
+    implements UserCardsHolderAdapter.OnTapDetail, ViewProfileFragment.OnSwipeButton {
 
   private FragmentSwipeBinding fragmentSwipeBinding;
   private List<UserDto> users;
@@ -55,8 +57,6 @@ public class SwipeFragment extends Fragment implements UserCardsHolderAdapter.On
   private UserCardsHolderAdapter userCardsHolderAdapter;
 
   private CardStackLayoutManager cardStackLayoutManager;
-
-  private OnMainEventHandle onMainEventHandle;
 
   private UserService userService;
 
@@ -69,10 +69,9 @@ public class SwipeFragment extends Fragment implements UserCardsHolderAdapter.On
 
   public SwipeFragment() {}
 
-  public SwipeFragment(List<UserDto> users, OnMainEventHandle onMainTapDetail) {
+  public SwipeFragment(List<UserDto> users) {
     // Required empty public constructor
     this.users = users;
-    this.onMainEventHandle = onMainTapDetail;
   }
 
   @Override
@@ -193,12 +192,27 @@ public class SwipeFragment extends Fragment implements UserCardsHolderAdapter.On
         });
   }
 
-  public interface OnMainEventHandle {
-    void showDetail(UserDto userDto);
+  private void loadFragment(Fragment fragment) {
+    FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
+    transaction.replace(R.id.mainView, fragment);
+    transaction.addToBackStack(null);
+    transaction.commit();
+  }
 
-    void dragRight(boolean isOn);
+  @Override
+  public void swipeLeft() {
+    swipeFlingAdapterView.swipe();
+    users.remove(0);
+    userCardsHolderAdapter.notifyItemRemoved(0);
+    Toast.makeText(requireContext(), "You swipe left!!!", Toast.LENGTH_SHORT).show();
+  }
 
-    void dragLeft(boolean isOn);
+  @Override
+  public void swipeRight(String userId) {
+    users.remove(0);
+    swipeFlingAdapterView.swipe();
+    Toast.makeText(requireContext(), "You swipe right!!!", Toast.LENGTH_SHORT).show();
+    userService.rightSwipe(userId);
   }
 
   @Override
@@ -212,6 +226,7 @@ public class SwipeFragment extends Fragment implements UserCardsHolderAdapter.On
 
   @Override
   public void showDetail(UserDto userDto) {
-    onMainEventHandle.showDetail(userDto);
+    ViewProfileFragment viewProfileFragment = new ViewProfileFragment(userDto, users, true, this);
+    loadFragment(viewProfileFragment);
   }
 }
