@@ -61,6 +61,7 @@
                     android:layout_height="wrap_content"
                     app:hintTextColor="@color/purple_200"
                     app:boxStrokeWidth="0dp"
+                    app:hintEnabled="false"
                     app:boxStrokeWidthFocused="0dp">
 
                     <com.google.android.material.textfield.TextInputEditText
@@ -89,9 +90,8 @@
                     android:text="@string/name_error"
                     android:textColor="@color/error" />
             </LinearLayout>
-
             <LinearLayout
-                android:id="@+id/numContainer"
+                android:id="@+id/ageContainer"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
@@ -105,7 +105,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/num_text"
+                    android:text="@string/age"
                     android:textColor="@color/black"
                     android:textSize="@dimen/_14sdp"
                     android:textStyle="bold" />
@@ -115,39 +115,42 @@
                     android:layout_height="wrap_content"
                     app:hintTextColor="@color/purple_200"
                     app:boxStrokeWidth="0dp"
+                    app:hintEnabled="false"
                     app:boxStrokeWidthFocused="0dp">
 
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/phoneNumId"
+                        android:id="@+id/ageId"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@drawable/input_field"
                         android:padding="@dimen/_10sdp"
-                        android:hint="@string/num_prompt"
-                        android:inputType="text"
+                        android:hint="@string/age_prompt"
+                        android:inputType="number"
+                        android:drawableEnd="@drawable/ic_person"
                         android:paddingHorizontal="@dimen/_12sdp"
-                        android:drawableEnd="@drawable/ic_phone"
                         android:textColor="@color/purple_200"
                         android:textSize="@dimen/_12sdp" />
                 </com.google.android.material.textfield.TextInputLayout>
                 <TextView
-                    android:background="@color/error_background"
-                    android:padding="@dimen/_5sdp"
+                    android:background="@drawable/error_background"
+                    android:padding="@dimen/_3sdp"
                     android:drawableStart="@drawable/ic_error"
-                    android:id="@+id/errorNum"
+                    android:drawablePadding="@dimen/_10sdp"
+                    android:paddingHorizontal="4dp"
+                    android:id="@+id/errorAge"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textAlignment="center"
                     android:layout_marginTop="@dimen/_5sdp"
-                    android:text="@string/num_error"
+                    android:text="@string/age_error"
                     android:textColor="@color/error" />
             </LinearLayout>
+
             <LinearLayout
                 android:id="@+id/genderCtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
-                android:layout_below="@+id/numContainer"
+                android:layout_below="@+id/ageContainer"
                 android:layout_alignParentEnd="true"
                 android:layout_marginTop="@dimen/_10sdp"
                 android:layout_marginStart="@dimen/_38sdp"

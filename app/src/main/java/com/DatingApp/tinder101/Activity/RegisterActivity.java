@@ -24,11 +24,16 @@ import com.DatingApp.tinder101.databinding.ActivityRegisterBinding;
 import com.DatingApp.tinder101.databinding.ActivitySignInBinding;
 
 import com.google.firebase.FirebaseApp;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 public class RegisterActivity extends AppCompatActivity {
 
   private UserService userService;
   private ActivityRegisterBinding activityRegisterBinding;
+  FirebaseAuth mAuth;
+  final private FirebaseFirestore db = FirebaseFirestore.getInstance();
+
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +44,7 @@ public class RegisterActivity extends AppCompatActivity {
     setErrorMessage(activityRegisterBinding.authenticatedFailedId,false);
     setInputListener();
     userService = new UserService(getApplicationContext());
-//    setUpButton();
+    setUpButton();
   }
   private void setLoading(boolean isLoading) {
     if (isLoading) {
@@ -116,6 +121,7 @@ public class RegisterActivity extends AppCompatActivity {
       public void onClick(View v) {
         finish();
         startActivity(new Intent(getApplicationContext(), SignInActivity.class));
+
       }
     });
   }

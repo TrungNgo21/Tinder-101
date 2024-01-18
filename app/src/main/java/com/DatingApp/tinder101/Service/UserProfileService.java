@@ -46,7 +46,11 @@ public class UserProfileService {
         this.firebaseAuth = FirebaseAuth.getInstance();
         this.userService = userService;
         this.currentUser = this.userService.getCurrentUser();
+        this.interests = new ArrayList<String>();
+        this.basics = new HashMap<>();
+        this.lifeStyleList = new HashMap<>();
         if (this.currentUser != null) {
+
             this.interests = this.currentUser.getProfileSetting().getInterests();
             for (Map.Entry<BasicEnum, String> ele : this.currentUser.getProfileSetting().getBasics().entrySet()) {
                 String key = EnumConverter.toString(ele.getKey());
@@ -59,10 +63,6 @@ public class UserProfileService {
                 String value = ele.getValue();
                 this.lifeStyleList.put(key, value);
             }
-        } else {
-            this.interests = new ArrayList<String>();
-            this.basics = new HashMap<>();
-            this.lifeStyleList = new HashMap<>();
         }
     }
 
