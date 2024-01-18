@@ -18,6 +18,8 @@ public class UserDto {
   private String id;
   private String name;
   private String email;
+
+  private int numOfLiked;
   private String gender;
   private int age;
   private Date createdDate;
