@@ -1,5 +1,6 @@
 package com.DatingApp.tinder101.Activity;
 
+import android.annotation.SuppressLint;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.util.Log;
@@ -23,6 +24,7 @@ import com.DatingApp.tinder101.Constant.Constant;
 import com.DatingApp.tinder101.R;
 import com.DatingApp.tinder101.Service.UserProfileService;
 import com.DatingApp.tinder101.Service.UserService;
+import com.DatingApp.tinder101.Utils.CustomToast;
 import com.DatingApp.tinder101.Utils.SpacingItemDecoration;
 import com.DatingApp.tinder101.databinding.ActivityAddInterestBinding;
 import com.google.android.material.chip.Chip;
@@ -45,6 +47,7 @@ public class AddInterestActivity extends AppCompatActivity {
         userService = new UserService(this);
         userProfileService = new UserProfileService(userService);
         setUpChipGroup();
+        setButton();
 
     }
     public void setUpChipGroup(){
@@ -82,5 +85,7 @@ public class AddInterestActivity extends AppCompatActivity {
                 }
             });
         }
+    }
+    public void setButton(){
     }
 }
