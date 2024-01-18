@@ -43,7 +43,9 @@
 
         <activity
             android:name=".Activity.AddInterestActivity"
-            android:exported="false" />
+            android:exported="false" >
+
+        </activity>
 
 
 
