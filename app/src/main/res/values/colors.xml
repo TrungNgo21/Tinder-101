@@ -7,6 +7,7 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="error">#ED0707</color>
 
     <color name="gray">#E5E1DA</color>
 
@@ -39,4 +40,11 @@
     <color name="slate_blue_500">#2C3A4B</color>
     <color name="selected_icon_color">@color/primary_purple_700</color>
     <color name="unselected_icon_color">@color/bluish_gray_200</color>
+    <color name="color_gradient_1">#8023EB</color>
+    <color name="color_gradient_2">#FD788C</color>
+    <color name="error_background">#FEEFEF</color>
+
+    <color name="colorGradientStart">#D9FF43</color>
+    <color name="colorGradientCenter">#F67831</color>
+    <color name="colorGradientEnd">#FF1493</color>
 </resources>

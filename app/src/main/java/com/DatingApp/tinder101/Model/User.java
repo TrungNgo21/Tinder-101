@@ -22,6 +22,7 @@ import lombok.NoArgsConstructor;
 public class User {
   private String name;
   private String email;
+  private int age;
   private HashMap<String, String> imageUrlsMap;
   private Date createdDate;
   private Date updatedDate;
@@ -30,14 +31,15 @@ public class User {
 
   public UserDto toDto() {
     return UserDto.builder()
-            .name(name)
-            .email(email)
-            .imageUrlsMap(imageUrlsMap)
-            .profileSetting(profileSetting.toDto())
-            .matchedUsers(matchedUsers)
-            .createdDate(createdDate)
-            .updatedDate(updatedDate)
-            .build();
+        .name(name)
+        .email(email)
+        .age(age)
+        .imageUrlsMap(imageUrlsMap)
+        .profileSetting(profileSetting.toDto())
+        .matchedUsers(matchedUsers)
+        .createdDate(createdDate)
+        .updatedDate(updatedDate)
+        .build();
   }
 
   public HashMap<String, Object> toMap() {

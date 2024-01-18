@@ -44,11 +44,13 @@ public class ProfileSetting {
 
   public ProfileSettingDto toDto() {
     return ProfileSettingDto.builder()
-            .quotes(quotes)
-            .interests(interests)
-            .lifestyleList(toEnumLifestyle())
-            .basics(toEnumBasics())
-            .lookingForEnum(LookingForEnum.valueOf(lookingForEnum))
-            .build();
+        .quotes(quotes)
+        .interests(interests)
+        .lifestyleList(toEnumLifestyle())
+        .basics(toEnumBasics())
+        .lookingForEnum(LookingForEnum.valueOf(lookingForEnum))
+        .build();
   }
+
+
 }

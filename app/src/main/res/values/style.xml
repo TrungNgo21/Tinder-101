@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="CustomChip" parent="Widget.MaterialComponents.Chip.Filter">
+        <item name="checkedIconTint">@color/black</item>
+        <item name="chipBackgroundColor">@color/interest_chip_bg_selector</item>
+        <item name="chipCornerRadius">@dimen/_8sdp</item>
+        <item name="android:width">@dimen/_100sdp</item>
+        <item name="android:textColor">@color/interest_chip_selector</item>
+        <item name="chipStrokeColor">@color/interest_chip_selector</item>
+        <item name="chipStrokeWidth">@dimen/_1sdp</item>
+        <item name="checkedIconVisible">false</item>
+    </style>
+    <style name="DialogAnimation">
+        <item name="android:windowEnterAnimation">@anim/slide_in_bottom</item>
+        <item name="android:windowExitAnimation">@anim/slide_out_bottom</item>
+    </style>
+</resources>

@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activity.CreateProfileActivity">
+    <ScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_40sdp">
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/create_profile_title"
+                android:textColor="@color/purple_500"
+                android:id="@+id/createProfileTitle"
+                android:textSize="@dimen/_20sdp"
+                android:textStyle="bold"
+                android:textAlignment="center"
+                />
+            <com.makeramen.roundedimageview.RoundedImageView
+                android:id="@+id/logoContainer"
+                android:layout_width="@dimen/_100sdp"
+                android:layout_height="@dimen/_100sdp"
+                android:layout_alignParentStart="true"
+                android:layout_centerHorizontal="true"
+                android:layout_alignParentEnd="true"
+                android:layout_below="@+id/createProfileTitle"
+                android:layout_marginStart="@dimen/_100sdp"
+                android:layout_marginEnd="@dimen/_100sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                app:riv_corner_radius="@dimen/_12sdp"
+                android:src="@drawable/ic_person_add" />
+            <LinearLayout
+                android:id="@+id/fullNameContainer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/logoContainer"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginStart="@dimen/_38sdp"
+                android:layout_marginEnd="@dimen/_38sdp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/full_name"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_14sdp"
+                    android:textStyle="bold" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:hintTextColor="@color/purple_200"
+                    app:boxStrokeWidth="0dp"
+                    app:boxStrokeWidthFocused="0dp">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/nameId"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/input_field"
+                        android:padding="@dimen/_10sdp"
+                        android:hint="@string/full_name_prompt"
+                        android:inputType="text"
+                        android:drawableEnd="@drawable/ic_person"
+                        android:paddingHorizontal="@dimen/_12sdp"
+                        android:textColor="@color/purple_200"
+                        android:textSize="@dimen/_12sdp" />
+                </com.google.android.material.textfield.TextInputLayout>
+                <TextView
+                    android:background="@drawable/error_background"
+                    android:padding="@dimen/_3sdp"
+                    android:drawableStart="@drawable/ic_error"
+                    android:drawablePadding="@dimen/_10sdp"
+                    android:paddingHorizontal="4dp"
+                    android:id="@+id/errorName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:text="@string/name_error"
+                    android:textColor="@color/error" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/numContainer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/fullNameContainer"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginStart="@dimen/_38sdp"
+                android:layout_marginEnd="@dimen/_38sdp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/num_text"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_14sdp"
+                    android:textStyle="bold" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:hintTextColor="@color/purple_200"
+                    app:boxStrokeWidth="0dp"
+                    app:boxStrokeWidthFocused="0dp">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/phoneNumId"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/input_field"
+                        android:padding="@dimen/_10sdp"
+                        android:hint="@string/num_prompt"
+                        android:inputType="text"
+                        android:paddingHorizontal="@dimen/_12sdp"
+                        android:drawableEnd="@drawable/ic_phone"
+                        android:textColor="@color/purple_200"
+                        android:textSize="@dimen/_12sdp" />
+                </com.google.android.material.textfield.TextInputLayout>
+                <TextView
+                    android:background="@color/error_background"
+                    android:padding="@dimen/_5sdp"
+                    android:drawableStart="@drawable/ic_error"
+                    android:id="@+id/errorNum"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:text="@string/num_error"
+                    android:textColor="@color/error" />
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/genderCtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/numContainer"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginStart="@dimen/_38sdp"
+                android:layout_marginEnd="@dimen/_38sdp"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/gender_text"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_14sdp"
+                    android:textStyle="bold" />
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:padding="@dimen/_5sdp"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="@dimen/_4sdp"
+                    android:background="@drawable/input_field">
+
+                    <Spinner
+                        android:id="@+id/genderCate"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="@dimen/_5sdp"
+                        android:background="@android:color/transparent"
+                        android:gravity="center"
+                        android:spinnerMode="dropdown" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:layout_gravity="center"
+                        android:src="@drawable/drop" />
+                </RelativeLayout>
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/continueButtonId"
+                android:layout_width="200dp"
+                android:layout_height="50dp"
+                android:textColor="@color/white"
+                android:layout_below="@+id/genderCtn"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="@dimen/_38sdp"
+                android:layout_marginEnd="@dimen/_38sdp"
+                android:layout_marginTop="@dimen/_30sdp"
+                android:background="@drawable/primary_button"
+                android:text="@string/continue_button" />
+        </RelativeLayout>
+
+    </ScrollView>
+
+</RelativeLayout>
