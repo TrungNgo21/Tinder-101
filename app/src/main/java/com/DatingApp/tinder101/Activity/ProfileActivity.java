@@ -83,10 +83,10 @@ public class ProfileActivity extends AppCompatActivity {
         } else if (isBasics) {
             dialog.setContentView(R.layout.bottom_sheet_layout);
 
-            setUpChipGroup(group1, Constant.zodiacs, "ZODIAC");
-            setUpChipGroup(group2, Constant.educations, "EDUCATION");
-            setUpChipGroup(group3, Constant.communications, "COMMUNICATION");
-            setUpChipGroup(group4, Constant.loves, "LOVE");
+            setUpChipGroup(group1, Constant.zodiacs, "ZODIAC", isBasics);
+            setUpChipGroup(group2, Constant.educations, "EDUCATION", isBasics);
+            setUpChipGroup(group3, Constant.communications, "COMMUNICATION", isBasics);
+            setUpChipGroup(group4, Constant.loves, "LOVE", isBasics);
 
             title1.setText("What is your zodiac sign ?");
             title2.setText("What is your education level ?");
@@ -98,10 +98,10 @@ public class ProfileActivity extends AppCompatActivity {
             dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
         } else {
             dialog.setContentView(R.layout.bottom_sheet_layout);
-            setUpChipGroup(group1, Constant.pets, "PET");
-            setUpChipGroup(group2, Constant.drinks, "DRINKING");
-            setUpChipGroup(group3, Constant.smokes, "SMOKE");
-            setUpChipGroup(group4, Constant.workouts, "WORKOUT");
+            setUpChipGroup(group1, Constant.pets, "PET", false);
+            setUpChipGroup(group2, Constant.drinks, "DRINKING", false);
+            setUpChipGroup(group3, Constant.smokes, "SMOKE", false);
+            setUpChipGroup(group4, Constant.workouts, "WORKOUT", false);
 
             title1.setText("DO you have any pets ?");
             title2.setText("How often do you drink ?");
@@ -137,11 +137,16 @@ public class ProfileActivity extends AppCompatActivity {
     }
 
 
-    public void setUpChipGroup(ChipGroup chipGroup, List<String> list, String basicType){
+    public void setUpChipGroup(ChipGroup chipGroup, List<String> list, String type, boolean isBasic){
         for(String value : list){
-            String basicValue = userProfileService.getBasics().get(basicType);
+            String typeValue;
+            if (isBasic) {
+                typeValue = userProfileService.getBasics().get(type);
+            } else {
+                typeValue = userProfileService.getLifeStyleList().get(type);
+            }
             Chip chipView = (Chip) LayoutInflater.from(this).inflate(R.layout.custom_chip_v2, null);
-            if (value.equals(basicValue)) {
+            if (value.equals(typeValue)) {
                 chipView.setChecked(true);
             }
             chipView.setText(value);
@@ -154,11 +159,20 @@ public class ProfileActivity extends AppCompatActivity {
             chipView.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                    if (isChecked) {
-                        userProfileService.appendBasics(basicType, chipView.getText().toString());
+                    if (isBasic) {
+                        if (isChecked) {
+                            userProfileService.appendBasics(type, chipView.getText().toString());
+                        } else {
+                            userProfileService.removeBasic(type);
+                        }
                     } else {
-                        userProfileService.removeBasic(basicType);
+                        if (isChecked) {
+                            userProfileService.appendLifeStyleList(type, chipView.getText().toString());
+                        } else {
+                            userProfileService.removeLifeStyle(type);
+                        }
                     }
+
                 }
             });
         }

@@ -8,6 +8,7 @@ import com.DatingApp.tinder101.Constant.Constant;
 import com.DatingApp.tinder101.Dto.ProfileSettingDto;
 import com.DatingApp.tinder101.Dto.UserDto;
 import com.DatingApp.tinder101.Enum.BasicEnum;
+import com.DatingApp.tinder101.Enum.LifestyleEnum;
 import com.DatingApp.tinder101.Model.ProfileSetting;
 import com.DatingApp.tinder101.Model.User;
 import com.DatingApp.tinder101.Utils.EnumConverter;
@@ -52,9 +53,17 @@ public class UserProfileService {
                 String value = ele.getValue();
                 this.basics.put(key, value);
             }
+
+            for (Map.Entry<LifestyleEnum, String> ele : this.currentUser.getProfileSetting().getLifestyleList().entrySet()) {
+                String key = EnumConverter.toString(ele.getKey());
+                String value = ele.getValue();
+                this.lifeStyleList.put(key, value);
+            }
+        } else {
+            this.interests = new ArrayList<String>();
+            this.basics = new HashMap<>();
+            this.lifeStyleList = new HashMap<>();
         }
-        this.interests = new ArrayList<String>();
-        this.basics = new HashMap<>();
     }
 
     public void setQuotes(String quotes) {
@@ -83,6 +92,13 @@ public class UserProfileService {
 
     public void appendLifeStyleList(String key, String value) {
         this.lifeStyleList.put(key, value);
+    }
+    public void removeLifeStyle(String key) {
+        this.lifeStyleList.remove(key);
+    }
+
+    public Map<String, String> getLifeStyleList() {
+        return this.lifeStyleList;
     }
 
     public void setBasics(HashMap<String, String> basics) {
