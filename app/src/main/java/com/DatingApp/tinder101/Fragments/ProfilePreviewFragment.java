@@ -64,6 +64,7 @@ public class ProfilePreviewFragment extends Fragment {
     private ImageView memberImg,mainImg, img1, img2, img3;
 
     private TextView name, age;
+    private TextView cancel, done;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -118,6 +119,7 @@ public class ProfilePreviewFragment extends Fragment {
         name.setText(userProfileService.getCurrentUser().getName());
 
         age = rootView.findViewById(R.id.my_age);
+        Log.d("Agage", String.valueOf(userProfileService.getCurrentUser().getAge()));
 //        age.setText(userProfileService.getCurrentUser().getAge());
 
         addInterest.setOnClickListener(new View.OnClickListener() {
@@ -157,8 +159,8 @@ public class ProfilePreviewFragment extends Fragment {
             dialog.setContentView(R.layout.bottom_sheet_layout);
         }
 
-        TextView cancel = dialog.findViewById(R.id.cancel_button);
-        TextView done = dialog.findViewById(R.id.done_button);
+        cancel = dialog.findViewById(R.id.cancel_button);
+        done = dialog.findViewById(R.id.done_button);
 
         ChipGroup group1 = dialog.findViewById(R.id.chip_group_1);
         ChipGroup group2 = dialog.findViewById(R.id.chip_group_2);
@@ -222,6 +224,7 @@ public class ProfilePreviewFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 userProfileService.updateUserProfileSetting();
+                closeDialog();
             }
         });
 
@@ -238,8 +241,6 @@ public class ProfilePreviewFragment extends Fragment {
 
 
     public void setUpChipGroup(ChipGroup chipGroup, List<String> list, String type, boolean isBasic){
-        List<String> basicsList = new ArrayList<>(userProfileService.getBasics().values());
-        List<String> lifeStyleList = new ArrayList<>(userProfileService.getLifeStyleList().values());
         List<String> valueList;
         if (isBasic) {
             valueList = new ArrayList<>(userProfileService.getBasics().values());
@@ -257,10 +258,6 @@ public class ProfilePreviewFragment extends Fragment {
             float padding = getResources().getDimension(com.intuit.sdp.R.dimen._8sdp);
             chipView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
             chipView.setTypeface(null, Typeface.BOLD);
-
-//            chipView.setChecked(isChecked);
-
-
 
 
             chipGroup.addView(chipView);

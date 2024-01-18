@@ -248,14 +248,14 @@
                     />
                 <TextView
                     android:id="@+id/add_interest"
-                    android:layout_width="wrap_content"
+                    android:layout_width="100dp"
                     android:layout_height="wrap_content"
                     android:textAlignment="center"
                     android:padding="@dimen/_4sdp"
                     android:fontFamily="@font/source_sans_pro_semibold"
                     android:background="@drawable/rounded_corner_background"
                     android:text="Update"
-                    android:layout_columnWeight="1"
+
                     android:textSize="@dimen/_10sdp"
                     />
             </GridLayout>
@@ -298,13 +298,12 @@
                     />
                 <TextView
                     android:id="@+id/add_basic"
-                    android:layout_width="wrap_content"
+                    android:layout_width="100dp"
                     android:layout_height="wrap_content"
                     android:textAlignment="center"
                     android:fontFamily="@font/source_sans_pro_semibold"
                     android:background="@drawable/rounded_corner_background"
                     android:text="Update"
-                    android:layout_columnWeight="1"
                     android:textSize="@dimen/_10sdp"
                     android:padding="@dimen/_4sdp"
                     />
@@ -347,13 +346,13 @@
                     />
                 <TextView
                     android:id="@+id/add_lifeStyle"
-                    android:layout_width="wrap_content"
+                    android:layout_width="100dp"
                     android:layout_height="wrap_content"
                     android:textAlignment="center"
                     android:fontFamily="@font/source_sans_pro_semibold"
                     android:background="@drawable/rounded_corner_background"
                     android:text="Update"
-                    android:layout_columnWeight="1"
+
                     android:textSize="@dimen/_10sdp"
                     android:padding="@dimen/_4sdp"
                     />

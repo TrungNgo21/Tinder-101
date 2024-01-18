@@ -1,5 +1,7 @@
 package com.DatingApp.tinder101.Service;
 
+import android.util.Log;
+
 import androidx.annotation.NonNull;
 
 import com.DatingApp.tinder101.Callback.CallbackRes;
@@ -54,18 +56,20 @@ public class UserProfileService {
         if (this.currentUser != null) {
             this.interests = this.currentUser.getProfileSetting().getInterests();
             for (Map.Entry<BasicEnum, String> ele : this.currentUser.getProfileSetting().getBasics().entrySet()) {
-                String key = EnumConverter.toString(ele.getKey());
+                String key = ele.getKey().toString();
                 String value = ele.getValue();
                 this.basics.put(key, value);
             }
 
             for (Map.Entry<LifestyleEnum, String> ele : this.currentUser.getProfileSetting().getLifestyleList().entrySet()) {
-                String key = EnumConverter.toString(ele.getKey());
+                String key = ele.getKey().toString();
+                Log.d("LifeStyle", ele.getKey().toString());
                 String value = ele.getValue();
                 this.lifeStyleList.put(key, value);
             }
-
+            Log.d("LifeStyle", this.lifeStyleList.toString());
             this.imgURLList.putAll(this.currentUser.getImageUrlsMap());
+            this.lookingForEnum = this.currentUser.getProfileSetting().getLookingForEnum().toString();
         }
     }
 
