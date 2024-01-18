@@ -60,17 +60,17 @@
                     android:layout_height="wrap_content"
                     app:hintTextColor="@color/purple_200"
                     app:boxStrokeWidth="0dp"
+                    app:hintEnabled="false"
                     app:boxStrokeWidthFocused="0dp">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/emailId"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="@dimen/_35sdp"
                         android:background="@drawable/input_field"
                         android:hint="@string/email_prompt"
                         android:inputType="text"
                         android:paddingHorizontal="@dimen/_12sdp"
-                        android:padding="@dimen/_10sdp"
                         android:textColor="@color/purple_200"
                         android:textSize="@dimen/_12sdp" />
                 </com.google.android.material.textfield.TextInputLayout>
@@ -115,14 +115,14 @@
                     app:endIconMode="password_toggle"
                     app:hintTextColor="@color/purple_200"
                     app:boxStrokeWidth="0dp"
+                    app:hintEnabled="false"
                     app:boxStrokeWidthFocused="0dp">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/passwordId"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="@dimen/_35sdp"
                         android:paddingHorizontal="@dimen/_12sdp"
-                        android:padding="@dimen/_10sdp"
                         android:inputType="textPassword"
                         android:textColor="@color/purple_200"
                         android:background="@drawable/input_field"
