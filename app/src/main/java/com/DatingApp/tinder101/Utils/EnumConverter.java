@@ -79,6 +79,23 @@ public class EnumConverter {
       }
     }
 
+    if (type instanceof LookingForEnum) {
+      switch ((LookingForEnum) type) {
+        case LONG_OK:
+          return R.drawable.ic_long_ok;
+        case SHORT_OK:
+          return R.drawable.ic_party;
+        case LONG_SHORT_OKE:
+          return R.drawable.ic_long_short;
+        case SHORT_LONG_OK:
+          return R.drawable.ic_short_long_ok;
+        case FRIEND_OK:
+          return R.drawable.ic_friend;
+        case THINKING:
+          return R.drawable.ic_thinking;
+      }
+    }
+
     return 0;
   }
 }

@@ -6,15 +6,56 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".Fragments.SwipeFragment">
 
-    <!--    <com.lorentzos.flingswipe.SwipeFlingAdapterView-->
-    <!--        android:id="@+id/swipeScreen"-->
-    <!--        app:rotation_degrees="15.5"-->
-    <!--        android:layout_width="match_parent"-->
-    <!--        android:layout_height="match_parent" />-->
-
     <com.yuyakaido.android.cardstackview.CardStackView
         android:id="@+id/swipeScreen"
         app:rotation_degrees="15.5"
         android:layout_width="match_parent"
+        android:paddingBottom="@dimen/_35sdp"
         android:layout_height="match_parent" />
+
+    <LinearLayout
+        android:layout_marginTop="@dimen/_2sdp"
+        android:id="@+id/likeDislikeBtn"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:gravity="center"
+        android:layout_height="wrap_content">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/dislikeBtn"
+            android:layout_marginHorizontal="@dimen/_8sdp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="@dimen/_599sdp"
+            android:elevation="@dimen/_4sdp">
+
+            <ImageView
+                android:id="@+id/dislikeIcon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/_8sdp"
+                android:src="@drawable/dislike_icon_new" />
+
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/likeBtn"
+            android:layout_marginHorizontal="@dimen/_8sdp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="@dimen/_599sdp"
+            android:elevation="@dimen/_4sdp">
+
+            <ImageView
+                android:id="@+id/likeIcon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/_8sdp"
+                android:src="@drawable/like_icon_new" />
+
+        </androidx.cardview.widget.CardView>
+    </LinearLayout>
+
 </RelativeLayout>

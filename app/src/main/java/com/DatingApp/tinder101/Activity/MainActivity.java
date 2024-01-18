@@ -3,6 +3,7 @@ package com.DatingApp.tinder101.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
@@ -158,20 +159,15 @@ public class MainActivity extends AppCompatActivity
 
   @Override
   public void showDetail(UserDto userDto) {
-    Fragment fragment = new ViewProfileFragment(userDto, this);
+    Fragment fragment = new ViewProfileFragment(userDto, true, this);
     loadFragment(fragment);
   }
 
   @Override
-  public void popCard() {
-    users.remove(0);
-  }
+  public void dragRight(boolean isOn) {}
 
   @Override
-  public void rightSwipe() {}
-
-  @Override
-  public void checkMatch() {}
+  public void dragLeft(boolean isOn) {}
 
   @Override
   public void backToSwipe() {
@@ -179,26 +175,25 @@ public class MainActivity extends AppCompatActivity
     loadFragment(fragment);
   }
 
-    private void setUpNavigation() {
-        activityMainBinding.menu.setOnItemSelectedListener(
-                item -> {
-                    Fragment fragment;
-                    if (item.getItemId() == R.id.home) {
-                        fragment = new SwipeFragment(users, this);
-                        loadFragment(fragment);
-                        return true;
-                    } else if (item.getItemId() == R.id.profile) {
-                        fragment = new ProfilePreviewFragment();
-                        loadFragment(fragment);
-                        return true;
-                    } else if (item.getItemId() == R.id.message) {
-                        fragment = new ChatFragment(users);
-                        loadFragment(fragment);
-                        return true;
-                    } else {
-                        return false;
-                    }
-
-                });
-    }
+  private void setUpNavigation() {
+    activityMainBinding.menu.setOnItemSelectedListener(
+        item -> {
+          Fragment fragment;
+          if (item.getItemId() == R.id.home) {
+            fragment = new SwipeFragment(users, this);
+            loadFragment(fragment);
+            return true;
+          } else if (item.getItemId() == R.id.profile) {
+            fragment = new ProfilePreviewFragment();
+            loadFragment(fragment);
+            return true;
+          } else if (item.getItemId() == R.id.message) {
+            fragment = new ChatFragment(users);
+            loadFragment(fragment);
+            return true;
+          } else {
+            return false;
+          }
+        });
+  }
 }

@@ -41,17 +41,22 @@ public class ViewProfileFragment extends Fragment {
 
   private OnBackSwipePress onBackSwipePress;
 
-  public ViewProfileFragment(UserDto userDto, OnBackSwipePress onBackSwipePress) {
+  private boolean isSwiping;
+
+  public ViewProfileFragment(
+      UserDto userDto, boolean isSwiping, OnBackSwipePress onBackSwipePress) {
     this.userDto = userDto;
     this.onBackSwipePress = onBackSwipePress;
+    this.isSwiping = isSwiping;
   }
 
   public ViewProfileFragment() {
     // doesn't do anything special
   }
 
-  public ViewProfileFragment(UserDto userDto) {
+  public ViewProfileFragment(UserDto userDto, boolean isSwiping) {
     this.userDto = userDto;
+    this.isSwiping = isSwiping;
   }
 
   @Override
@@ -70,6 +75,7 @@ public class ViewProfileFragment extends Fragment {
     setUpProfileImages();
     setUpProfileInfo();
     setUpButton();
+    setUpSwipeUI(isSwiping);
     return fragmentViewProfileBinding.getRoot();
   }
 
@@ -115,8 +121,15 @@ public class ViewProfileFragment extends Fragment {
     return contents;
   }
 
-  public void hideBackToSwipe() {
-    fragmentViewProfileBinding.viewProfileBtn.setVisibility(View.GONE);
+  private void setUpSwipeUI(boolean isSwiping) {
+    if (isSwiping) {
+      fragmentViewProfileBinding.likeDislikeBtn.setVisibility(View.VISIBLE);
+      fragmentViewProfileBinding.viewProfileBtn.setVisibility(View.VISIBLE);
+
+    } else {
+      fragmentViewProfileBinding.likeDislikeBtn.setVisibility(View.GONE);
+      fragmentViewProfileBinding.viewProfileBtn.setVisibility(View.GONE);
+    }
   }
 
   private FlexboxLayoutManager constructLayoutManager() {
@@ -153,7 +166,7 @@ public class ViewProfileFragment extends Fragment {
   }
 
   private void setUpProfileHeader() {
-    fragmentViewProfileBinding.profileAge.setText("19");
+    fragmentViewProfileBinding.profileAge.setText(String.valueOf(userDto.getAge()));
     fragmentViewProfileBinding.profileName.setText(userDto.getName());
     fragmentViewProfileBinding.viewProfileBtn.setOnClickListener(
         view -> {
