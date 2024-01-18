@@ -169,7 +169,7 @@ public class MainActivity extends AppCompatActivity {
             loadFragment(fragment);
             return true;
           } else if (item.getItemId() == R.id.message) {
-            fragment = new ChatFragment(users);
+            fragment = new ChatFragment(matchedUsers);
             loadFragment(fragment);
             return true;
           } else {
