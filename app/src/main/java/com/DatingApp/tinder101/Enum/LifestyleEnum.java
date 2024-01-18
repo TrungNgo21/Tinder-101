@@ -5,4 +5,6 @@ public enum LifestyleEnum {
   DRINKING,
   SMOKE,
   WORKOUT
+
+
 }

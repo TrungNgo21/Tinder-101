@@ -18,10 +18,12 @@ public class UserDto {
   private String id;
   private String name;
   private String email;
+  private int age;
   private Date createdDate;
   private Date updatedDate;
   private ProfileSettingDto profileSetting;
   private HashMap<String, String> imageUrlsMap;
   @Builder.Default private boolean isOnline = true;
+  @Builder.Default private int score = 0;
   @Builder.Default private List<String> matchedUsers = new ArrayList<>();
 }

@@ -73,9 +73,9 @@
         android:background="?android:attr/windowBackground"
         app:itemBackground="@color/white"
         android:foreground="?attr/selectableItemBackground"
-        app:itemIconTint="@color/icon_color"
+        app:itemIconTint="@drawable/item_home_selector"
         app:labelVisibilityMode="unlabeled"
-        app:itemTextColor="@color/icon_color"
+        app:itemTextColor="@drawable/item_home_selector"
         app:menu="@menu/navigation" />
 
 </LinearLayout>

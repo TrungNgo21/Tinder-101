@@ -1,6 +1,8 @@
 package com.DatingApp.tinder101.Activity;
 
 import android.content.Intent;
+import android.graphics.drawable.AnimationDrawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -9,6 +11,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -17,12 +20,17 @@ import androidx.core.view.WindowInsetsCompat;
 import com.DatingApp.tinder101.Callback.CallbackRes;
 import com.DatingApp.tinder101.Callback.FirebaseCallback;
 import com.DatingApp.tinder101.Dto.UserDto;
+import com.DatingApp.tinder101.Fragments.LoadingComponent;
 import com.DatingApp.tinder101.Model.User;
 import com.DatingApp.tinder101.R;
 import com.DatingApp.tinder101.Service.UserService;
 import com.DatingApp.tinder101.Utils.InputValidation;
 import com.DatingApp.tinder101.databinding.ActivitySignInBinding;
 import com.google.firebase.FirebaseApp;
+
+import org.w3c.dom.Text;
+
+import java.util.Arrays;
 
 import javax.security.auth.callback.Callback;
 
@@ -40,6 +48,11 @@ public class SignInActivity extends AppCompatActivity {
       finish();
       startActivity(new Intent(this, MainActivity.class));
     }
+
+
+      LoadingComponent loadingComponent = findViewById(R.id.loadingView);
+    loadingComponent.hideLoading();
+
     setUpButton();
     setErrorMessage(activitySignInBinding.authenticatedFailedId, false);
     setLoading(false);
@@ -94,6 +107,8 @@ public class SignInActivity extends AppCompatActivity {
 
     };
   }
+
+
 
 
   public void setUpButton() {

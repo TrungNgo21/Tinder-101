@@ -22,6 +22,7 @@ import com.DatingApp.tinder101.Service.UserService;
 import com.DatingApp.tinder101.Utils.InputValidation;
 import com.DatingApp.tinder101.databinding.ActivityRegisterBinding;
 import com.DatingApp.tinder101.databinding.ActivitySignInBinding;
+
 import com.google.firebase.FirebaseApp;
 
 public class RegisterActivity extends AppCompatActivity {

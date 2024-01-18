@@ -19,25 +19,11 @@
         android:theme="@style/Theme.Tinder101"
         tools:targetApi="31">
         <activity
-            android:name=".Activity.ConversationActivity"
+            android:name=".Activity.AboutUsActivity"
             android:exported="false" />
         <activity
-            android:name=".Activity.AddInterestActivity"
+            android:name=".Activity.CarouselActivity"
             android:exported="false" />
-
-
-
-        <activity
-            android:name=".Activity.AddPhotoActivity"
-            android:exported="false" />
-
-        <activity
-            android:name=".Activity.CreateProfileActivity"
-            android:exported="false">
-
-        </activity>
-
-
         <activity
             android:name=".Activity.RegisterActivity"
             android:exported="false" />
@@ -51,7 +37,19 @@
             </intent-filter>
         </activity>
 
+        <activity
+            android:name=".Activity.AddInterestActivity"
+            android:exported="false" />
 
+        <activity
+            android:name=".Activity.AddPhotoActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".Activity.CreateProfileActivity"
+            android:exported="false">
+
+        </activity>
         <activity
             android:name=".Activity.MainActivity"
             android:exported="false" />

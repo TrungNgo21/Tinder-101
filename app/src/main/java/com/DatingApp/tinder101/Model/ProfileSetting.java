@@ -51,4 +51,6 @@ public class ProfileSetting {
         .lookingForEnum(LookingForEnum.valueOf(lookingForEnum))
         .build();
   }
+
+
 }
