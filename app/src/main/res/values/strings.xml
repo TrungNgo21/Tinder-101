@@ -84,6 +84,8 @@
     <string name="age">Age</string>
     <string name="age_prompt">Enter your age</string>
     <string name="age_error">Your age is not valid</string>
+    <string name="notification_title">Notification</string>
+    <string name="tinder_title">Tinder101</string>
     <string name="lorem_ipsum">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam in scelerisque sem. Mauris
         volutpat, dolor id interdum ullamcorper, risus dolor egestas lectus, sit amet mattis purus
