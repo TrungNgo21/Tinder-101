@@ -119,8 +119,7 @@ public class ProfilePreviewFragment extends Fragment {
         name.setText(userProfileService.getCurrentUser().getName());
 
         age = rootView.findViewById(R.id.my_age);
-        Log.d("Agage", String.valueOf(userProfileService.getCurrentUser().getAge()));
-//        age.setText(userProfileService.getCurrentUser().getAge());
+        age.setText(String.valueOf(userProfileService.getCurrentUser().getAge()));
 
         addInterest.setOnClickListener(new View.OnClickListener() {
             @Override
