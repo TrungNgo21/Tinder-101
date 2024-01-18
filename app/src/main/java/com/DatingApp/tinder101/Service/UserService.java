@@ -142,7 +142,7 @@ public class UserService {
   }
 
   public void register(
-      String email, String password, final FirebaseCallback<CallbackRes<UserDto>> callback) {
+      String email, String password, final FirebaseCallback<CallbackRes<UserDto>> callback, CallbackListener  listener) {
     firebaseAuth
         .createUserWithEmailAndPassword(email, password)
         .addOnCompleteListener(
@@ -193,6 +193,7 @@ public class UserService {
 
                           } else {
                             callback.callback(new CallbackRes.Error(updateTask.getException()));
+                            listener.onFailureCallBack(updateTask.getException().getMessage());
                           }
                         });
                 userReference
@@ -208,6 +209,7 @@ public class UserService {
                             callback.callback(new CallbackRes.Success<UserDto>(currentUser));
                           } else {
                             callback.callback(new CallbackRes.Error(task.getException()));
+                              listener.onFailureCallBack(task.getException().getMessage());
                           }
                         });
               }
@@ -326,8 +328,8 @@ public class UserService {
                       callback.callback(new CallbackRes.Error(updateUserTask.getException()));
                       callbackListener.onFailureCallBack(updateUserTask.getException().getMessage());
                   }
-              }
-            });
+              });
+
   }
 
   public void updateName(String name, final FirebaseCallback<CallbackRes<UserDto>> callback) {
