@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools">
     <style name="PrimaryPurpleText" parent="TextAppearance.AppCompat">
         <item name="android:textColor">@color/primary_purple_700</item>
         <item name="android:fontFamily">@font/source_sans_pro_semibold</item>
@@ -8,6 +8,8 @@
     <style name="PrimaryLightPurpleButton" parent="TextAppearance.AppCompat">
         <item name="android:textColor">@color/primary_purple_700</item>
         <item name="android:backgroundTint">@color/light_purple_200</item>
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">@dimen/_75sdp</item>
         <item name="fontFamily">@font/source_sans_pro_semibold</item>
     </style>
 
@@ -43,10 +45,29 @@
         <item name="cornerSize">@dimen/_12sdp</item>
     </style>
 
+    <style name="RoundedItemTextView">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">@dimen/_8sdp</item>
+    </style>
+
     <style name="NoActionBar" parent="@android:style/Theme.Holo.Light">
         <item name="android:windowActionBar">false</item>
         <item name="android:windowNoTitle">true</item>
     </style>
 
+    <style name="InterestChipStyle" parent="Widget.MaterialComponents.Chip.Choice">
+        <!-- Add any custom styling for the chip here -->
+        <item name="chipBackgroundColor">@color/slate_blue_500</item>
+    </style>
+
+    <style name="BasicChipStyle" parent="Widget.MaterialComponents.Chip.Choice">
+        <!-- Add any custom styling for the chip here -->
+        <item name="chipBackgroundColor">@color/red_500</item>
+    </style>
+
+    <style name="LifestyleChipStyle" parent="Widget.MaterialComponents.Chip.Choice">
+        <!-- Add any custom styling for the chip here -->
+        <item name="chipBackgroundColor">@color/quantum_cyan600</item>
+    </style>
 
 </resources>

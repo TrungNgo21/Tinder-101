@@ -18,8 +18,9 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/black"
+                android:textColor="@color/red_500"
                 android:id="@+id/cancel_button"
+                android:padding="@dimen/_16sdp"
                 android:textSize="@dimen/_14sdp"
                 android:layout_columnWeight="1"
                 android:text="Cancel"
@@ -28,11 +29,12 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/black"
+                android:textColor="@color/teal_700"
                 android:textSize="@dimen/_14sdp"
                 android:layout_columnWeight="1"
                 android:textAlignment="viewEnd"
                 android:id="@+id/done_button"
+                android:padding="@dimen/_16sdp"
                 android:text="Done"
                 android:textStyle="bold" />
         </GridLayout>
@@ -42,7 +44,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textStyle="bold"
-            android:textSize="30dp"
+            android:fontFamily="@font/source_sans_pro_bold"
+            android:layout_marginLeft="@dimen/_16sdp"
+            android:textSize="@dimen/_16sdp"
+            style="@style/PrimaryPurpleText"
             android:text="More about me" />
 
         <ScrollView
@@ -73,7 +78,9 @@
                             android:layout_height="wrap_content"
                             android:textColor="@color/black"
                             android:id="@+id/chip_group_title_1"
-                            android:textSize="@dimen/_14sdp"
+                            android:textSize="@dimen/_12sdp"
+                            android:layout_marginTop="@dimen/_16sdp"
+                            android:layout_marginLeft="@dimen/_10sdp"
                             android:text="What's your star sign ?"
                             android:textStyle="bold" />
                     </LinearLayout>
@@ -111,7 +118,9 @@
                             android:layout_height="wrap_content"
                             android:textColor="@color/black"
                             android:id="@+id/chip_group_title_2"
-                            android:textSize="@dimen/_14sdp"
+                            android:textSize="@dimen/_12sdp"
+                            android:layout_marginLeft="@dimen/_10sdp"
+                            android:layout_marginTop="@dimen/_8sdp"
                             android:text="What's your star sign ?"
                             android:textStyle="bold" />
                     </LinearLayout>
@@ -150,7 +159,9 @@
                             android:layout_height="wrap_content"
                             android:textColor="@color/black"
                             android:id="@+id/chip_group_title_3"
-                            android:textSize="@dimen/_14sdp"
+                            android:textSize="@dimen/_12sdp"
+                            android:layout_marginLeft="@dimen/_10sdp"
+                            android:layout_marginTop="@dimen/_8sdp"
                             android:text="What's your star sign ?"
                             android:textStyle="bold" />
                     </LinearLayout>
@@ -189,7 +200,9 @@
                             android:layout_height="wrap_content"
                             android:textColor="@color/black"
                             android:id="@+id/chip_group_title_4"
-                            android:textSize="@dimen/_14sdp"
+                            android:textSize="@dimen/_12sdp"
+                            android:layout_marginLeft="@dimen/_10sdp"
+                            android:layout_marginTop="@dimen/_8sdp"
                             android:text="What's your star sign ?"
                             android:textStyle="bold" />
                     </LinearLayout>

@@ -53,7 +53,7 @@
                         android:fontFamily="@font/source_sans_pro_semibold"
                         android:text="Trung Bu"
                         android:textAppearance="?attr/textAppearanceSubtitle1"
-                        android:textSize="@dimen/_18sdp" />
+                        android:textSize="@dimen/_12sdp" />
 
                     <TextView
                         android:id="@+id/my_age"
@@ -64,7 +64,7 @@
                         android:fontFamily="@font/source_sans_pro_semibold"
                         android:text="21"
                         android:textAppearance="?attr/textAppearanceCaption"
-                        android:textSize="@dimen/_18sdp" />
+                        android:textSize="@dimen/_12sdp" />
                 </LinearLayout>
 
                 <Button
@@ -73,7 +73,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/_8sdp"
                     android:text="Preview Your Profile"
-                    android:textSize="@dimen/_14sdp"
+                    android:textSize="@dimen/_8sdp"
+                    android:fontFamily="@font/source_sans_pro_regular"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="1.0"
                     app:layout_constraintStart_toStartOf="parent"
@@ -90,7 +91,7 @@
             android:fontFamily="@font/source_sans_pro_bold"
             android:text="Photos"
             android:layout_marginLeft="@dimen/_16sdp"
-            android:textSize="@dimen/_20sdp"
+            android:textSize="@dimen/_16sdp"
             app:layout_constraintTop_toBottomOf="@+id/info1"
             tools:ignore="MissingConstraints"
             tools:layout_editor_absoluteX="16dp" />
@@ -180,7 +181,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/source_sans_pro_bold"
                 android:text="About Me"
-                android:textSize="@dimen/_20sdp"
+                android:textSize="@dimen/_14sdp"
                 app:layout_constraintTop_toBottomOf="@+id/info1"
                 tools:ignore="MissingConstraints"
                 android:layout_marginLeft="@dimen/_16sdp"
@@ -242,19 +243,20 @@
                     android:fontFamily="@font/source_sans_pro_bold"
                     android:text="I'm interested with"
                     android:layout_columnWeight="1"
-                    android:textSize="@dimen/_20sdp"
+                    android:textSize="@dimen/_14sdp"
 
                     />
                 <TextView
                     android:id="@+id/add_interest"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textAlignment="viewEnd"
-                    android:fontFamily="@font/source_sans_pro_bold"
+                    android:textAlignment="center"
+                    android:padding="@dimen/_4sdp"
+                    android:fontFamily="@font/source_sans_pro_semibold"
+                    android:background="@drawable/rounded_corner_background"
                     android:text="Update"
                     android:layout_columnWeight="1"
-                    android:textSize="20dp"
-
+                    android:textSize="@dimen/_10sdp"
                     />
             </GridLayout>
             <com.google.android.material.chip.ChipGroup
@@ -291,18 +293,20 @@
                     android:fontFamily="@font/source_sans_pro_bold"
                     android:text="My Basics"
                     android:layout_columnWeight="1"
-                    android:textSize="@dimen/_20sdp"
+                    android:textSize="@dimen/_14sdp"
 
                     />
                 <TextView
                     android:id="@+id/add_basic"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textAlignment="viewEnd"
-                    android:fontFamily="@font/source_sans_pro_bold"
+                    android:textAlignment="center"
+                    android:fontFamily="@font/source_sans_pro_semibold"
+                    android:background="@drawable/rounded_corner_background"
                     android:text="Update"
                     android:layout_columnWeight="1"
-                    android:textSize="20dp"
+                    android:textSize="@dimen/_10sdp"
+                    android:padding="@dimen/_4sdp"
                     />
             </GridLayout>
 
@@ -336,20 +340,22 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/source_sans_pro_bold"
-                    android:text="My lifeStyles"
+                    android:text="My Lifestyles"
                     android:layout_columnWeight="1"
-                    android:textSize="@dimen/_20sdp"
+                    android:textSize="@dimen/_14sdp"
 
                     />
                 <TextView
                     android:id="@+id/add_lifeStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textAlignment="viewEnd"
-                    android:fontFamily="@font/source_sans_pro_bold"
+                    android:textAlignment="center"
+                    android:fontFamily="@font/source_sans_pro_semibold"
+                    android:background="@drawable/rounded_corner_background"
                     android:text="Update"
                     android:layout_columnWeight="1"
-                    android:textSize="20dp"
+                    android:textSize="@dimen/_10sdp"
+                    android:padding="@dimen/_4sdp"
                     />
             </GridLayout>
 

@@ -1,5 +1,6 @@
 package com.DatingApp.tinder101.Fragments;
 
+import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.graphics.Color;
 import android.graphics.Typeface;
@@ -330,13 +331,16 @@ public class ProfilePreviewFragment extends Fragment {
         ChipGroup basicGroup = rootView.findViewById(R.id.basicsChipGroup);
         ChipGroup lifeStyleGroup = rootView.findViewById(R.id.lifeStylesChipGroup);
 
-        setupProfileChipGroup(interests, interestGroup);
-        setupProfileChipGroup(basicValues, basicGroup);
-        setupProfileChipGroup(lifeStyleValues, lifeStyleGroup);
+        int[] backgroundColors = {R.color.light_purple_400, R.color.slate_blue_600, R.color.like_middle_color};
 
+        setupProfileChipGroup(interests, interestGroup, backgroundColors[0]);
+        setupProfileChipGroup(basicValues, basicGroup, backgroundColors[1]);
+        setupProfileChipGroup(lifeStyleValues, lifeStyleGroup, backgroundColors[2]);
     }
 
-    public void setupProfileChipGroup(List<String> values, ChipGroup chipGroup) {
+    @SuppressLint("ResourceAsColor")
+    public void setupProfileChipGroup(List<String> values, ChipGroup chipGroup, int backgroundColor) {
+        int colorIndex = 0;
 
         for (String value : values) {
             Chip chipView = (Chip) LayoutInflater.from(getContext()).inflate(R.layout.custom_chip_v2, null);
@@ -345,6 +349,7 @@ public class ProfilePreviewFragment extends Fragment {
             float padding = getResources().getDimension(com.intuit.sdp.R.dimen._8sdp);
             chipView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
             chipView.setTypeface(null, Typeface.BOLD);
+            chipView.setChipBackgroundColorResource(backgroundColor);
             chipGroup.addView(chipView);
         }
     }
