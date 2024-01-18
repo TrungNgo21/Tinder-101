@@ -33,6 +33,7 @@ import com.DatingApp.tinder101.Enum.LifestyleEnum;
 import com.DatingApp.tinder101.R;
 import com.DatingApp.tinder101.Service.UserProfileService;
 import com.DatingApp.tinder101.Service.UserService;
+import com.DatingApp.tinder101.Utils.CustomToast;
 import com.DatingApp.tinder101.databinding.ProfilePreviewBinding;
 import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
@@ -65,6 +66,8 @@ public class ProfilePreviewFragment extends Fragment implements UserService.Call
 
     private TextView name, age;
     private TextView cancel, done;
+
+    private CustomToast customToast;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -352,11 +355,11 @@ public class ProfilePreviewFragment extends Fragment implements UserService.Call
 
     @Override
     public void onSuccessCallBack(String message) {
-
+        CustomToast.makeText(getContext(), CustomToast.SHORT,"Success!", message).show();
     }
 
     @Override
     public void onFailureCallBack(String message) {
-
+        CustomToast.makeText(getContext(), CustomToast.SHORT, "Success!", message).show();
     }
 }

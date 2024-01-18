@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.TextView;
 
@@ -25,6 +26,7 @@ import com.DatingApp.tinder101.R;
 import com.DatingApp.tinder101.Service.UserProfileService;
 import com.DatingApp.tinder101.Service.UserService;
 
+import com.DatingApp.tinder101.Utils.CustomToast;
 import com.DatingApp.tinder101.Utils.SpacingItemDecoration;
 import com.DatingApp.tinder101.databinding.ActivityAddInterestBinding;
 import com.google.android.material.chip.Chip;
@@ -33,7 +35,7 @@ import com.google.android.material.chip.ChipGroup;
 import java.util.List;
 import java.util.Random;
 
-public class AddInterestActivity extends AppCompatActivity {
+public class AddInterestActivity extends AppCompatActivity implements UserService.CallbackListener {
     private ActivityAddInterestBinding activityAddInterestBinding;
     private UserService userService;
     private UserProfileService userProfileService;
@@ -87,5 +89,22 @@ public class AddInterestActivity extends AppCompatActivity {
         }
     }
     public void setButton(){
+        Button button = findViewById(R.id.nextButtonId);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                userProfileService.updateUserProfileSetting(AddInterestActivity.this);
+            }
+        });
+    }
+
+    @Override
+    public void onSuccessCallBack(String message) {
+        CustomToast.makeText(AddInterestActivity.this, CustomToast.SHORT, "Success!", message).show();
+    }
+
+    @Override
+    public void onFailureCallBack(String message) {
+        CustomToast.makeText(AddInterestActivity.this, CustomToast.SHORT, "Error!", message).show();
     }
 }

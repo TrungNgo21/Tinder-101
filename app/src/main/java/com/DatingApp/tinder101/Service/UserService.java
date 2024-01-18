@@ -250,7 +250,7 @@ public class UserService {
   }
 
   public void login(
-      String email, String password, final FirebaseCallback<CallbackRes<UserDto>> callback) {
+      String email, String password, final FirebaseCallback<CallbackRes<UserDto>> callback, CallbackListener listener) {
     firebaseAuth
         .signInWithEmailAndPassword(email, password)
         .addOnCompleteListener(
@@ -272,12 +272,15 @@ public class UserService {
                             preferenceManager.putCurrentUser(currentUser);
                             preferenceManager.putBoolean(Constant.KEY_SIGN_IN, true);
                             callback.callback(new CallbackRes.Success<UserDto>(currentUser));
+
                           } else {
                             callback.callback(new CallbackRes.Error(getUserTask.getException()));
+                            listener.onFailureCallBack(getUserTask.getException().getMessage());
                           }
                         });
               } else {
                 callback.callback(new CallbackRes.Error(singInTask.getException()));
+                listener.onFailureCallBack(singInTask.getException().getMessage());
               }
             });
   }

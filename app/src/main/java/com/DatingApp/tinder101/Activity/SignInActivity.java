@@ -24,6 +24,7 @@ import com.DatingApp.tinder101.Fragments.LoadingComponent;
 import com.DatingApp.tinder101.Model.User;
 import com.DatingApp.tinder101.R;
 import com.DatingApp.tinder101.Service.UserService;
+import com.DatingApp.tinder101.Utils.CustomToast;
 import com.DatingApp.tinder101.Utils.InputValidation;
 import com.DatingApp.tinder101.databinding.ActivitySignInBinding;
 import com.google.firebase.FirebaseApp;
@@ -34,7 +35,7 @@ import java.util.Arrays;
 
 import javax.security.auth.callback.Callback;
 
-public class SignInActivity extends AppCompatActivity {
+public class SignInActivity extends AppCompatActivity implements UserService.CallbackListener {
   private UserService userService;
   private ActivitySignInBinding activitySignInBinding;
 
@@ -119,6 +120,7 @@ public class SignInActivity extends AppCompatActivity {
           userService.login(
               activitySignInBinding.emailId.getText().toString(),
               activitySignInBinding.passwordId.getText().toString(),
+
               new FirebaseCallback<CallbackRes<UserDto>>() {
                 @Override
                 public void callback(CallbackRes<UserDto> res) {
@@ -131,15 +133,25 @@ public class SignInActivity extends AppCompatActivity {
                   } else {
                     setLoading(false);
                     setErrorMessage(activitySignInBinding.authenticatedFailedId,true);
-                    Toast.makeText(getApplicationContext(), res.toString(), Toast.LENGTH_LONG)
-                        .show();
+//                    Toast.makeText(getApplicationContext(), res.toString(), Toast.LENGTH_LONG)
+//                        .show();
                   }
                 }
-              });
+              }, this);
         });
     activitySignInBinding.toSignUpButtonId.setOnClickListener(
             view -> {
               startActivity(new Intent(this, RegisterActivity.class));
             });
+  }
+
+  @Override
+  public void onSuccessCallBack(String message) {
+
+  }
+
+  @Override
+  public void onFailureCallBack(String message) {
+    CustomToast.makeText(this, CustomToast.SHORT,"Error", message).show();
   }
 }
