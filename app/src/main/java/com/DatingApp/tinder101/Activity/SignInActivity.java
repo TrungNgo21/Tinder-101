@@ -53,7 +53,7 @@ public class SignInActivity extends AppCompatActivity implements UserService.Cal
 
       LoadingComponent loadingComponent = findViewById(R.id.loadingView);
     loadingComponent.hideLoading();
-
+  initialCheck();
     setUpButton();
     setErrorMessage(activitySignInBinding.authenticatedFailedId, false);
     setLoading(false);
@@ -61,7 +61,16 @@ public class SignInActivity extends AppCompatActivity implements UserService.Cal
     activitySignInBinding.emailId.addTextChangedListener(inputListener);
     activitySignInBinding.passwordId.addTextChangedListener(inputListener);
   }
-  private void setLoading(boolean isLoading) {
+  public void initialCheck() {
+    if (!InputValidation.isValidEmail(activitySignInBinding.emailId.getText().toString().trim())) {
+      activitySignInBinding.loginButtonId.setEnabled(false);
+    }
+    if (!InputValidation.isValidPass(activitySignInBinding.passwordId.getText().toString().trim(), 7, 10)) {
+      activitySignInBinding.loginButtonId.setEnabled(false);
+    }
+  }
+
+    private void setLoading(boolean isLoading) {
     if (isLoading) {
       activitySignInBinding.progressBarId.setVisibility(View.VISIBLE);
     } else {
@@ -75,6 +84,7 @@ public class SignInActivity extends AppCompatActivity implements UserService.Cal
       errorMessage.setVisibility(View.INVISIBLE);
     }
   }
+
   private TextWatcher setInputListener() {
     return new TextWatcher() {
       @Override
