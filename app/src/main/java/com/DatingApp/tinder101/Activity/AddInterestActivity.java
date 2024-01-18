@@ -48,6 +48,7 @@ public class AddInterestActivity extends AppCompatActivity {
 
     }
     public void setUpChipGroup(){
+        List<String> interestList = userProfileService.getInterests();
         for(String interest : Constant.interests){
             TextView choiceAnnounce = findViewById(R.id.choiceAnnounce);
             Chip chipView = (Chip) LayoutInflater.from(this).inflate(R.layout.custom_chip_v2, null);
@@ -61,34 +62,22 @@ public class AddInterestActivity extends AppCompatActivity {
             chipView.setTypeface(null, Typeface.BOLD);
             activityAddInterestBinding.interestGroup.addView(chipView);
 
-            activityAddInterestBinding.interestGroup.setOnCheckedStateChangeListener(new ChipGroup.OnCheckedStateChangeListener() {
+            chipView.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
-                public void onCheckedChanged(@NonNull ChipGroup chipGroup, @NonNull List<Integer> list) {
-                    for(int i = 0; i < activityAddInterestBinding.interestGroup.getChildCount(); i++){
-                        View child = activityAddInterestBinding.interestGroup.getChildAt(i);
-                        Chip chip = (Chip) child;
-                        chip.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                            @Override
-                            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                                if(isChecked){
-
-                                    List<Integer> ids = chipGroup.getCheckedChipIds();
-                                    if(ids.size() > 5){
-                                        chip.setChecked(false);
-                                        choiceAnnounce.setText("You have selected " +  userProfileService.getInterests().size());
-                                        activityAddInterestBinding.choiceAnnounce.setVisibility(View.VISIBLE);
-                                    }
-                                    else {
-                                        userProfileService.appendInterests(chip.getText().toString());
-                                        Log.d("Chip selected", chip.getText().toString());
-
-                                    }
-                                } else {
-                                    userProfileService.removeInterests(chip.getText().toString());
-                                }
-                            }
-                        });
-
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    if (isChecked) {
+                       if (!interestList.contains(interest)) {
+                           if (interestList.size() != 5) {
+                               activityAddInterestBinding.choiceAnnounce.setVisibility(View.INVISIBLE);
+                               chipView.setChecked(true);
+                               userProfileService.appendInterests(interest);
+                           } else {
+                               activityAddInterestBinding.choiceAnnounce.setVisibility(View.VISIBLE);
+                               chipView.setChecked(false);
+                           }
+                       }
+                    } else {
+                        userProfileService.removeInterests(interest);
                     }
                 }
             });

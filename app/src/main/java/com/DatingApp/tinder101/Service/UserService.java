@@ -58,6 +58,7 @@ public class UserService {
   private final CollectionReference userReference =
       fireStore.collection(Constant.KEY_COLLECTION_USERS);
 
+
   public UserService(Context context) {
     this.preferenceManager = new PreferenceManager(context.getApplicationContext());
 
@@ -332,4 +333,42 @@ public class UserService {
               }
       );
   }
+  public void updateName(String name, final FirebaseCallback<CallbackRes<UserDto>> callback){
+      userReference.document(getCurrentUser().getId()).update("name", name).addOnCompleteListener(
+              updateTask -> {
+                  if(updateTask.isSuccessful()){
+                      callback.callback(new CallbackRes.Success<>(getCurrentUser()));
+                  }
+                  else {
+                      callback.callback(new CallbackRes.Error(updateTask.getException()));
+                  }
+              }
+      );
+  }
+    public void updateGender(String gender, final FirebaseCallback<CallbackRes<UserDto>> callback){
+        userReference.document(getCurrentUser().getId()).update("gender", gender).addOnCompleteListener(
+                updateTask -> {
+                    if(updateTask.isSuccessful()){
+                        callback.callback(new CallbackRes.Success<>(getCurrentUser()));
+                    }
+                    else {
+                        callback.callback(new CallbackRes.Error(updateTask.getException()));
+                    }
+                }
+        );
+    }
+    public void updateAge(int age, final FirebaseCallback<CallbackRes<UserDto>> callback){
+      userReference.document(getCurrentUser().getId()).update("age", age).addOnCompleteListener(
+              updateTask -> {
+                  if(updateTask.isSuccessful()){
+                      callback.callback(new CallbackRes.Success<>(getCurrentUser()));
+                  }
+                  else {
+                      callback.callback(new CallbackRes.Error(updateTask.getException()));
+                  }
+              }
+      );
+    }
+
+
 }

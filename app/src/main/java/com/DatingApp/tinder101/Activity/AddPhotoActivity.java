@@ -19,6 +19,11 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.DatingApp.tinder101.R;
 import com.DatingApp.tinder101.databinding.ActivityAddPhotoBinding;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.storage.StorageReference;
+
+import java.util.HashMap;
 
 public class AddPhotoActivity extends AppCompatActivity {
     private ActivityAddPhotoBinding activityAddPhotoBinding;
@@ -26,6 +31,8 @@ public class AddPhotoActivity extends AppCompatActivity {
     private Uri imageUri2;
     private Uri imageUri3;
     private Uri imageUri4;
+    StorageReference storageReference;
+    private HashMap<Integer, String> imageString;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,6 +40,7 @@ public class AddPhotoActivity extends AppCompatActivity {
         setContentView(activityAddPhotoBinding.getRoot());
         setUpImagePicker();
         checkImage();
+        setButton();
 
 
     }
@@ -153,7 +161,8 @@ public class AddPhotoActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 finish();
-//                startActivity(new Intent(getApplicationContext(), AddPhotoActivity.class));
+                startActivity(new Intent(getApplicationContext(), AddInterestActivity.class));
+
             }
         });
     }
