@@ -26,9 +26,12 @@ import android.widget.Toast;
 import com.DatingApp.tinder101.Adapter.RoundChatItemAdapter;
 import com.DatingApp.tinder101.Adapter.UserCardAdapter;
 import com.DatingApp.tinder101.Adapter.UserCardsHolderAdapter;
+import com.DatingApp.tinder101.Callback.CallbackRes;
+import com.DatingApp.tinder101.Callback.FirebaseCallback;
 import com.DatingApp.tinder101.Dto.UserDto;
 
 import com.DatingApp.tinder101.R;
+import com.DatingApp.tinder101.Service.SystemService;
 import com.DatingApp.tinder101.Service.UserService;
 import com.DatingApp.tinder101.databinding.FragmentSwipeBinding;
 
@@ -54,6 +57,8 @@ public class SwipeFragment extends Fragment
 
   private CardStackView swipeFlingAdapterView;
 
+  private SystemService systemService;
+
   private UserCardsHolderAdapter userCardsHolderAdapter;
 
   private CardStackLayoutManager cardStackLayoutManager;
@@ -78,6 +83,7 @@ public class SwipeFragment extends Fragment
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     userService = new UserService(requireContext());
+    systemService = new SystemService(userService);
     fragmentSwipeBinding = FragmentSwipeBinding.inflate(getLayoutInflater());
     userCardsHolderAdapter = new UserCardsHolderAdapter(requireContext(), this);
     userCardsHolderAdapter.setData(users);
@@ -96,7 +102,6 @@ public class SwipeFragment extends Fragment
                   fragmentSwipeBinding.likeBtn.setBackgroundResource(R.drawable.bg_like);
                   fragmentSwipeBinding.dislikeIcon.setImageResource(R.drawable.dislike_icon_new);
                   fragmentSwipeBinding.dislikeBtn.setBackgroundResource(R.drawable.bg_dislike_norm);
-
                 } else if (direction == Direction.Left) {
                   isLike = false;
                   isDislike = true;
@@ -104,6 +109,13 @@ public class SwipeFragment extends Fragment
                   fragmentSwipeBinding.dislikeBtn.setBackgroundResource(R.drawable.bg_dislike);
                   fragmentSwipeBinding.likeIcon.setImageResource(R.drawable.like_icon_new);
                   fragmentSwipeBinding.likeBtn.setBackgroundResource(R.drawable.bg_dislike_norm);
+                } else {
+                  likeView.setVisibility(View.INVISIBLE);
+                  dislikeView.setVisibility(View.INVISIBLE);
+                  fragmentSwipeBinding.likeIcon.setImageResource(R.drawable.like_icon_new);
+                  fragmentSwipeBinding.likeBtn.setBackgroundResource(R.drawable.bg_dislike_norm);
+                  fragmentSwipeBinding.dislikeIcon.setImageResource(R.drawable.dislike_icon_new);
+                  fragmentSwipeBinding.dislikeBtn.setBackgroundResource(R.drawable.bg_dislike_norm);
                 }
 
                 likeView.setVisibility(isLike ? View.VISIBLE : View.INVISIBLE);
@@ -115,6 +127,17 @@ public class SwipeFragment extends Fragment
                 int currentPos = cardStackLayoutManager.getTopPosition();
                 if (direction == Direction.Right) {
                   userService.rightSwipe(users.get(currentPos - 1).getId());
+                  systemService.updateNumOfLiked(
+                      users.get(currentPos - 1).getId(),
+                      0,
+                      new FirebaseCallback<CallbackRes<Integer>>() {
+                        @Override
+                        public void callback(CallbackRes<Integer> template) {
+                          if (template instanceof CallbackRes.Success) {
+                            Log.d("send notifications: ", "nice");
+                          }
+                        }
+                      });
                   users.remove(0);
                   if (users.isEmpty()) {
                     fragmentSwipeBinding.likeDislikeBtn.setVisibility(View.GONE);
@@ -132,6 +155,12 @@ public class SwipeFragment extends Fragment
                   userCardsHolderAdapter.notifyItemRemoved(0);
                   Log.d("delete ne", "hehee");
                 }
+                likeView.setVisibility(View.INVISIBLE);
+                dislikeView.setVisibility(View.INVISIBLE);
+                fragmentSwipeBinding.likeIcon.setImageResource(R.drawable.like_icon_new);
+                fragmentSwipeBinding.likeBtn.setBackgroundResource(R.drawable.bg_dislike_norm);
+                fragmentSwipeBinding.dislikeIcon.setImageResource(R.drawable.dislike_icon_new);
+                fragmentSwipeBinding.dislikeBtn.setBackgroundResource(R.drawable.bg_dislike_norm);
               }
 
               @Override
@@ -180,13 +209,34 @@ public class SwipeFragment extends Fragment
         view -> {
           users.remove(0);
           swipeFlingAdapterView.swipe();
+          if (users.isEmpty()) {
+            fragmentSwipeBinding.likeDislikeBtn.setVisibility(View.GONE);
+          } else {
+            fragmentSwipeBinding.likeDislikeBtn.setVisibility(View.VISIBLE);
+          }
           Toast.makeText(requireContext(), "You swipe right!!!", Toast.LENGTH_SHORT).show();
           userService.rightSwipe(users.get(cardStackLayoutManager.getTopPosition()).getId());
+          systemService.updateNumOfLiked(
+              users.get(cardStackLayoutManager.getTopPosition()).getId(),
+              0,
+              new FirebaseCallback<CallbackRes<Integer>>() {
+                @Override
+                public void callback(CallbackRes<Integer> template) {
+                  if (template instanceof CallbackRes.Success) {
+                    Log.d("send notifications: ", "nice");
+                  }
+                }
+              });
         });
     fragmentSwipeBinding.dislikeBtn.setOnClickListener(
         view -> {
           swipeFlingAdapterView.swipe();
           users.remove(0);
+          if (users.isEmpty()) {
+            fragmentSwipeBinding.likeDislikeBtn.setVisibility(View.GONE);
+          } else {
+            fragmentSwipeBinding.likeDislikeBtn.setVisibility(View.VISIBLE);
+          }
           userCardsHolderAdapter.notifyItemRemoved(0);
           Toast.makeText(requireContext(), "You swipe left!!!", Toast.LENGTH_SHORT).show();
         });
@@ -203,6 +253,11 @@ public class SwipeFragment extends Fragment
   public void swipeLeft() {
     swipeFlingAdapterView.swipe();
     users.remove(0);
+    if (users.isEmpty()) {
+      fragmentSwipeBinding.likeDislikeBtn.setVisibility(View.GONE);
+    } else {
+      fragmentSwipeBinding.likeDislikeBtn.setVisibility(View.VISIBLE);
+    }
     userCardsHolderAdapter.notifyItemRemoved(0);
     Toast.makeText(requireContext(), "You swipe left!!!", Toast.LENGTH_SHORT).show();
   }
@@ -211,8 +266,24 @@ public class SwipeFragment extends Fragment
   public void swipeRight(String userId) {
     users.remove(0);
     swipeFlingAdapterView.swipe();
+    if (users.isEmpty()) {
+      fragmentSwipeBinding.likeDislikeBtn.setVisibility(View.GONE);
+    } else {
+      fragmentSwipeBinding.likeDislikeBtn.setVisibility(View.VISIBLE);
+    }
     Toast.makeText(requireContext(), "You swipe right!!!", Toast.LENGTH_SHORT).show();
     userService.rightSwipe(userId);
+    systemService.updateNumOfLiked(
+        userId,
+        0,
+        new FirebaseCallback<CallbackRes<Integer>>() {
+          @Override
+          public void callback(CallbackRes<Integer> template) {
+            if (template instanceof CallbackRes.Success) {
+              Log.d("send notifications: ", "nice");
+            }
+          }
+        });
   }
 
   @Override

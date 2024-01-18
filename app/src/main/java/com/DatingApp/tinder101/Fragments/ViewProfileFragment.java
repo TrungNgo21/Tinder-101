@@ -205,6 +205,8 @@ public class ViewProfileFragment extends Fragment {
       fragmentViewProfileBinding.lookingForDisplay.setVisibility(View.VISIBLE);
       fragmentViewProfileBinding.lookingForContent.setText(
           EnumConverter.toString(userDto.getProfileSetting().getLookingForEnum()));
+      fragmentViewProfileBinding.lookingForIcon.setImageResource(
+          EnumConverter.getIconResource(userDto.getProfileSetting().getLookingForEnum()));
     } else {
       fragmentViewProfileBinding.lookingForDisplay.setVisibility(View.GONE);
     }

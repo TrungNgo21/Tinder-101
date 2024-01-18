@@ -156,6 +156,7 @@
                     android:layout_height="wrap_content">
 
                     <ImageView
+                        android:id="@+id/lookingForIcon"
                         android:layout_width="@dimen/_20sdp"
                         android:layout_height="@dimen/_20sdp"
                         android:src="@drawable/looking_for_icon" />

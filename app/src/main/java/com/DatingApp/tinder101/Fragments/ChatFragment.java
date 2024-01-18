@@ -16,8 +16,10 @@ import com.DatingApp.tinder101.Adapter.RoundChatItemAdapter;
 import com.DatingApp.tinder101.Constant.Constant;
 import com.DatingApp.tinder101.Dto.UserDto;
 import com.DatingApp.tinder101.Model.Conversation;
+import com.DatingApp.tinder101.Model.User;
 import com.DatingApp.tinder101.R;
 import com.DatingApp.tinder101.Service.MessageService;
+import com.DatingApp.tinder101.Service.SystemService;
 import com.DatingApp.tinder101.Service.UserService;
 import com.DatingApp.tinder101.databinding.FragmentChatBinding;
 
@@ -31,6 +33,8 @@ public class ChatFragment extends Fragment implements OnChatItemTap {
 
   private MessageService messageService;
 
+  private SystemService systemService;
+
   private UserService userService;
 
   public ChatFragment(List<UserDto> users) {
@@ -42,6 +46,7 @@ public class ChatFragment extends Fragment implements OnChatItemTap {
     super.onCreate(savedInstanceState);
     userService = new UserService(requireContext());
     messageService = new MessageService(requireContext(), userService);
+    systemService = new SystemService(userService);
     fragmentChatBinding = FragmentChatBinding.inflate(getLayoutInflater());
     setUpMessages();
   }
@@ -50,6 +55,12 @@ public class ChatFragment extends Fragment implements OnChatItemTap {
   public View onCreateView(
       LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
     setUpNewMatches();
+    fragmentChatBinding.lastOnline.setText(
+        "+ " + String.valueOf(userService.getCurrentUser().getNumOfLiked()));
+    fragmentChatBinding.profileName.setText(
+        userService.getCurrentUser().getNumOfLiked() + " likes");
+
+    systemService.setNotiListener(fragmentChatBinding.lastOnline, fragmentChatBinding.profileName);
     // Inflate the layout for this fragment
     return fragmentChatBinding.getRoot();
   }

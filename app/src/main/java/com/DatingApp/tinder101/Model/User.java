@@ -23,6 +23,7 @@ public class User {
   private String name;
   private String email;
   private int age;
+  private int numOfLiked;
   private HashMap<String, String> imageUrlsMap;
   private Date createdDate;
   private String gender;
@@ -36,6 +37,7 @@ public class User {
         .email(email)
         .gender(gender)
         .age(age)
+        .numOfLiked(numOfLiked)
         .imageUrlsMap(imageUrlsMap)
         .profileSetting(profileSetting.toDto())
         .matchedUsers(matchedUsers)

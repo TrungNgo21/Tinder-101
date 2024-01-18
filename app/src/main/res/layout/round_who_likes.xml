@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:layout_marginEnd="@dimen/_16sdp"
+    android:gravity="center"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <LinearLayout
+        android:background="@drawable/bg_round_linear"
+        android:layout_width="@dimen/_70sdp"
+        android:layout_height="@dimen/_70sdp"
+        android:gravity="center">
+
+        <TextView
+            android:id="@+id/lastOnline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="@dimen/_5sdp"
+            android:paddingVertical="@dimen/_1sdp"
+            android:text="@string/lastOnline"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_16ssp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+
+    <TextView
+        android:id="@+id/profileName"
+        android:layout_marginTop="@dimen/_4sdp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/mockUpName"
+        android:textSize="@dimen/_10ssp"
+        android:textStyle="bold" />
+
+
+</LinearLayout>

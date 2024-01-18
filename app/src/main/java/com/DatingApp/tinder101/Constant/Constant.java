@@ -16,6 +16,7 @@ public class Constant {
   public static final String KEY_COLLECTION_MESSAGES = "messages";
 
   public static final String KEY_COLLECTION_CONVERSATIONS = "conversations";
+  public static final String KEY_COLLECTION_NOTIFICATIONS = "notifications";
 
   public static final String KEY_GOOGLE_MAP_API = "AIzaSyBiKCD0sJBfjF8OHDT6j-8iTHh3PAdB268";
 
@@ -28,45 +29,112 @@ public class Constant {
   public static final String KEY_CACHE_REGISTER = "cacheUser";
 
   public static final String KEY_SIGN_IN = "isSignIn";
-  public static final List<String> interests = asList(new String[]{"Gaming", "Dancing", "Music", "Movie", "Photography", "Architecture", "Fashion", "Book", "Writing", "Painting",
-          "Football", "People", "Animals", "Gym", "Food & Drink", "Travel & Places"});
+  public static final List<String> interests =
+      asList(
+          new String[] {
+            "Gaming",
+            "Dancing",
+            "Music",
+            "Movie",
+            "Photography",
+            "Architecture",
+            "Fashion",
+            "Book",
+            "Writing",
+            "Painting",
+            "Football",
+            "People",
+            "Animals",
+            "Gym",
+            "Food & Drink",
+            "Travel & Places"
+          });
 
-  public static final List<String> zodiacs = asList(new String[]{
-          "Aries", "Taurus", "Gemini", "Cancer",
-          "Leo", "Virgo", "Libra", "Scorpio",
-          "Sagittarius", "Capricorn", "Aquarius", "Pisces"
-  });
+  public static final List<String> zodiacs =
+      asList(
+          new String[] {
+            "Aries", "Taurus", "Gemini", "Cancer",
+            "Leo", "Virgo", "Libra", "Scorpio",
+            "Sagittarius", "Capricorn", "Aquarius", "Pisces"
+          });
 
-  public static final List<String> educations = asList(new String[]{
-          "Bachelor degree", "At uni", "High school", "PhD", "On a graduate programme", "Master degree", "Trade school"
-  });
+  public static final List<String> educations =
+      asList(
+          new String[] {
+            "Bachelor degree",
+            "At uni",
+            "High school",
+            "PhD",
+            "On a graduate programme",
+            "Master degree",
+            "Trade school"
+          });
 
-  public static final List<String> communications = asList(new String[]{
-          "Big time texter", "Phone caller", "Video chatter", "Bad texter", "Better in person"
-  });
+  public static final List<String> communications =
+      asList(
+          new String[] {
+            "Big time texter", "Phone caller", "Video chatter", "Bad texter", "Better in person"
+          });
 
-  public static final List<String> loves = asList(new String[]{
-          "Thoughtful gestures", "Presents", "Touch", "Compliments", "Time together"
-  });
+  public static final List<String> loves =
+      asList(
+          new String[] {
+            "Thoughtful gestures", "Presents", "Touch", "Compliments", "Time together"
+          });
 
-//  public static final String PET = "Pets";
-public static final List<String> pets = asList(new String[]{
-        "Dog", "Cat", "Fish", "Bird", "Don't have, but love", "Pet-free", "All the pets", "Want a pet"
-});
-//  public static final String DRINKING = "Drinking";
-public static final List<String> drinks = asList(new String[]{
-        "Not for me", "Newly teetotal", "Sober curious", "On special occasions", "Socially, at the weekend", "Most nights"
-});
-//  public static final String SMOKE = "How often do you smoke?";
-public static final List<String> smokes = asList(new String[]{
-        "Social smoker", "Smoker when drinking", "Non-smoker", "Smoker", "Trying to quit"
-});
-//  public static final String WORKOUT = "Workout";
-public static final List<String> workouts = asList(new String[]{
-        "Every day", "Often","Sometimes","Never"
-});
-  public static List<Integer> interestsIcon = asList(new Integer[]{R.drawable.ic_game, R.drawable.ic_dancing, R.drawable.ic_music, R.drawable.ic_movie, R.drawable.ic_photo, R.drawable.ic_architecture, R.drawable.ic_fashion, R.drawable.ic_book, R.drawable.ic_writing,
-          R.drawable.ic_painting, R.drawable.ic_football, R.drawable.ic_people, R.drawable.ic_animal, R.drawable.ic_gym, R.drawable.ic_food, R.drawable.ic_travel});
+  //  public static final String PET = "Pets";
+  public static final List<String> pets =
+      asList(
+          new String[] {
+            "Dog",
+            "Cat",
+            "Fish",
+            "Bird",
+            "Don't have, but love",
+            "Pet-free",
+            "All the pets",
+            "Want a pet"
+          });
+  //  public static final String DRINKING = "Drinking";
+  public static final List<String> drinks =
+      asList(
+          new String[] {
+            "Not for me",
+            "Newly teetotal",
+            "Sober curious",
+            "On special occasions",
+            "Socially, at the weekend",
+            "Most nights"
+          });
+  //  public static final String SMOKE = "How often do you smoke?";
+  public static final List<String> smokes =
+      asList(
+          new String[] {
+            "Social smoker", "Smoker when drinking", "Non-smoker", "Smoker", "Trying to quit"
+          });
+  //  public static final String WORKOUT = "Workout";
+  public static final List<String> workouts =
+      asList(new String[] {"Every day", "Often", "Sometimes", "Never"});
+  public static List<Integer> interestsIcon =
+      asList(
+          new Integer[] {
+            R.drawable.ic_game,
+            R.drawable.ic_dancing,
+            R.drawable.ic_music,
+            R.drawable.ic_movie,
+            R.drawable.ic_photo,
+            R.drawable.ic_architecture,
+            R.drawable.ic_fashion,
+            R.drawable.ic_book,
+            R.drawable.ic_writing,
+            R.drawable.ic_painting,
+            R.drawable.ic_football,
+            R.drawable.ic_people,
+            R.drawable.ic_animal,
+            R.drawable.ic_gym,
+            R.drawable.ic_food,
+            R.drawable.ic_travel
+          });
 
   public static final String KEY_SENT_USER_ID = "sentUserId";
   public static final String KEY_RECEIVED_USED_ID = "receivedUserId";
