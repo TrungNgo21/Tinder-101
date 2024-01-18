@@ -75,14 +75,14 @@
                         android:textSize="@dimen/_12sdp" />
                 </com.google.android.material.textfield.TextInputLayout>
                 <TextView
-                    android:background="@color/white"
+                    android:background="@drawable/error_background"
                     android:paddingHorizontal="4dp"
-                    android:textAlignment="center"
+                    android:drawableStart="@drawable/ic_error"
+                    android:drawablePadding="@dimen/_10sdp"
                     android:id="@+id/errorEmail"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/_35sdp"
-                    android:layout_marginEnd="@dimen/_35sdp"
+                    android:padding="@dimen/_5sdp"
                     android:layout_marginTop="@dimen/_5sdp"
                     android:text="@string/email_error"
                     android:textColor="@color/error" />
@@ -122,6 +122,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:paddingHorizontal="@dimen/_12sdp"
+                        android:padding="@dimen/_10sdp"
                         android:inputType="textPassword"
                         android:textColor="@color/purple_200"
                         android:background="@drawable/input_field"
@@ -129,14 +130,14 @@
                         android:textSize="@dimen/_12sdp" />
                 </com.google.android.material.textfield.TextInputLayout>
                 <TextView
-                    android:background="@color/white"
+                    android:background="@drawable/error_background"
+                    android:padding="@dimen/_5sdp"
+                    android:drawableStart="@drawable/ic_error"
+                    android:drawablePadding="@dimen/_10sdp"
                     android:paddingHorizontal="4dp"
-                    android:textAlignment="center"
                     android:id="@+id/errorPassword"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/_35sdp"
-                    android:layout_marginEnd="@dimen/_35sdp"
                     android:layout_marginTop="@dimen/_5sdp"
                     android:text="@string/password_error"
                     android:textColor="@color/error" />
