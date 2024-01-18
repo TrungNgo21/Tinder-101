@@ -24,7 +24,7 @@ import com.DatingApp.tinder101.Constant.Constant;
 import com.DatingApp.tinder101.R;
 import com.DatingApp.tinder101.Service.UserProfileService;
 import com.DatingApp.tinder101.Service.UserService;
-import com.DatingApp.tinder101.Utils.CustomToast;
+
 import com.DatingApp.tinder101.Utils.SpacingItemDecoration;
 import com.DatingApp.tinder101.databinding.ActivityAddInterestBinding;
 import com.google.android.material.chip.Chip;

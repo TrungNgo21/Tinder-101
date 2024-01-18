@@ -157,7 +157,7 @@ public class UserProfileService {
 
 
 
-    public void updateUserProfileSetting() {
+    public void updateUserProfileSetting(UserService.CallbackListener callbackListener) {
         this.userService.updateProfile(new FirebaseCallback<CallbackRes<UserDto>>() {
             @Override
             public void callback(CallbackRes<UserDto> template) {
@@ -166,7 +166,7 @@ public class UserProfileService {
                     userService.setCurrentUser(currentUser);
                 }
             }
-        }, this.setProfileSetting());
+        }, this.setProfileSetting(), callbackListener);
 
     }
 

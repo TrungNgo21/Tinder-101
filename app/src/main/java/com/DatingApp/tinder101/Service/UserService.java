@@ -47,6 +47,11 @@ import java.util.Objects;
 import java.util.Stack;
 
 public class UserService {
+
+    public interface CallbackListener {
+        public void onSuccessCallBack(String message);
+        public void onFailureCallBack(String message);
+    }
   private PreferenceManager preferenceManager;
   private final FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
   private final FirebaseFirestore fireStore = FirebaseFirestore.getInstance();
@@ -322,13 +327,15 @@ public class UserService {
             });
 
   }
-  public void updateProfile(final FirebaseCallback<CallbackRes<UserDto>> callback, ProfileSetting profileSetting){
+  public void updateProfile(final FirebaseCallback<CallbackRes<UserDto>> callback, ProfileSetting profileSetting, CallbackListener callbackListener){
       userReference.document(getCurrentUser().getId()).update("profileSetting", profileSetting).addOnCompleteListener(
               updateUserTask -> {
                   if (updateUserTask.isSuccessful()) {
                       callback.callback(new CallbackRes.Success<>(getCurrentUser()));
+                      callbackListener.onSuccessCallBack("Update profile successfully");
                   } else {
                       callback.callback(new CallbackRes.Error(updateUserTask.getException()));
+                      callbackListener.onFailureCallBack(updateUserTask.getException().getMessage());
                   }
               }
       );

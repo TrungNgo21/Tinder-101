@@ -44,7 +44,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
-public class ProfilePreviewFragment extends Fragment {
+public class ProfilePreviewFragment extends Fragment implements UserService.CallbackListener {
     private ProfilePreviewBinding profilePreviewBinding;
     private UserDto currentUser;
     private UserService userService;
@@ -222,7 +222,7 @@ public class ProfilePreviewFragment extends Fragment {
         done.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                userProfileService.updateUserProfileSetting();
+                userProfileService.updateUserProfileSetting(ProfilePreviewFragment.this);
                 closeDialog();
             }
         });
@@ -348,5 +348,15 @@ public class ProfilePreviewFragment extends Fragment {
             chipView.setChipBackgroundColorResource(backgroundColor);
             chipGroup.addView(chipView);
         }
+    }
+
+    @Override
+    public void onSuccessCallBack(String message) {
+
+    }
+
+    @Override
+    public void onFailureCallBack(String message) {
+
     }
 }
