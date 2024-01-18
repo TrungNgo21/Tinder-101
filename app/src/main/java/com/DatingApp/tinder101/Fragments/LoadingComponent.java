@@ -51,7 +51,7 @@ public class LoadingComponent extends RelativeLayout {
 
         root = findViewById(R.id.radial_animation);
         animationDrawable = (AnimationDrawable) root.getBackground();
-        animationDrawable.setEnterFadeDuration(10);
+        animationDrawable.setEnterFadeDuration(1000);
         animationDrawable.setExitFadeDuration(1000);
 
     }

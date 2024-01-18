@@ -41,6 +41,7 @@
     <color name="selected_icon_color">@color/primary_purple_700</color>
     <color name="unselected_icon_color">@color/bluish_gray_200</color>
     <color name="color_gradient_1">#8023EB</color>
+    <color name="color_gradient_3">#c16ce0</color>
     <color name="color_gradient_2">#FD788C</color>
     <color name="error_background">#FEEFEF</color>
 
