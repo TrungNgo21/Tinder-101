@@ -58,10 +58,8 @@ public class UserService {
   private final CollectionReference userReference =
       fireStore.collection(Constant.KEY_COLLECTION_USERS);
 
-
   public UserService(Context context) {
     this.preferenceManager = new PreferenceManager(context.getApplicationContext());
-
   }
 
   public void rightSwipe(String userId) {
@@ -146,7 +144,7 @@ public class UserService {
             registerTask -> {
               if (registerTask.isSuccessful()) {
                 FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-                sendVerificationEmail();
+                //                sendVerificationEmail();
                 User createdUser =
                     User.builder()
                         .name("Test")
@@ -175,23 +173,7 @@ public class UserService {
                                 .lookingForEnum(LookingForEnum.SHORT_LONG_OK.toString())
                                 .quotes("Qua la tuyet voi")
                                 .build())
-                        .imageUrlsMap(
-                            new HashMap<String, String>() {
-                              {
-                                put(
-                                    "0",
-                                    "https://cdn.freecodecamp.org/curriculum/cat-photo-app/relaxing-cat.jpg");
-                                put(
-                                    "1",
-                                    "https://cdn.freecodecamp.org/curriculum/cat-photo-app/relaxing-cat.jpg");
-                                put(
-                                    "2",
-                                    "https://cdn.freecodecamp.org/curriculum/cat-photo-app/relaxing-cat.jpg");
-                                put(
-                                    "3",
-                                    "https://cdn.freecodecamp.org/curriculum/cat-photo-app/relaxing-cat.jpg");
-                              }
-                            })
+                        .imageUrlsMap(new HashMap<String, String>())
                         .createdDate(new Date())
                         .updatedDate(new Date())
                         .build();
@@ -228,20 +210,25 @@ public class UserService {
   }
 
   private void sendVerificationEmail() {
-      FirebaseUser currentUser = firebaseAuth.getCurrentUser();
-      currentUser.sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
-          @Override
-          public void onComplete(@NonNull Task<Void> task) {
-              if (task.isSuccessful()) {
+    FirebaseUser currentUser = firebaseAuth.getCurrentUser();
+    currentUser
+        .sendEmailVerification()
+        .addOnCompleteListener(
+            new OnCompleteListener<Void>() {
+              @Override
+              public void onComplete(@NonNull Task<Void> task) {
+                if (task.isSuccessful()) {
                   firebaseAuth.signOut();
+                }
               }
-          }
-      }).addOnFailureListener(new OnFailureListener() {
-          @Override
-          public void onFailure(@NonNull Exception e) {
-              Log.d("Failed", e.getMessage().toString());
-          }
-      });
+            })
+        .addOnFailureListener(
+            new OnFailureListener() {
+              @Override
+              public void onFailure(@NonNull Exception e) {
+                Log.d("Failed", e.getMessage().toString());
+              }
+            });
   }
 
   public void login(
@@ -320,55 +307,66 @@ public class UserService {
                 callback.callback(new CallbackRes.Error(getUsersTask.getException()));
               }
             });
-
   }
-  public void updateProfile(final FirebaseCallback<CallbackRes<UserDto>> callback, ProfileSetting profileSetting){
-      userReference.document(getCurrentUser().getId()).update("profileSetting", profileSetting).addOnCompleteListener(
-              updateUserTask -> {
-                  if (updateUserTask.isSuccessful()) {
-                      callback.callback(new CallbackRes.Success<>(getCurrentUser()));
-                  } else {
-                      callback.callback(new CallbackRes.Error(updateUserTask.getException()));
-                  }
-              }
-      );
-  }
-  public void updateName(String name, final FirebaseCallback<CallbackRes<UserDto>> callback){
-      userReference.document(getCurrentUser().getId()).update("name", name).addOnCompleteListener(
-              updateTask -> {
-                  if(updateTask.isSuccessful()){
-                      callback.callback(new CallbackRes.Success<>(getCurrentUser()));
-                  }
-                  else {
-                      callback.callback(new CallbackRes.Error(updateTask.getException()));
-                  }
-              }
-      );
-  }
-    public void updateGender(String gender, final FirebaseCallback<CallbackRes<UserDto>> callback){
-        userReference.document(getCurrentUser().getId()).update("gender", gender).addOnCompleteListener(
-                updateTask -> {
-                    if(updateTask.isSuccessful()){
-                        callback.callback(new CallbackRes.Success<>(getCurrentUser()));
-                    }
-                    else {
-                        callback.callback(new CallbackRes.Error(updateTask.getException()));
-                    }
-                }
-        );
-    }
-    public void updateAge(int age, final FirebaseCallback<CallbackRes<UserDto>> callback){
-      userReference.document(getCurrentUser().getId()).update("age", age).addOnCompleteListener(
-              updateTask -> {
-                  if(updateTask.isSuccessful()){
-                      callback.callback(new CallbackRes.Success<>(getCurrentUser()));
-                  }
-                  else {
-                      callback.callback(new CallbackRes.Error(updateTask.getException()));
-                  }
-              }
-      );
-    }
 
+  public void updateProfile(
+      final FirebaseCallback<CallbackRes<UserDto>> callback, ProfileSetting profileSetting) {
+    userReference
+        .document(getCurrentUser().getId())
+        .update("profileSetting", profileSetting)
+        .addOnCompleteListener(
+            updateUserTask -> {
+              if (updateUserTask.isSuccessful()) {
+                callback.callback(new CallbackRes.Success<>(getCurrentUser()));
+              } else {
+                callback.callback(new CallbackRes.Error(updateUserTask.getException()));
+              }
+            });
+  }
 
+  public void updateName(String name, final FirebaseCallback<CallbackRes<UserDto>> callback) {
+    userReference
+        .document(getCurrentUser().getId())
+        .update("name", name)
+        .addOnCompleteListener(
+            updateTask -> {
+              if (updateTask.isSuccessful()) {
+                callback.callback(new CallbackRes.Success<>(getCurrentUser()));
+              } else {
+                callback.callback(new CallbackRes.Error(updateTask.getException()));
+              }
+            });
+  }
+
+  public void updateGender(String gender, final FirebaseCallback<CallbackRes<UserDto>> callback) {
+    userReference
+        .document(getCurrentUser().getId())
+        .update("gender", gender)
+        .addOnCompleteListener(
+            updateTask -> {
+              if (updateTask.isSuccessful()) {
+                callback.callback(new CallbackRes.Success<>(getCurrentUser()));
+              } else {
+                callback.callback(new CallbackRes.Error(updateTask.getException()));
+              }
+            });
+  }
+
+  public void updateAge(int age, final FirebaseCallback<CallbackRes<UserDto>> callback) {
+    userReference
+        .document(getCurrentUser().getId())
+        .update("age", age)
+        .addOnCompleteListener(
+            updateTask -> {
+              if (updateTask.isSuccessful()) {
+                callback.callback(new CallbackRes.Success<>(getCurrentUser()));
+              } else {
+                callback.callback(new CallbackRes.Error(updateTask.getException()));
+              }
+            });
+  }
+
+  public void updateImages(HashMap<String, String> map) {
+    userReference.document(getCurrentUser().getId()).update("imageUrlsMap", map);
+  }
 }
