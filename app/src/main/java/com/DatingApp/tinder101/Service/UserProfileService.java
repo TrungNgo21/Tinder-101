@@ -7,8 +7,10 @@ import com.DatingApp.tinder101.Callback.FirebaseCallback;
 import com.DatingApp.tinder101.Constant.Constant;
 import com.DatingApp.tinder101.Dto.ProfileSettingDto;
 import com.DatingApp.tinder101.Dto.UserDto;
+import com.DatingApp.tinder101.Enum.BasicEnum;
 import com.DatingApp.tinder101.Model.ProfileSetting;
 import com.DatingApp.tinder101.Model.User;
+import com.DatingApp.tinder101.Utils.EnumConverter;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -18,9 +20,11 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class UserProfileService {
     private FirebaseFirestore firestore;
@@ -41,6 +45,16 @@ public class UserProfileService {
         this.firebaseAuth = FirebaseAuth.getInstance();
         this.userService = userService;
         this.currentUser = this.userService.getCurrentUser();
+        if (this.currentUser != null) {
+            this.interests = this.currentUser.getProfileSetting().getInterests();
+            for (Map.Entry<BasicEnum, String> ele : this.currentUser.getProfileSetting().getBasics().entrySet()) {
+                String key = EnumConverter.toString(ele.getKey());
+                String value = ele.getValue();
+                this.basics.put(key, value);
+            }
+        }
+        this.interests = new ArrayList<String>();
+        this.basics = new HashMap<>();
     }
 
     public void setQuotes(String quotes) {
@@ -53,6 +67,14 @@ public class UserProfileService {
 
     public void appendInterests(String interest) {
         this.interests.add(interest);
+    }
+
+    public void removeInterests(String interest) {
+        this.interests.remove(interest);
+    }
+
+    public List<String> getInterests() {
+        return this.interests;
     }
 
     public void setLifeStyleList(HashMap<String, String> lifeStyleList) {
@@ -69,6 +91,14 @@ public class UserProfileService {
 
     public void appendBasics(String key, String value) {
         this.basics.put(key, value);
+    }
+
+    public void removeBasic(String key) {
+        this.basics.remove(key);
+    }
+
+    public Map<String, String> getBasics() {
+        return this.basics;
     }
 
     public void setLookingForEnum(String lookingForEnum) {
