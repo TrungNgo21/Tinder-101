@@ -1,16 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:orientation="vertical"
         android:layout_height="wrap_content">
+
         <GridLayout
             android:columnCount="2"
             android:rowCount="1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -19,8 +23,8 @@
                 android:textSize="@dimen/_14sdp"
                 android:layout_columnWeight="1"
                 android:text="Cancel"
-                android:textStyle="bold"
-                />
+                android:textStyle="bold" />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -30,162 +34,185 @@
                 android:textAlignment="viewEnd"
                 android:id="@+id/done_button"
                 android:text="Done"
-                android:textStyle="bold"
-                />
+                android:textStyle="bold" />
         </GridLayout>
+
         <TextView
             android:id="@+id/bottom_sheet_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textStyle="bold"
             android:textSize="30dp"
-            android:text="More about me"
-            />
+            android:text="More about me" />
+
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-            <GridLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:rowCount="2"
 
-                android:columnCount="1">
-                <LinearLayout
+            <LinearLayout
+                android:orientation="vertical"
+                android:gravity="center_horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <GridLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    >
-                    <TextView
+                    android:rowCount="2"
+
+                    android:columnCount="1">
+
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/black"
-                        android:id="@+id/chip_group_title_1"
-                        android:textSize="@dimen/_14sdp"
-                        android:text="What's your star sign ?"
-                        android:textStyle="bold"/>
-                </LinearLayout>
-                <com.google.android.material.chip.ChipGroup
-                    app:chipSpacingVertical="@dimen/_4sdp"
-                    app:chipSpacingHorizontal="@dimen/_4sdp"
-                    android:layout_marginTop="@dimen/_20sdp"
-                    android:layout_marginBottom="@dimen/_20sdp"
-                    android:id="@+id/chip_group_1"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                        android:orientation="horizontal">
 
-            </GridLayout>
-            <com.google.android.material.divider.MaterialDivider
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/black"
+                            android:id="@+id/chip_group_title_1"
+                            android:textSize="@dimen/_14sdp"
+                            android:text="What's your star sign ?"
+                            android:textStyle="bold" />
+                    </LinearLayout>
 
-                />
-            <GridLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:rowCount="2"
+                    <com.google.android.material.chip.ChipGroup
+                        app:chipSpacingVertical="@dimen/_4sdp"
+                        app:chipSpacingHorizontal="@dimen/_4sdp"
+                        android:layout_marginTop="@dimen/_20sdp"
+                        android:layout_marginBottom="@dimen/_20sdp"
+                        android:id="@+id/chip_group_1"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
 
-                android:columnCount="1">
-                <LinearLayout
+                </GridLayout>
+
+                <com.google.android.material.divider.MaterialDivider
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    >
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/_14sdp"
-                        android:id="@+id/chip_group_title_2"
-                        android:text="What's your education level ?"
-                        android:textStyle="bold"/>
-                </LinearLayout>
-                <com.google.android.material.chip.ChipGroup
-                    app:chipSpacingVertical="@dimen/_4sdp"
-                    app:chipSpacingHorizontal="@dimen/_4sdp"
-                    android:layout_marginTop="@dimen/_20sdp"
-                    android:layout_marginBottom="@dimen/_20sdp"
-                    android:id="@+id/chip_group_2"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
 
-            </GridLayout>
-            <com.google.android.material.divider.MaterialDivider
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                    />
 
-                />
-            <GridLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:rowCount="2"
-                android:columnCount="1">
-                <LinearLayout
+                <GridLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    >
-                    <TextView
+                    android:rowCount="2"
+
+                    android:columnCount="1">
+
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/black"
-                        android:id="@+id/chip_group_title_3"
-                        android:textSize="@dimen/_14sdp"
-                        android:text="What's your communication style ?"
-                        android:textStyle="bold"/>
-                </LinearLayout>
-                <com.google.android.material.chip.ChipGroup
-                    app:chipSpacingVertical="@dimen/_4sdp"
-                    app:chipSpacingHorizontal="@dimen/_4sdp"
-                    android:layout_marginTop="@dimen/_20sdp"
-                    android:layout_marginBottom="@dimen/_20sdp"
-                    android:id="@+id/chip_group_3"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                        android:orientation="horizontal">
 
-            </GridLayout>
-            <com.google.android.material.divider.MaterialDivider
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/_14sdp"
+                            android:id="@+id/chip_group_title_2"
+                            android:text="What's your education level ?"
+                            android:textStyle="bold" />
+                    </LinearLayout>
 
-                />
-            <GridLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:rowCount="2"
-                android:columnCount="1">
-                <LinearLayout
+                    <com.google.android.material.chip.ChipGroup
+                        app:chipSpacingVertical="@dimen/_4sdp"
+                        app:chipSpacingHorizontal="@dimen/_4sdp"
+                        android:layout_marginTop="@dimen/_20sdp"
+                        android:layout_marginBottom="@dimen/_20sdp"
+                        android:id="@+id/chip_group_2"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                </GridLayout>
+
+                <com.google.android.material.divider.MaterialDivider
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    >
-                    <TextView
+
+                    />
+
+                <GridLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:rowCount="2"
+                    android:columnCount="1">
+
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/_14sdp"
-                        android:id="@+id/chip_group_title_4"
-                        android:text="How do you receive love ?"
-                        android:textStyle="bold"/>
-                </LinearLayout>
-                <com.google.android.material.chip.ChipGroup
-                    app:chipSpacingVertical="@dimen/_4sdp"
-                    app:chipSpacingHorizontal="@dimen/_4sdp"
-                    android:layout_marginTop="@dimen/_20sdp"
-                    android:layout_marginBottom="@dimen/_20sdp"
-                    android:id="@+id/chip_group_4"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                        android:orientation="horizontal">
 
-            </GridLayout>
-            <com.google.android.material.divider.MaterialDivider
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/black"
+                            android:id="@+id/chip_group_title_3"
+                            android:textSize="@dimen/_14sdp"
+                            android:text="What's your communication style ?"
+                            android:textStyle="bold" />
+                    </LinearLayout>
 
-                />
+                    <com.google.android.material.chip.ChipGroup
+                        app:chipSpacingVertical="@dimen/_4sdp"
+                        app:chipSpacingHorizontal="@dimen/_4sdp"
+                        android:layout_marginTop="@dimen/_20sdp"
+                        android:layout_marginBottom="@dimen/_20sdp"
+                        android:id="@+id/chip_group_3"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                </GridLayout>
+
+                <com.google.android.material.divider.MaterialDivider
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    />
+
+                <GridLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:rowCount="2"
+                    android:columnCount="1">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/_14sdp"
+                            android:id="@+id/chip_group_title_4"
+                            android:text="How do you receive love ?"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                    <com.google.android.material.chip.ChipGroup
+                        app:chipSpacingVertical="@dimen/_4sdp"
+                        app:chipSpacingHorizontal="@dimen/_4sdp"
+                        android:layout_marginTop="@dimen/_20sdp"
+                        android:layout_marginBottom="@dimen/_20sdp"
+                        android:id="@+id/chip_group_4"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                </GridLayout>
+
+                <com.google.android.material.divider.MaterialDivider
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    />
+            </LinearLayout>
         </ScrollView>
     </LinearLayout>
 </RelativeLayout>
