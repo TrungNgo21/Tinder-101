@@ -71,7 +71,7 @@ public class CreateProfileActivity extends AppCompatActivity {
                     activityCreateProfileBinding.continueButtonId.setEnabled(false);
                 }
                 else {
-                    if(Integer.parseInt(activityCreateProfileBinding.ageId.getText().toString()) == 0){
+                    if(Integer.parseInt(activityCreateProfileBinding.ageId.getText().toString()) == 0 || Integer.parseInt(activityCreateProfileBinding.ageId.getText().toString()) < 18 || Integer.parseInt(activityCreateProfileBinding.ageId.getText().toString()) > 99){
                         activityCreateProfileBinding.errorAge.setVisibility(View.VISIBLE);
                         activityCreateProfileBinding.continueButtonId.setEnabled(false);
                     }
@@ -92,7 +92,7 @@ public class CreateProfileActivity extends AppCompatActivity {
                     activityCreateProfileBinding.continueButtonId.setEnabled(true);
                 }
                 if(!TextUtils.isEmpty(activityCreateProfileBinding.ageId.getText().toString())){
-                    if(Integer.parseInt(activityCreateProfileBinding.ageId.getText().toString()) != 0){
+                    if(Integer.parseInt(activityCreateProfileBinding.ageId.getText().toString()) != 0 && Integer.parseInt(activityCreateProfileBinding.ageId.getText().toString()) >= 18 && Integer.parseInt(activityCreateProfileBinding.ageId.getText().toString()) <= 99){
                         activityCreateProfileBinding.errorAge.setVisibility(View.INVISIBLE);
                         activityCreateProfileBinding.continueButtonId.setEnabled(true);
                     }

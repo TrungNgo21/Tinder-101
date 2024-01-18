@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:orientation="horizontal"
+    android:columnCount="5"
+    android:id="@+id/header"
+    android:paddingHorizontal="@dimen/_10sdp"
+    android:paddingVertical="@dimen/_5sdp"
+    android:layout_height="wrap_content">
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_row="1"
+        android:layout_marginEnd="@dimen/_5sdp"
+        android:src="@drawable/tinder_logo"/>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_column="1"
+        android:layout_row="1">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+           android:layout_marginTop="@dimen/_5sdp"
+            android:text="tinder:101"
+            android:textColor="@color/purple_200"
+            android:textSize="@dimen/_15sdp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_row="1"
+        android:layout_column="3"
+        android:id="@+id/notificationBtn"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:layout_marginEnd="@dimen/_10sdp"
+        android:src="@drawable/ic_notification" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_row="1"
+        android:layout_column="4"
+        android:id="@+id/aboutUsBtn"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:src="@drawable/ic_information" />
+
+
+</GridLayout>
