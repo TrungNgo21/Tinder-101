@@ -44,6 +44,7 @@ public class RegisterActivity extends AppCompatActivity implements UserService.C
     setLoading(false);
     setErrorMessage(activityRegisterBinding.authenticatedFailedId,false);
     setInputListener();
+    initialCheck();
     userService = new UserService(getApplicationContext());
     setUpButton();
   }
@@ -60,6 +61,15 @@ public class RegisterActivity extends AppCompatActivity implements UserService.C
     } else {
       errorMessage.setVisibility(View.INVISIBLE);
     }
+  }
+  public void initialCheck(){
+    if(!InputValidation.isValidEmail(activityRegisterBinding.emailId.getText().toString().trim())){
+      activityRegisterBinding.signUpButtonId.setEnabled(false);
+    }
+    if(!InputValidation.isValidPass(activityRegisterBinding.passwordId.getText().toString().trim(), 7, 10)){
+      activityRegisterBinding.signUpButtonId.setEnabled(false);
+    }
+
   }
   private void setInputListener(){
     TextWatcher textWatcher = new TextWatcher() {
@@ -101,6 +111,7 @@ public class RegisterActivity extends AppCompatActivity implements UserService.C
   public void setUpButton() {
     activityRegisterBinding.signUpButtonId.setOnClickListener(
         view -> {
+          setLoading(true);
           userService.register(
               activityRegisterBinding.emailId.getText().toString(),
               activityRegisterBinding.passwordId.getText().toString(),
@@ -108,9 +119,11 @@ public class RegisterActivity extends AppCompatActivity implements UserService.C
                 @Override
                 public void callback(CallbackRes<UserDto> res) {
                   if (res instanceof CallbackRes.Success) {
+                    setLoading(false);
                     finish();
                     startActivity(new Intent(getApplicationContext(), CreateProfileActivity.class));
                   } else {
+                    setLoading(false);
                     Toast.makeText(getApplicationContext(), res.toString(), Toast.LENGTH_LONG)
                         .show();
                   }
