@@ -18,11 +18,10 @@
     <color name="transparent">#00000000</color>
 
     <color name="like_color">#25A55F</color>
-    <color name="like_middle_color">#9BDF46</color>
+    <color name="like_middle_color">#FDF2F2</color>
     <color name="green_light">#E9FFC2</color>
     <color name="dislike_color">#F05941</color>
     <color name="dislike_middle_color">#f9bfbf</color>
-
 
     <color name="start_black">#4D000000</color>
     <color name="middle_black">#191919</color>
@@ -38,11 +37,14 @@
     <color name="pink_200">#FEEFEF</color>
     <color name="bluish_gray_200">#EBEEF2</color>
     <color name="slate_blue_500">#2C3A4B</color>
+    <color name="slate_blue_600">#F1F8FD</color>
     <color name="selected_icon_color">@color/primary_purple_700</color>
     <color name="unselected_icon_color">@color/bluish_gray_200</color>
     <color name="color_gradient_1">#8023EB</color>
+    <color name="color_gradient_3">#c16ce0</color>
     <color name="color_gradient_2">#FD788C</color>
     <color name="error_background">#FEEFEF</color>
+    <color name="light_purple_400">#F7F1FE</color>
 
     <color name="colorGradientStart">#D9FF43</color>
     <color name="colorGradientCenter">#F67831</color>

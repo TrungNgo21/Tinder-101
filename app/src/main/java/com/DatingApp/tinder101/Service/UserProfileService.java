@@ -1,5 +1,7 @@
 package com.DatingApp.tinder101.Service;
 
+import android.util.Log;
+
 import androidx.annotation.NonNull;
 
 import com.DatingApp.tinder101.Callback.CallbackRes;
@@ -39,6 +41,7 @@ public class UserProfileService {
     private List<String> interests;
     private HashMap<String,String> lifeStyleList;
     private HashMap<String, String> basics;
+    private HashMap<String, String> imgURLList;
     private String lookingForEnum;
 
     public UserProfileService(UserService userService) {
@@ -49,20 +52,24 @@ public class UserProfileService {
         this.interests = new ArrayList<String>();
         this.basics = new HashMap<>();
         this.lifeStyleList = new HashMap<>();
+        this.imgURLList = new HashMap<>();
         if (this.currentUser != null) {
-
             this.interests = this.currentUser.getProfileSetting().getInterests();
             for (Map.Entry<BasicEnum, String> ele : this.currentUser.getProfileSetting().getBasics().entrySet()) {
-                String key = EnumConverter.toString(ele.getKey());
+                String key = ele.getKey().toString();
                 String value = ele.getValue();
                 this.basics.put(key, value);
             }
 
             for (Map.Entry<LifestyleEnum, String> ele : this.currentUser.getProfileSetting().getLifestyleList().entrySet()) {
-                String key = EnumConverter.toString(ele.getKey());
+                String key = ele.getKey().toString();
+                Log.d("LifeStyle", ele.getKey().toString());
                 String value = ele.getValue();
                 this.lifeStyleList.put(key, value);
             }
+            Log.d("LifeStyle", this.lifeStyleList.toString());
+            this.imgURLList.putAll(this.currentUser.getImageUrlsMap());
+            this.lookingForEnum = this.currentUser.getProfileSetting().getLookingForEnum().toString();
         }
     }
 
@@ -101,6 +108,7 @@ public class UserProfileService {
         return this.lifeStyleList;
     }
 
+
     public void setBasics(HashMap<String, String> basics) {
         this.basics = basics;
     }
@@ -115,6 +123,22 @@ public class UserProfileService {
 
     public Map<String, String> getBasics() {
         return this.basics;
+    }
+
+    public void appendImgList(String key, String value) {
+        this.imgURLList.put(key, value);
+    }
+
+    public Map<String, String> getImgURL() {
+        return this.imgURLList;
+    }
+
+    public UserDto getCurrentUser() {
+        return currentUser;
+    }
+
+    public void setCurrentUser(UserDto currentUser) {
+        this.currentUser = currentUser;
     }
 
     public void setLookingForEnum(String lookingForEnum) {
@@ -133,7 +157,7 @@ public class UserProfileService {
 
 
 
-    public void updateUserProfileSetting() {
+    public void updateUserProfileSetting(UserService.CallbackListener callbackListener) {
         this.userService.updateProfile(new FirebaseCallback<CallbackRes<UserDto>>() {
             @Override
             public void callback(CallbackRes<UserDto> template) {
@@ -142,7 +166,7 @@ public class UserProfileService {
                     userService.setCurrentUser(currentUser);
                 }
             }
-        }, this.setProfileSetting());
+        }, this.setProfileSetting(), callbackListener);
 
     }
 

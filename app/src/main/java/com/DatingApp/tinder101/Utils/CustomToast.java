@@ -16,24 +16,21 @@ public class CustomToast extends Toast {
     public static final int SHORT = 4000;
     public static final int LONG = 7000;
 
-
     public CustomToast(Context context) {
+
         super(context);
+
     }
-    public static Toast makeText(Context context, int duration, int type){
+    public static Toast makeText(Context context, int duration,String title, String message){
         Toast toast = new Toast(context);
         toast.setDuration(duration);
         View layout = LayoutInflater.from(context).inflate(R.layout.edit_profile_custom_toast, null, false);
         TextView textView = layout.findViewById(R.id.status_text);
         TextView notification = layout.findViewById(R.id.notification_text);
-        if(type == 1){
-            textView.setText("Success!");
-            notification.setText("Your selections have been updated");
-        }
-        else {
-            textView.setText("Failed");
-            notification.setText("Your selections have not been updated");
-        }
+
+        textView.setText(title);
+        notification.setText(message);
+
         toast.setView(layout);
         return toast;
     }

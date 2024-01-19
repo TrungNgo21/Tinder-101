@@ -15,30 +15,36 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/black"
+            android:textColor="@color/red_700"
+            android:id="@+id/cancel_button"
+            android:padding="@dimen/_16sdp"
             android:textSize="@dimen/_14sdp"
             android:layout_columnWeight="1"
-            android:text="Done"
-            android:textStyle="bold"
-            />
+            android:text="Cancel"
+            android:textStyle="bold" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/black"
+            android:textColor="@color/teal_700"
             android:textSize="@dimen/_14sdp"
             android:layout_columnWeight="1"
             android:textAlignment="viewEnd"
+            android:id="@+id/done_button"
+            android:padding="@dimen/_16sdp"
             android:text="Done"
-            android:textStyle="bold"
-            />
+            android:textStyle="bold" />
     </GridLayout>
     <TextView
         android:id="@+id/bottom_sheet_title"
+        style="@style/PrimaryPurpleText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textStyle="bold"
-        android:textSize="30dp"
-        android:text="More about me"
+        android:fontFamily="@font/source_sans_pro_bold"
+        android:textSize="@dimen/_16sdp"
+        android:layout_marginLeft="@dimen/_16sdp"
+        android:layout_marginTop="@dimen/_16sdp"
+        android:text="My interests"
         />
     <GridLayout
         android:layout_width="match_parent"
@@ -54,9 +60,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="@color/black"
-                android:textSize="@dimen/_14sdp"
+                android:fontFamily="@font/source_sans_pro_semibold"
+                android:textSize="@dimen/_12sdp"
+                android:layout_marginTop="@dimen/_2sdp"
+                android:layout_marginLeft="@dimen/_16sdp"
                 android:text="What are your interests ?"
-                android:textStyle="bold"/>
+               />
         </LinearLayout>
         <com.google.android.material.chip.ChipGroup
             app:chipSpacingVertical="@dimen/_4sdp"

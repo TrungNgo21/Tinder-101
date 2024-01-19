@@ -18,8 +18,9 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/black"
+                android:textColor="@color/red_500"
                 android:id="@+id/cancel_button"
+                android:padding="@dimen/_16sdp"
                 android:textSize="@dimen/_14sdp"
                 android:layout_columnWeight="1"
                 android:text="Cancel"
@@ -28,11 +29,12 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/black"
+                android:textColor="@color/teal_700"
                 android:textSize="@dimen/_14sdp"
                 android:layout_columnWeight="1"
                 android:textAlignment="viewEnd"
                 android:id="@+id/done_button"
+                android:padding="@dimen/_16sdp"
                 android:text="Done"
                 android:textStyle="bold" />
         </GridLayout>
@@ -42,11 +44,15 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textStyle="bold"
-            android:textSize="30dp"
+            android:fontFamily="@font/source_sans_pro_bold"
+            android:layout_marginLeft="@dimen/_16sdp"
+            android:textSize="@dimen/_16sdp"
+            style="@style/PrimaryPurpleText"
             android:text="More about me" />
 
         <ScrollView
             android:layout_width="match_parent"
+            android:paddingHorizontal="10dp"
             android:layout_height="match_parent">
 
             <LinearLayout
@@ -72,7 +78,9 @@
                             android:layout_height="wrap_content"
                             android:textColor="@color/black"
                             android:id="@+id/chip_group_title_1"
-                            android:textSize="@dimen/_14sdp"
+                            android:textSize="@dimen/_12sdp"
+                            android:layout_marginTop="@dimen/_16sdp"
+                            android:layout_marginLeft="@dimen/_10sdp"
                             android:text="What's your star sign ?"
                             android:textStyle="bold" />
                     </LinearLayout>
@@ -83,7 +91,6 @@
                         android:layout_marginTop="@dimen/_20sdp"
                         android:layout_marginBottom="@dimen/_20sdp"
                         android:id="@+id/chip_group_1"
-                        android:layout_gravity="center_horizontal"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
 
@@ -92,7 +99,6 @@
                 <com.google.android.material.divider.MaterialDivider
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-
                     />
 
                 <GridLayout
@@ -111,9 +117,11 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:textColor="@color/black"
-                            android:textSize="@dimen/_14sdp"
                             android:id="@+id/chip_group_title_2"
-                            android:text="What's your education level ?"
+                            android:textSize="@dimen/_12sdp"
+                            android:layout_marginLeft="@dimen/_10sdp"
+                            android:layout_marginTop="@dimen/_8sdp"
+                            android:text="What's your star sign ?"
                             android:textStyle="bold" />
                     </LinearLayout>
 
@@ -123,7 +131,6 @@
                         android:layout_marginTop="@dimen/_20sdp"
                         android:layout_marginBottom="@dimen/_20sdp"
                         android:id="@+id/chip_group_2"
-                        android:layout_gravity="center_horizontal"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
 
@@ -139,6 +146,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:rowCount="2"
+
                     android:columnCount="1">
 
                     <LinearLayout
@@ -151,8 +159,10 @@
                             android:layout_height="wrap_content"
                             android:textColor="@color/black"
                             android:id="@+id/chip_group_title_3"
-                            android:textSize="@dimen/_14sdp"
-                            android:text="What's your communication style ?"
+                            android:textSize="@dimen/_12sdp"
+                            android:layout_marginLeft="@dimen/_10sdp"
+                            android:layout_marginTop="@dimen/_8sdp"
+                            android:text="What's your star sign ?"
                             android:textStyle="bold" />
                     </LinearLayout>
 
@@ -162,7 +172,6 @@
                         android:layout_marginTop="@dimen/_20sdp"
                         android:layout_marginBottom="@dimen/_20sdp"
                         android:id="@+id/chip_group_3"
-                        android:layout_gravity="center_horizontal"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
 
@@ -178,6 +187,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:rowCount="2"
+
                     android:columnCount="1">
 
                     <LinearLayout
@@ -189,9 +199,11 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:textColor="@color/black"
-                            android:textSize="@dimen/_14sdp"
                             android:id="@+id/chip_group_title_4"
-                            android:text="How do you receive love ?"
+                            android:textSize="@dimen/_12sdp"
+                            android:layout_marginLeft="@dimen/_10sdp"
+                            android:layout_marginTop="@dimen/_8sdp"
+                            android:text="What's your star sign ?"
                             android:textStyle="bold" />
                     </LinearLayout>
 
@@ -201,17 +213,11 @@
                         android:layout_marginTop="@dimen/_20sdp"
                         android:layout_marginBottom="@dimen/_20sdp"
                         android:id="@+id/chip_group_4"
-                        android:layout_gravity="center_horizontal"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
 
                 </GridLayout>
 
-                <com.google.android.material.divider.MaterialDivider
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-
-                    />
             </LinearLayout>
         </ScrollView>
     </LinearLayout>

@@ -19,6 +19,7 @@ import com.DatingApp.tinder101.Callback.FirebaseCallback;
 import com.DatingApp.tinder101.Dto.UserDto;
 import com.DatingApp.tinder101.R;
 import com.DatingApp.tinder101.Service.UserService;
+import com.DatingApp.tinder101.Utils.CustomToast;
 import com.DatingApp.tinder101.Utils.InputValidation;
 import com.DatingApp.tinder101.databinding.ActivityRegisterBinding;
 import com.DatingApp.tinder101.databinding.ActivitySignInBinding;
@@ -27,7 +28,7 @@ import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-public class RegisterActivity extends AppCompatActivity {
+public class RegisterActivity extends AppCompatActivity implements UserService.CallbackListener {
 
   private UserService userService;
   private ActivityRegisterBinding activityRegisterBinding;
@@ -114,7 +115,7 @@ public class RegisterActivity extends AppCompatActivity {
                         .show();
                   }
                 }
-              });
+              }, this);
         });
     activityRegisterBinding.toSignInButtonId.setOnClickListener(new View.OnClickListener() {
       @Override
@@ -124,5 +125,15 @@ public class RegisterActivity extends AppCompatActivity {
 
       }
     });
+  }
+
+  @Override
+  public void onSuccessCallBack(String message) {
+    CustomToast.makeText(this, CustomToast.SHORT, "Success!", message).show();
+  }
+
+  @Override
+  public void onFailureCallBack(String message) {
+    CustomToast.makeText(this, CustomToast.SHORT, "Error!", message).show();
   }
 }
