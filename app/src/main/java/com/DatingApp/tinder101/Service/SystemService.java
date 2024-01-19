@@ -179,8 +179,33 @@ public class SystemService {
           }
         });
 
+    EventListener<QuerySnapshot> matchListener =
+        ((value, error) -> {
+          if (error != null) {
+            Log.w("err", "listen:error", error);
+            return;
+          }
+
+          for (DocumentChange dc : value.getDocumentChanges()) {
+            switch (dc.getType()) {
+              case ADDED:
+                String last = indicator.getText().toString().replace("+", "").trim();
+                String next = "+ " + (Integer.parseInt(last) - 1);
+                explainedText.setText(next);
+                indicator.setText(next + " likes");
+                break;
+            }
+          }
+        });
+
     notificationRef
         .whereEqualTo("receiverId", userService.getCurrentUser().getId())
+        .whereEqualTo("mode", "MATCH")
+        .addSnapshotListener(matchListener);
+
+    notificationRef
+        .whereEqualTo("receiverId", userService.getCurrentUser().getId())
+        .whereEqualTo("mode", "LIKE")
         .addSnapshotListener(listener);
   }
 
@@ -194,7 +219,7 @@ public class SystemService {
               task -> {
                 if (task.isSuccessful()) {
                   callback.callback(new CallbackRes.Success<>(0));
-                  notificationService.sendNotification(userId, "Someone like you!");
+                  notificationService.sendNotification(userId, "Someone likes you!");
                 } else {
                   callback.callback(new CallbackRes.Error(task.getException()));
                 }

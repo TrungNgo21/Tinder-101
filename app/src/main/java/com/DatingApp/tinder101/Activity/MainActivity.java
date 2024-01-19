@@ -42,6 +42,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Stack;
 
@@ -115,16 +116,18 @@ public class MainActivity extends AppCompatActivity {
                 realTimeUserRef
                     .child(currentUser.getId())
                     .child("likedList")
-                    .child(snapshot.getKey())
                     .addValueEventListener(
                         new ValueEventListener() {
                           @Override
                           public void onDataChange(@NonNull DataSnapshot snapshot1) {
-                            if (snapshot1.exists()) {
-                              userService.handleMatch(snapshot1.getKey());
-                              Toast.makeText(
-                                      getApplicationContext(), "Matched!!!", Toast.LENGTH_LONG)
-                                  .show();
+                            if (snapshot1.getValue() != null) {
+                              if (((HashMap<String, Boolean>) snapshot1.getValue())
+                                  .containsKey(snapshot.getKey())) {
+                                userService.handleMatch(snapshot.getKey());
+                                Toast.makeText(
+                                        getApplicationContext(), "Matched!!!", Toast.LENGTH_LONG)
+                                    .show();
+                              }
                             }
                           }
 

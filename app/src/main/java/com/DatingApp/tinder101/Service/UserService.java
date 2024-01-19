@@ -13,6 +13,7 @@ import com.DatingApp.tinder101.Constant.Constant;
 import com.DatingApp.tinder101.Dto.ProfileSettingDto;
 import com.DatingApp.tinder101.Dto.UserDto;
 import com.DatingApp.tinder101.Enum.LookingForEnum;
+import com.DatingApp.tinder101.Model.Notification;
 import com.DatingApp.tinder101.Model.ProfileSetting;
 import com.DatingApp.tinder101.Model.User;
 import com.DatingApp.tinder101.Utils.EnumConverter;
@@ -58,6 +59,9 @@ public class UserService {
   private final CollectionReference userReference =
       fireStore.collection(Constant.KEY_COLLECTION_USERS);
 
+  private final CollectionReference notificationRef =
+      fireStore.collection(Constant.KEY_COLLECTION_NOTIFICATIONS);
+
   public UserService(Context context) {
     this.preferenceManager = new PreferenceManager(context.getApplicationContext());
   }
@@ -70,7 +74,6 @@ public class UserService {
   }
 
   public void handleMatch(String userId) {
-
     realTimeUserRef.child(getCurrentUser().getId()).child("likeList").child(userId).removeValue();
     realTimeUserRef.child(getCurrentUser().getId()).child("likedList").child(userId).removeValue();
     realTimeUserRef.child(userId).child("likeList").child(getCurrentUser().getId()).removeValue();
@@ -81,7 +84,19 @@ public class UserService {
     userReference
         .document(userId)
         .update("matchedUsers", FieldValue.arrayUnion(preferenceManager.getCurrentUser().getId()));
-    preferenceManager.getCurrentUser().getMatchedUsers().add(userId);
+    List<String> matchedIds = preferenceManager.getCurrentUser().getMatchedUsers();
+    matchedIds.add(userId);
+    UserDto userDto = preferenceManager.getCurrentUser();
+    userDto.setMatchedUsers(matchedIds);
+    preferenceManager.putCurrentUser(userDto);
+
+    notificationRef.add(
+        Notification.builder()
+            .createdDate(new Date())
+            .notiContent("Matched !!! Congratulations!")
+            .receiverId(userId)
+            .mode("MATCH")
+            .build());
   }
 
   public void getMatchedUsers(final FirebaseCallback<CallbackRes<List<UserDto>>> callback) {
@@ -93,9 +108,11 @@ public class UserService {
               @Override
               public Void apply(@NonNull Transaction transaction)
                   throws FirebaseFirestoreException {
+                DocumentSnapshot documentSnapshot =
+                    transaction.get(userReference.document((getCurrentUser().getId())));
+                List<String> matchedIds = documentSnapshot.toObject(User.class).getMatchedUsers();
                 List<DocumentSnapshot> userSnapshots = new ArrayList<>();
-
-                for (String userId : preferenceManager.getCurrentUser().getMatchedUsers()) {
+                for (String userId : matchedIds) {
                   if (userId.equals(preferenceManager.getCurrentUser().getId())) {
                     continue;
                   }

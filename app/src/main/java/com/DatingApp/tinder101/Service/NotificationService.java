@@ -31,6 +31,7 @@ public class NotificationService {
             Notification.builder()
                 .receiverId(userId)
                 .notiContent(content)
+                .mode("LIKE")
                 .createdDate(new Date())
                 .build())
         .addOnCompleteListener(

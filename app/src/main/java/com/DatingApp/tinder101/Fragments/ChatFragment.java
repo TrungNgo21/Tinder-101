@@ -13,6 +13,8 @@ import com.DatingApp.tinder101.Activity.ConversationActivity;
 import com.DatingApp.tinder101.Adapter.MessageItemAdapter;
 import com.DatingApp.tinder101.Adapter.OnChatItemTap;
 import com.DatingApp.tinder101.Adapter.RoundChatItemAdapter;
+import com.DatingApp.tinder101.Callback.CallbackRes;
+import com.DatingApp.tinder101.Callback.FirebaseCallback;
 import com.DatingApp.tinder101.Constant.Constant;
 import com.DatingApp.tinder101.Dto.UserDto;
 import com.DatingApp.tinder101.Model.Conversation;
@@ -33,6 +35,8 @@ public class ChatFragment extends Fragment implements OnChatItemTap {
 
   private MessageService messageService;
 
+  private RoundChatItemAdapter roundChatItemAdapter;
+
   private SystemService systemService;
 
   private UserService userService;
@@ -42,11 +46,29 @@ public class ChatFragment extends Fragment implements OnChatItemTap {
   }
 
   @Override
+  public void onResume() {
+    userService.getMatchedUsers(
+        new FirebaseCallback<CallbackRes<List<UserDto>>>() {
+          @Override
+          public void callback(CallbackRes<List<UserDto>> template) {
+            if (template instanceof CallbackRes.Success) {
+              List<UserDto> matchedUsers =
+                  ((CallbackRes.Success<List<UserDto>>) template).getData();
+              users = matchedUsers;
+              roundChatItemAdapter.setData(users);
+            }
+          }
+        });
+    super.onResume();
+  }
+
+  @Override
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     userService = new UserService(requireContext());
     messageService = new MessageService(requireContext(), userService);
     systemService = new SystemService(userService);
+
     fragmentChatBinding = FragmentChatBinding.inflate(getLayoutInflater());
     setUpMessages();
   }
@@ -66,7 +88,8 @@ public class ChatFragment extends Fragment implements OnChatItemTap {
   }
 
   private void setUpNewMatches() {
-    RoundChatItemAdapter roundChatItemAdapter = new RoundChatItemAdapter(users, this);
+    roundChatItemAdapter = new RoundChatItemAdapter(users, this);
+
     fragmentChatBinding.roundChatItemsDisplay.setAdapter(roundChatItemAdapter);
     fragmentChatBinding.roundChatItemsDisplay.setLayoutManager(
         new LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false));

@@ -25,6 +25,10 @@ public class RoundChatItemAdapter
   public RoundChatItemAdapter(List<UserDto> users, OnChatItemTap onChatItemTap) {
     this.users = users;
     this.onChatItemTap = onChatItemTap;
+  }
+
+  public void setData(List<UserDto> users) {
+    this.users = users;
     notifyDataSetChanged();
   }
 

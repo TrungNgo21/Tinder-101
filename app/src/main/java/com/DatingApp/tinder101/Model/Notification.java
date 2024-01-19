@@ -15,5 +15,6 @@ import lombok.NonNull;
 public class Notification {
   private String receiverId;
   private String notiContent;
+  private String mode;
   private Date createdDate;
 }
