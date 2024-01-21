@@ -49,10 +49,12 @@ import java.util.Stack;
 
 public class UserService {
 
-    public interface CallbackListener {
-        public void onSuccessCallBack(String message);
-        public void onFailureCallBack(String message);
-    }
+  public interface CallbackListener {
+    public void onSuccessCallBack(String message);
+
+    public void onFailureCallBack(String message);
+  }
+
   private PreferenceManager preferenceManager;
   private final FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
   private final FirebaseFirestore fireStore = FirebaseFirestore.getInstance();
@@ -159,7 +161,10 @@ public class UserService {
   }
 
   public void register(
-      String email, String password, final FirebaseCallback<CallbackRes<UserDto>> callback, CallbackListener  listener) {
+      String email,
+      String password,
+      final FirebaseCallback<CallbackRes<UserDto>> callback,
+      CallbackListener listener) {
     firebaseAuth
         .createUserWithEmailAndPassword(email, password)
         .addOnCompleteListener(
@@ -182,7 +187,7 @@ public class UserService {
                                         put("LOVE", "Touch");
                                       }
                                     })
-                                .interests(Arrays.asList("BaseBall", "LickBack"))
+                                .interests(new ArrayList<>())
                                 .lifestyleList(
                                     new HashMap<String, String>() {
                                       {
@@ -209,7 +214,6 @@ public class UserService {
                           if (updateTask.isSuccessful()) {
 
                           } else {
-                            callback.callback(new CallbackRes.Error(updateTask.getException()));
                             listener.onFailureCallBack(updateTask.getException().getMessage());
                           }
                         });
@@ -226,7 +230,7 @@ public class UserService {
                             callback.callback(new CallbackRes.Success<UserDto>(currentUser));
                           } else {
                             callback.callback(new CallbackRes.Error(task.getException()));
-                              listener.onFailureCallBack(task.getException().getMessage());
+                            listener.onFailureCallBack(task.getException().getMessage());
                           }
                         });
               }
@@ -256,7 +260,10 @@ public class UserService {
   }
 
   public void login(
-      String email, String password, final FirebaseCallback<CallbackRes<UserDto>> callback, CallbackListener listener) {
+      String email,
+      String password,
+      final FirebaseCallback<CallbackRes<UserDto>> callback,
+      CallbackListener listener) {
     firebaseAuth
         .signInWithEmailAndPassword(email, password)
         .addOnCompleteListener(
@@ -335,18 +342,24 @@ public class UserService {
               }
             });
   }
-  public void updateProfile(final FirebaseCallback<CallbackRes<UserDto>> callback, ProfileSetting profileSetting, CallbackListener callbackListener){
-      userReference.document(getCurrentUser().getId()).update("profileSetting", profileSetting).addOnCompleteListener(
-              updateUserTask -> {
-                  if (updateUserTask.isSuccessful()) {
-                      callback.callback(new CallbackRes.Success<>(getCurrentUser()));
-                      callbackListener.onSuccessCallBack("Update profile successfully");
-                  } else {
-                      callback.callback(new CallbackRes.Error(updateUserTask.getException()));
-                      callbackListener.onFailureCallBack(updateUserTask.getException().getMessage());
-                  }
-              });
 
+  public void updateProfile(
+      final FirebaseCallback<CallbackRes<UserDto>> callback,
+      ProfileSetting profileSetting,
+      CallbackListener callbackListener) {
+    userReference
+        .document(getCurrentUser().getId())
+        .update("profileSetting", profileSetting)
+        .addOnCompleteListener(
+            updateUserTask -> {
+              if (updateUserTask.isSuccessful()) {
+                callback.callback(new CallbackRes.Success<>(getCurrentUser()));
+                callbackListener.onSuccessCallBack("Update profile successfully");
+              } else {
+                callback.callback(new CallbackRes.Error(updateUserTask.getException()));
+                callbackListener.onFailureCallBack(updateUserTask.getException().getMessage());
+              }
+            });
   }
 
   public void updateName(String name, final FirebaseCallback<CallbackRes<UserDto>> callback) {

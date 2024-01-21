@@ -26,7 +26,14 @@
             android:exported="false" />
         <activity
             android:name=".Activity.RegisterActivity"
-            android:exported="true" >
+            android:exported="false">
+
+        </activity>
+
+
+        <activity
+            android:name=".Activity.SignInActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -35,18 +42,11 @@
         </activity>
 
 
-
-        <activity
-            android:name=".Activity.SignInActivity"
-            android:exported="false"/>
-
-
         <activity
             android:name=".Activity.AddInterestActivity"
-            android:exported="false" >
+            android:exported="false">
 
         </activity>
-
 
 
         <activity
@@ -56,9 +56,7 @@
 
         <activity
             android:name=".Activity.CreateProfileActivity"
-            android:exported="false"/>
-
-
+            android:exported="false" />
 
 
         <activity

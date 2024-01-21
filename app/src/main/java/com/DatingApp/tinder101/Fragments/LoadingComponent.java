@@ -16,53 +16,52 @@ import com.DatingApp.tinder101.R;
 
 public class LoadingComponent extends RelativeLayout {
 
-    View root;
-    AnimationDrawable animationDrawable;
+  View root;
+  AnimationDrawable animationDrawable;
 
-    public LoadingComponent(Context context) {
-        super(context);
-        init();
+  public LoadingComponent(Context context) {
+    super(context);
+    init();
+  }
+
+  public LoadingComponent(Context context, AttributeSet attrs) {
+    super(context, attrs);
+    init();
+  }
+
+  public LoadingComponent(Context context, AttributeSet attrs, int defStyleAttr) {
+    super(context, attrs, defStyleAttr);
+    init();
+  }
+
+  public LoadingComponent(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+    super(context, attrs, defStyleAttr, defStyleRes);
+  }
+
+  public void init() {
+    LayoutInflater.from(getContext()).inflate(R.layout.loading_view, this, true);
+
+    Window window = ((Activity) getContext()).getWindow();
+    View decor = window.getDecorView();
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+      window.setDecorFitsSystemWindows(false);
+    } else {
+      decor.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
     }
 
-    public LoadingComponent(Context context, AttributeSet attrs) {
-        super(context, attrs);
-        init();
-    }
+    root = findViewById(R.id.radial_animation);
+    animationDrawable = (AnimationDrawable) root.getBackground();
+    animationDrawable.setEnterFadeDuration(1000);
+    animationDrawable.setExitFadeDuration(1000);
+  }
 
-    public LoadingComponent(Context context, AttributeSet attrs, int defStyleAttr) {
-        super(context, attrs, defStyleAttr);
-        init();
-    }
+  public void showLoading() {
+    animationDrawable.start();
+    setVisibility(VISIBLE);
+  }
 
-    public LoadingComponent(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
-        super(context, attrs, defStyleAttr, defStyleRes);
-    }
-
-    public void init() {
-        LayoutInflater.from(getContext()).inflate(R.layout.loading_view, this, true);
-
-        Window window = ((Activity) getContext()).getWindow();
-        View decor = window.getDecorView();
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-            window.setDecorFitsSystemWindows(false);
-        } else {
-            decor.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
-        }
-
-        root = findViewById(R.id.radial_animation);
-        animationDrawable = (AnimationDrawable) root.getBackground();
-        animationDrawable.setEnterFadeDuration(1000);
-        animationDrawable.setExitFadeDuration(1000);
-
-    }
-
-    public void showLoading() {
-        animationDrawable.start();
-        setVisibility(VISIBLE);
-    }
-
-    public void hideLoading() {
-        animationDrawable.stop();
-        setVisibility(GONE);
-    }
+  public void hideLoading() {
+    animationDrawable.stop();
+    setVisibility(GONE);
+  }
 }

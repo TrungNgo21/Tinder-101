@@ -7,28 +7,18 @@
     android:layout_height="match_parent"
     android:gravity="center"
     tools:context=".Activity.MainActivity">
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:gravity="center"
-        android:layout_height="match_parent">
-        <com.DatingApp.tinder101.Fragments.LoadingComponent
-            android:layout_width="wrap_content"
-            android:id="@+id/loadingView"
-            android:visibility="gone"
-            android:gravity="center"
-            android:layout_height="wrap_content"/>
-    </RelativeLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
         android:orientation="vertical">
+
         <FrameLayout
             android:id="@+id/swipeScreen1"
             android:layout_weight="1"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
-
 
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
@@ -44,4 +34,19 @@
             app:menu="@menu/navigation" />
 
     </LinearLayout>
+
+    <!--    <LinearLayout-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:gravity="center"-->
+    <!--        android:orientation="vertical"-->
+    <!--        android:layout_height="match_parent">-->
+
+    <!--        <com.DatingApp.tinder101.Fragments.LoadingComponent-->
+    <!--            android:layout_width="wrap_content"-->
+    <!--            android:layout_weight="1"-->
+    <!--            android:id="@+id/loadingView"-->
+    <!--            android:visibility="gone"-->
+    <!--            android:gravity="center"-->
+    <!--            android:layout_height="0dp" />-->
+    <!--    </LinearLayout>-->
 </RelativeLayout>

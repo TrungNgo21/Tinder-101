@@ -71,12 +71,11 @@ public class MainActivity extends AppCompatActivity {
     currentUser = userService.getCurrentUser();
     setMatchListener();
     setContentView(activityMainBinding.getRoot());
-    loadingComponent = findViewById(R.id.loadingView);
-    loadingComponent.showLoading();
-    ImageView userImage = loadingComponent.findViewById(R.id.loading_user_img);
-    String imgResource = userService.getCurrentUser().getImageUrlsMap().get("0");
-      Picasso.get().load(imgResource)
-              .into(userImage);
+    //    loadingComponent = findViewById(R.id.loadingView);
+    //    loadingComponent.showLoading();
+    //    ImageView userImage = loadingComponent.findViewById(R.id.loading_user_img);
+    //    String imgResource = userService.getCurrentUser().getImageUrlsMap().get("0");
+    //    Picasso.get().load(imgResource).into(userImage);
     userService.getAllUsers(
         new FirebaseCallback<CallbackRes<List<UserDto>>>() {
           @Override
@@ -84,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
             if (template instanceof CallbackRes.Success) {
               users = ((CallbackRes.Success<List<UserDto>>) template).getData();
               Fragment fragment = new SwipeFragment(users);
-              loadingComponent.hideLoading();
+              //              loadingComponent.hideLoading();
               loadFragment(fragment);
             } else {
               Toast.makeText(getApplicationContext(), template.toString(), Toast.LENGTH_LONG)
@@ -101,7 +100,6 @@ public class MainActivity extends AppCompatActivity {
             }
           }
         });
-
 
     setUpNavigation();
   }
@@ -179,10 +177,10 @@ public class MainActivity extends AppCompatActivity {
             loadFragment(fragment);
             return true;
           } else if (item.getItemId() == R.id.logout) {
-              userService.logout();
-              finish();
-              startActivity(new Intent(getApplicationContext(), SignInActivity.class));
-              return true;
+            userService.logout();
+            finish();
+            startActivity(new Intent(getApplicationContext(), SignInActivity.class));
+            return true;
           } else {
             return false;
           }
